@@ -1,0 +1,606 @@
+% !TeX program = xelatex
+% =========================================================
+% 勒让德变换 · 数学变换专题讲义
+% 基于：01_知识库/数学变换/勒让德变换.md（已审核）
+% 补充：02_题目库/已解决/P001_为什么勒让德变换这样定义.md
+% 模板母版：04_LATEX/模板/数学讲义模板_v1/
+% =========================================================
+
+\documentclass[
+    lang=cn,
+    color=blue,
+    mode=fancy,
+    thmcnt=section,
+    scheme=chinese,
+    chinesefont=ctexfont
+]{elegantbook}
+
+
+% =========================================================
+% 数学宏包
+% =========================================================
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{bm}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,positioning}
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multicol}
+
+
+% =========================================================
+% 常用数学命令
+% =========================================================
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\inner}[2]{\left\langle #1,#2\right\rangle}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\Argmin}{arg\,min}
+\DeclareMathOperator{\Argmax}{arg\,max}
+
+% 共轭记号（避免 * 歧义）
+\newcommand{\fstar}{f^{\ast}}
+\newcommand{\fstarp}{f^{\ast}(p)}
+\newcommand{\fstardd}{f^{\ast\ast}}
+
+
+% =========================================================
+% 文档信息
+% =========================================================
+
+\title{勒让德变换}
+\subtitle{从最高仿射下界到凸共轭}
+
+\author{}
+\institute{}
+
+\date{\today}
+
+\version{1.0}
+
+\setcounter{tocdepth}{2}
+
+
+% =========================================================
+\begin{document}
+% =========================================================
+
+\maketitle
+
+\frontmatter
+
+\begin{introduction}
+  \item 勒让德变换要解决什么问题
+  \item 固定斜率与最高仿射下界
+  \item Legendre--Fenchel 共轭的 $\sup$ 定义
+  \item 经典写法何时成立
+  \item 典型例子：$x^{2}/2$ 与 $\e^{x}$
+  \item Fenchel--Young 不等式与常见误区
+\end{introduction}
+
+\tableofcontents
+
+\mainmatter
+
+
+% =========================================================
+\chapter{问题与动机}
+% =========================================================
+
+\section{要解决的问题}
+
+勒让德变换回答的是：怎样用\emph{斜率}而不是\emph{位置}来描述一个函数？
+
+原先用位置--函数值数据 $(x,f(x))$ 描述函数。勒让德变换把它转为斜率--最佳仿射下界数据 $(p,\fstarp)$。一般地
+\[
+\operatorname{graph}(f)\neq\operatorname{graph}(\fstar).
+\]
+在适当的 proper、下半连续且凸的条件下，有 $\fstardd=f$，即对偶信息足以恢复原函数；完整的双共轭定理证明不在本讲义展开。
+
+\begin{note}
+本讲义以已经审核通过的知识条目为准。共轭记号统一写作 $f^{\ast}$、$f^{\ast\ast}$；多元内积写作 $p\cdot x$，一元时 $p\cdot x=px$。
+\end{note}
+
+
+\section{设定}
+
+对共轭采用
+\[
+f:\R^{n}\to(-\infty,+\infty].
+\]
+几何与优化讨论中默认 $\dom f\neq\emptyset$，以避免 $f\equiv+\infty$ 的退化情形。proper、下半连续、凸等条件\emph{不作为}共轭定义的前提，而在相应结论中再声明。
+
+
+% =========================================================
+\chapter{从最高仿射下界到共轭定义}
+% =========================================================
+
+\section{\texorpdfstring{固定斜率：为什么出现 $p\cdot x-f(x)$}{固定斜率：为什么出现 p·x-f(x)}}
+
+固定斜率（或梯度方向）$p$，考察仿射函数
+\[
+y=p\cdot x-c
+\]
+（一元时即为直线 $y=px-c$；多元时为仿射超平面）。
+
+要求它始终位于 $f$ 下方，即对一切 $x\in\dom f$ 有
+\[
+p\cdot x-c\le f(x),
+\]
+等价于
+\[
+c\ge p\cdot x-f(x).
+\]
+因此，量 $p\cdot x-f(x)$ 是在位置 $x$、斜率 $p$ 时截距参数 $c$ 的下界约束。注意：$c$ 越大，仿射图越\emph{低}；$c$ 越小，仿射图越\emph{高}。$y$ 轴截距为 $-c$，故称 $c$ 为\emph{截距参数}，不直接等同于 $y$ 轴截距。
+
+
+\section{\texorpdfstring{为什么取 $\sup$}{为什么取 sup}}
+
+要使 $c$ 对\emph{所有} $x$ 都合法，必须
+\[
+c\ge\sup_{x\in\dom f}\bigl\{p\cdot x-f(x)\bigr\}.
+\]
+记右端为 $\fstarp$。于是``最高''仿射下界对应\emph{最小允许的截距参数}。
+
+\begin{proposition}[有限性]
+只有当 $\fstarp<+\infty$ 时，才能令有限截距参数 $c=\fstarp$，得到有限最高仿射下界
+\[
+y=p\cdot x-\fstarp.
+\]
+若 $\fstarp=+\infty$，则不存在该斜率方向上的有限全局仿射下界。
+\end{proposition}
+
+
+\section{Legendre--Fenchel 定义}
+
+\begin{definition}[Legendre--Fenchel 共轭]
+对 $f:\R^{n}\to(-\infty,+\infty]$，定义
+\[
+\fstarp=\sup_{x\in\dom f}\bigl\{p\cdot x-f(x)\bigr\}.
+\]
+一元时写作
+\[
+\fstarp=\sup_{x\in\dom f}\bigl\{px-f(x)\bigr\}.
+\]
+\end{definition}
+
+这是本主题的\emph{主定义}。$\sup$ 总有定义（可取 $+\infty$），不得无条件改写成 $\max$。
+
+
+\section{最高仿射下界与支撑直线}
+
+\begin{definition}[最高仿射下界与支撑直线]
+设 $\fstarp<+\infty$。称
+\[
+y=p\cdot x-\fstarp
+\]
+为斜率为 $p$ 的\emph{有限最高仿射下界}（亦称最佳仿射下界）。更大的 $c$ 仍合法但更低；更小的 $c$ 会破坏下界条件。
+
+仅当上确界在某个\emph{有限} $x_{0}$ 达到，即
+\[
+f(x_{0})=p\cdot x_{0}-\fstarp
+\]
+时，才称该仿射下界为 $f$ 在 $x_{0}$ 处的\emph{支撑直线}（或支撑超平面）。最高仿射下界\emph{不必}是支撑直线。
+\end{definition}
+
+\begin{remark}
+$\sup$ 与 $\max$ 的区别：$\max$ 要求上确界在某个有限点达到。可以出现 $\fstarp$ 有限但 $\max$ 达不到；也可以出现 $\fstarp=+\infty$。
+\end{remark}
+
+
+\section{优化视角（补充）}
+
+当 $f$ 为凸函数时，$x\mapsto p\cdot x-f(x)$ 为凹函数，故
+\[
+\sup_{x}\bigl\{p\cdot x-f(x)\bigr\}
+\]
+是凹函数最大化，等价于最小化凸函数 $f(x)-p\cdot x$。对一般非凸 $f$，共轭仍可用 $\sup$ 定义，但不宜笼统称为凸优化问题。
+
+
+% =========================================================
+\chapter{经典 Legendre 写法}
+% =========================================================
+
+\section{何时可用换变量}
+
+在光滑情形，对固定的 $p$，考察函数 $\phi_{p}(x)=px-f(x)$。若在内点达到最大值，则一阶必要条件为
+\[
+\frac{\dd}{\dd x}\bigl(px-f(x)\bigr)=p-f'(x)=0,
+\]
+即
+\[
+p=f'(x).
+\]
+多元时同理得到
+\[
+p=\nabla f(x).
+\]
+因此：$p=f'(x)$ 或 $p=\nabla f(x)$ 是良性情形下求上确界的\emph{极值条件}，而不是一般定义本身。
+
+当 $p$ 位于相应导数/梯度映射的像集中时，对应的 $x^{\ast}$ 是 $p\cdot x-f(x)$ 的全局最大点；严格凸时该点唯一。由此得到经典写法。
+
+\begin{definition}[经典 Legendre 变换（一元）]
+设 $f:\R\to\R$ 可微、严格凸，且\emph{导数映射} $x\mapsto f'(x)$ 在像集上可逆。对 $p\in f'(\dom f)$，令
+\[
+p=f'(x),\qquad
+x(p)=(f')^{-1}(p),\qquad
+\fstarp=p\,x(p)-f\bigl(x(p)\bigr).
+\]
+\end{definition}
+
+\begin{definition}[经典 Legendre 变换（多元）]
+设 $f:\R^{n}\to\R$ 可微、严格凸，且\emph{梯度映射} $\nabla f$ 在像集上可逆。对 $p\in\nabla f(\dom f)$，令
+\[
+p=\nabla f(x),\qquad
+x(p)=(\nabla f)^{-1}(p),\qquad
+\fstarp=p\cdot x(p)-f\bigl(x(p)\bigr).
+\]
+\end{definition}
+
+不能默认任意 $p$ 都有唯一原像。
+
+\begin{note}
+一般定义始终是 $\sup$。经典写法只在光滑、严格凸且相应映射可逆时与之等价。
+\end{note}
+
+
+\section{两类变换的对照}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+ & Legendre--Fenchel & 经典 Legendre \\
+\midrule
+定义 & $\sup_{x}\{p\cdot x-f(x)\}$ & 由 $p=f'(x)$ 或 $p=\nabla f(x)$ 换变量后代入 \\
+适用 & 一般 $f:\R^{n}\to(-\infty,+\infty]$ & 可微、严格凸，导数/梯度映射在像集上可逆 \\
+地位 & \textbf{主定义} & 良性情形下的等价写法 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+% =========================================================
+\chapter{典型例子}
+% =========================================================
+
+\section{\texorpdfstring{例一：$f(x)=x^{2}/2$（处处良性）}{例一：f(x)=x^2/2（处处良性）}}
+
+\begin{example}[$f(x)=x^{2}/2$]
+$f'(x)=x$，$f'(\R)=\R$。对任意 $p$，
+\[
+\fstarp=\sup_{x\in\R}\Bigl\{px-\frac{x^{2}}{2}\Bigr\}=\frac{p^{2}}{2},
+\]
+在 $x=p$ 达到最大值，故此时 $\sup=\max$，且 $y=px-\fstarp$ 为支撑直线。
+\end{example}
+
+\begin{solution}
+令 $\phi_{p}(x)=px-x^{2}/2$。配方得
+\[
+\phi_{p}(x)=-\frac12(x-p)^{2}+\frac{p^{2}}{2},
+\]
+故最大值在 $x=p$ 达到，且 $\fstarp=p^{2}/2$。求导亦可：$\phi_{p}'(x)=p-x=0\Rightarrow x=p$。又
+\[
+f(p)=\frac{p^{2}}{2}=p\cdot p-\frac{p^{2}}{2}=p\cdot p-\fstarp,
+\]
+故上确界达到，最高仿射下界即为支撑直线。对所有 $p\in\R$，均有 $\sup=\max$。
+\end{solution}
+
+\begin{remark}[自共轭特例]
+本例 $\fstarp=p^{2}/2$ 与 $f$ 形式相同，是\emph{自共轭}特例，不能据此认为一般勒让德变换只是把同一条曲线重新参数化，也不能把 $f=\fstar$ 当成一般性质。一般地 $\operatorname{graph}(f)\neq\operatorname{graph}(\fstar)$。
+\end{remark}
+
+% 图：固定斜率，平移截距参数
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.92\textwidth,
+  height=6.6cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-2.4, xmax=2.4,
+  ymin=-0.5, ymax=3.2,
+  samples=120,
+  legend style={at={(0.02,0.98)},anchor=north west,font=\small},
+  clip=true
+]
+\addplot[thick,blue,domain=-2.2:2.2] {0.5*x*x};
+\addlegendentry{$f(x)=x^{2}/2$}
+\addplot[gray,dashed,domain=-2.2:2.2] {1*x-0.2};
+\addlegendentry{$p=1$，$c$ 偏小（越过曲线）}
+\addplot[orange,thick,domain=-2.2:2.2] {1*x-0.5};
+\addlegendentry{$p=1$，$c=f^{\ast}(1)=1/2$（最高仿射下界）}
+\addplot[gray,dotted,domain=-2.2:2.2] {1*x-1.2};
+\addlegendentry{$p=1$，$c$ 更大（合法但更低）}
+\addplot[only marks,mark=*,blue] coordinates {(1,0.5)};
+\end{axis}
+\end{tikzpicture}
+\caption{固定斜率 $p=1$：上下平移直线 $y=x-c$。因 $c$ 越大直线越低，故``最高''仿射下界对应\emph{最小允许}的 $c$，即 $c=f^{\ast}(1)=1/2$。}
+\label{fig:quad-shift}
+\end{figure}
+
+% 图：多个斜率的最高仿射下界
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.92\textwidth,
+  height=6.6cm,
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-2.6, xmax=2.6,
+  ymin=-0.8, ymax=3.4,
+  samples=120,
+  legend style={at={(0.02,0.98)},anchor=north west,font=\small},
+  clip=true
+]
+\addplot[thick,blue,domain=-2.4:2.4] {0.5*x*x};
+\addlegendentry{$f(x)=x^{2}/2$}
+% p=-1: f*=1/2, y=-x-1/2, touch at x=-1
+\addplot[thick,teal,domain=-2.4:2.4] {-1*x-0.5};
+\addlegendentry{$p=-1$：$y=-x-1/2$}
+% p=0: f*=0, y=0, touch at x=0
+\addplot[thick,orange,domain=-2.4:2.4] {0};
+\addlegendentry{$p=0$：$y=0$}
+% p=1.5: f*=(1.5)^2/2=1.125, y=1.5x-1.125, touch at 1.5
+\addplot[thick,purple,domain=-2.4:2.4] {1.5*x-1.125};
+\addlegendentry{$p=1.5$：$y=1.5x-9/8$}
+\addplot[only marks,mark=*,blue] coordinates {(-1,0.5) (0,0) (1.5,1.125)};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=x^{2}/2$：不同斜率 $p=-1,0,1.5$ 各自的最高仿射下界（本例中均为支撑直线）。切点依次为 $x=p$。}
+\label{fig:quad-multi}
+\end{figure}
+
+
+\section{\texorpdfstring{例二：$f(x)=\mathrm{e}^{x}$（暴露边界）}{例二：f(x)=e^x（暴露边界）}}
+
+\begin{example}[$f(x)=\e^{x}$]
+$f'(x)=\e^{x}$，$f'(\R)=(0,+\infty)$。共轭为
+\[
+\fstarp=
+\begin{cases}
+p\ln p-p,& p>0,\\
+0,& p=0,\\
++\infty,& p<0.
+\end{cases}
+\]
+故 $\dom\fstar=[0,+\infty)$。
+\end{example}
+
+\begin{solution}
+令 $\phi_{p}(x)=px-\e^{x}$。
+
+\textbf{情形 $p>0$。}
+对一切 $x$，$\phi_{p}''(x)=-\e^{x}<0$，故 $\phi_{p}$ 严格凹。唯一临界点满足 $p-\e^{x}=0$，即 $x^{\ast}=\ln p$，为唯一全局最大点。于是
+\[
+\fstarp=p\ln p-\e^{\ln p}=p\ln p-p,
+\]
+且上确界达到，最高仿射下界为支撑直线。经典写法适用。
+
+\textbf{情形 $p=0$。}
+$\phi_{0}(x)=-\e^{x}<0$，而 $\lim_{x\to-\infty}(-\e^{x})=0$，故 $\fstar(0)=0$，但任何有限 $x$ 达不到。水平线 $y=0$ 是有限最高仿射下界，\emph{不是}支撑直线。
+
+\textbf{情形 $p<0$。}
+当 $x\to-\infty$ 时 $px\to+\infty$，故 $\phi_{p}$ 无上界，$\fstarp=+\infty$。不存在有限全局仿射下界；经典写法无定义。
+\end{solution}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+$p$ & $\fstarp$ & $\sup$ 是否达到 & 经典 $p=f'(x)$ \\
+\midrule
+$p>0$ & $p\ln p-p$ & 是，$x=\ln p$ & 适用 \\
+$p=0$ & $0$ & 否 & 不适用 \\
+$p<0$ & $+\infty$ & --- & 不适用 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  name=ax1,
+  width=0.31\textwidth,
+  height=5.0cm,
+  title={$p>0$（取 $p=\mathrm{e}$）},
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-1.2, xmax=2.2,
+  ymin=-0.5, ymax=4.2,
+  samples=100,
+  font=\small
+]
+\addplot[thick,blue,domain=-1:2] {exp(x)};
+\addplot[thick,orange,domain=-1:2] {exp(1)*x};
+\addplot[only marks,mark=*,blue] coordinates {(1,{exp(1)})};
+\end{axis}
+
+\begin{axis}[
+  name=ax2,
+  at={(ax1.east)},
+  anchor=west,
+  xshift=0.4cm,
+  width=0.31\textwidth,
+  height=5.0cm,
+  title={$p=0$},
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-3.2, xmax=1.5,
+  ymin=-0.4, ymax=3.2,
+  samples=100,
+  font=\small
+]
+\addplot[thick,blue,domain=-3:1.2] {exp(x)};
+\addplot[thick,orange,domain=-3:1.2] {0};
+\end{axis}
+
+\begin{axis}[
+  name=ax3,
+  at={(ax2.east)},
+  anchor=west,
+  xshift=0.4cm,
+  width=0.31\textwidth,
+  height=5.0cm,
+  title={$p<0$（示意）},
+  axis lines=middle,
+  xlabel={$x$},
+  ylabel={$y$},
+  xmin=-3.2, xmax=1.2,
+  ymin=-0.5, ymax=3.5,
+  samples=100,
+  font=\small
+]
+\addplot[thick,blue,domain=-3:1] {exp(x)};
+\addplot[thick,orange,domain=-3:1] {-0.5*x+0.3};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=\mathrm{e}^{x}$ 三种斜率。左：$p=\mathrm{e}>0$，切线相贴（支撑）。中：$p=0$，水平线 $y=0$ 是最高仿射下界但不接触。右：$p<0$，负斜率直线向左上冲，无法成为全局下界。}
+\label{fig:exp}
+\end{figure}
+
+\begin{note}
+本例说明：为何必须以 $\sup$ 为主定义，以及为何不能默认任意 $p$ 都能用 $p=f'(x)$ 反解。
+\end{note}
+
+
+% =========================================================
+\chapter{Fenchel--Young 不等式、误区与总结}
+% =========================================================
+
+\section{Fenchel--Young 不等式}
+
+\begin{theorem}[Fenchel--Young]
+由定义，对任意 $x\in\dom f$ 与任意 $p$，
+\[
+p\cdot x-f(x)\le\fstarp,
+\]
+故
+\[
+p\cdot x\le f(x)+\fstarp,
+\]
+或
+\[
+f(x)\ge p\cdot x-\fstarp.
+\]
+一元时 $p\cdot x=px$。
+\end{theorem}
+
+\begin{proof}
+由 $\fstarp$ 是 $\{p\cdot x'-f(x'):x'\in\dom f\}$ 的上确界，对任意固定的 $x\in\dom f$ 有 $p\cdot x-f(x)\le\fstarp$。移项即得。
+\end{proof}
+
+几何意义：当 $\fstarp<+\infty$ 时，$y=p\cdot x-\fstarp$ 是斜率为 $p$ 的有限最高仿射下界，曲线位于其上方。若上确界在有限 $x_{0}$ 达到，则在该点等号成立：一元光滑情形对应 $p=f'(x_{0})$；多元光滑情形对应 $p=\nabla f(x_{0})$。
+
+
+\section{常见误区}
+
+\begin{remark}
+\begin{enumerate}
+  \item 把 Legendre--Fenchel 直接定义成 $p=f'(x)$。
+  \item 把 $\sup$ 无条件改成 $\max$。
+  \item 认为最高仿射下界一定与函数图像接触（一定是支撑直线）。
+  \item 认为 $\fstarp$ 对所有 $p$ 都有限。
+  \item 认为 $f=\fstar$ 是一般性质（仅如 $x^{2}/2$ 的特例）。
+  \item 混淆 $f^{\ast}$ 与 $f^{\ast\ast}$。
+  \item 一元 $px$ 与多元 $p\cdot x$ 无说明混用。
+  \item 将良性光滑情形误写成一般定义。
+  \item 把 $c$ 与仿射图高度的方向搞反：$c$ 越大图越低。
+\end{enumerate}
+\end{remark}
+
+
+\section{知识联系}
+
+本主题与以下内容相关（本讲义不展开）：
+
+\begin{itemize}
+  \item 凸函数与有效域；
+  \item 导数 / 梯度、严格凸与严格凹；
+  \item Fenchel--Young 不等式（上文已给出基本形式）；
+  \item 在适当的 proper、下半连续、凸条件下有 $f^{\ast\ast}=f$（双共轭恢复；完整证明另立专题）。
+\end{itemize}
+
+跨领域上亦关联凸分析与优化理论；正式知识条目主归属为``数学变换''。
+
+
+\section{本章总结}
+
+\begin{conclusion}
+推荐掌握顺序：最高仿射下界（几何）$\to$ 优化视角 $\to$ Legendre--Fenchel 定义 $\to$ 经典写法（一阶条件 + 像集可逆）$\to$ 用 $x^{2}/2$ 与 $\e^{x}$ 检验 $\sup$/$\max$ 与有限性。
+\end{conclusion}
+
+\begin{enumerate}
+  \item \textbf{主定义}是 Legendre--Fenchel 共轭 $\fstarp=\sup_{x}\{p\cdot x-f(x)\}$。
+  \item \textbf{几何核心}是固定斜率的最高仿射下界；仅当上确界在有限点达到时才是支撑直线。
+  \item \textbf{经典 Legendre} 是光滑严格凸、导数/梯度映射在像集上可逆时的特例。
+  \item \textbf{描述方式}从 $(x,f(x))$ 转为 $(p,\fstarp)$；一般 $\operatorname{graph}(f)\neq\operatorname{graph}(\fstar)$。
+  \item \textbf{必记例子：}$x^{2}/2$（自共轭、处处达到）；$\e^{x}$（区分 $\sup$/$\max$ 与 $+\infty$）。
+  \item \textbf{Fenchel--Young：}$p\cdot x\le f(x)+\fstarp$（一元时 $p\cdot x=px$）。
+\end{enumerate}
+
+
+% =========================================================
+\appendix
+% =========================================================
+
+\chapter{符号表}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+符号 & 含义 \\
+\midrule
+$f$ & 原函数，$f:\R^{n}\to(-\infty,+\infty]$ \\
+$\dom f$ & 有效域 $\{x:f(x)<+\infty\}$ \\
+$p$ & 对偶变量（斜率 / 梯度方向） \\
+$\fstarp$ & Legendre--Fenchel 共轭 \\
+$\fstardd$ & 双共轭 \\
+$c$ & 截距参数（$y=p\cdot x-c$） \\
+$f'(x)$ / $\nabla f(x)$ & 一元导数映射 / 多元梯度映射 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\backmatter
+
+\chapter*{说明}
+\addcontentsline{toc}{chapter}{说明}
+
+本讲义依据已审核知识条目
+\texttt{01\_知识库/数学变换/勒让德变换.md}
+整理；证明与例子按需参考已解决研究任务
+\texttt{02\_题目库/已解决/P001\_为什么勒让德变换这样定义.md}。
+历史起源待查证，本讲义不编造史实。力学、热力学、Lean 形式化与完整 Fenchel--Moreau 证明不在本专题范围。
+
+\end{document}

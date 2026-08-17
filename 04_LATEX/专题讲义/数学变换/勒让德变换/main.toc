@@ -1,0 +1,23 @@
+\contentsline {chapter}{\numberline {第一章}问题与动机}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}要解决的问题}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}设定}{1}{section.1.2}%
+\contentsline {chapter}{\numberline {第二章}从最高仿射下界到共轭定义}{2}{chapter.2}%
+\contentsline {section}{\numberline {2.1}固定斜率：为什么出现 $p\cdot x-f(x)$}{2}{section.2.1}%
+\contentsline {section}{\numberline {2.2}为什么取 $\sup $}{2}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Legendre--Fenchel 定义}{2}{section.2.3}%
+\contentsline {section}{\numberline {2.4}最高仿射下界与支撑直线}{3}{section.2.4}%
+\contentsline {section}{\numberline {2.5}优化视角（补充）}{3}{section.2.5}%
+\contentsline {chapter}{\numberline {第三章}经典 Legendre 写法}{4}{chapter.3}%
+\contentsline {section}{\numberline {3.1}何时可用换变量}{4}{section.3.1}%
+\contentsline {section}{\numberline {3.2}两类变换的对照}{4}{section.3.2}%
+\contentsline {chapter}{\numberline {第四章}典型例子}{5}{chapter.4}%
+\contentsline {section}{\numberline {4.1}例一：$f(x)=x^{2}/2$（处处良性）}{5}{section.4.1}%
+\contentsline {section}{\numberline {4.2}例二：$f(x)=\mathrm {e}^{x}$（暴露边界）}{6}{section.4.2}%
+\contentsline {chapter}{\numberline {第五章}Fenchel--Young 不等式、误区与总结}{7}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Fenchel--Young 不等式}{7}{section.5.1}%
+\contentsline {section}{\numberline {5.2}常见误区}{7}{section.5.2}%
+\contentsline {section}{\numberline {5.3}知识联系}{7}{section.5.3}%
+\contentsline {section}{\numberline {5.4}本章总结}{8}{section.5.4}%
+\renewcommand {\cftchappresnum }{附录 }\renewcommand {\cftchapaftersnum }{}
+\contentsline {chapter}{\numberline {A}符号表}{9}{appendix.A}%
+\contentsline {chapter}{说明}{10}{appendix*.5}%
