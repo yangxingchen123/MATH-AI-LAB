@@ -144,41 +144,45 @@ AI 图像不得承担精确坐标、数据值、拓扑或证明关系。二进�
 gate_id: "v1.1/research-project-dossier"
 baseline: "tag v1.0.1-foundation-portability-verified @ 140d01b011ac3b68f3177b9dabcb33b796a6b298; pytest 620 passed; verification core PASS; workspace CURRENT / 0 ERROR / 0 WARNING"
 metric:
-  - "project_scaffold_completeness"
-  - "duplicate_fixture_detection_rate"
-  - "decision_append_only_violation_count"
-  - "unauthorized_knowledge_create_count"
-  - "attempt_pollution_count"
-  - "dossier_generated_boundary_violations"
-  - "governance_external_processing_block_rate"
+  - project_scaffold_completeness_rate
+  - duplicate_fixture_detection_rate
+  - append_only_fixture_detection_rate
+  - decision_history_overwrite_count
+  - failed_write_byte_stability_rate
+  - unauthorized_knowledge_create_count
+  - attempt_pollution_count
+  - dossier_generated_boundary_violation_count
+  - unauthorized_external_processing_block_rate
 threshold:
-  project_scaffold_completeness: "research_dossier.md + assumptions.md + evidence.md + decisions.md + negative_results.md + governance.md + documents/ + runs/ + artifacts/ + reviews/"
-  duplicate_fixture_detection_rate: "100% on fixed duplicate-ref / exact-block / dossier-copy fixtures"
-  decision_append_only_violation_count: 0
+  project_scaffold_completeness_rate: "100%"
+  duplicate_fixture_detection_rate: "100%"
+  append_only_fixture_detection_rate: "100%"
+  decision_history_overwrite_count: 0
+  failed_write_byte_stability_rate: "100%"
   unauthorized_knowledge_create_count: 0
   attempt_pollution_count: 0
-  dossier_generated_boundary_violations: 0
-  governance_external_processing_block_rate: "100% when PERSONAL/RESTRICTED lacks authorization"
+  dossier_generated_boundary_violation_count: 0
+  unauthorized_external_processing_block_rate: "100%"
 fixture:
-  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project disposable fixtures"
-  sha256: "recorded per fixture asset during implementation"
+  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project/fixtures + tests/research_project/fixtures/SHA256SUMS"
+  sha256: "each fixture file hash listed in SHA256SUMS; integrity test enforces exact match"
 evidence:
   - "tools/research_project validator/operations/renderer tests"
-  - ".github/workflows/dossier-smoke.yml"
-  - "optional reviewed ASEAN pilot under 07_项目/"
-failure_action: "BLOCK version closure and tagging; keep failing tests; do not install Sidecar dependencies to force a pass"
+  - ".github/workflows/dossier-smoke.yml including check-append-only --all"
+  - "optional reviewed ASEAN pilot under 07_项目/ after human authorization"
+failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weaken thresholds; do not install Sidecar deps to force a pass"
 ```
+
+指标释义与 workflow spec §14 完全一致：`append_only_fixture_detection_rate` 覆盖修改/删除/重排/插入/空白变化 fixture；`decision_history_overwrite_count` 统计真实候选覆写；`unauthorized_external_processing_block_rate` 是外部处理阻断率，不是项目 validate 失败率。
 
 交付范围：
 
-- 项目目录控制平面：`research_dossier.md`（导航）、`assumptions.md` / `evidence.md` / `decisions.md` / `negative_results.md` / `governance.md`（事实源）；
-- 项目内局部 ref：`ASM/CLM/EVD/DEC/NEG-####`（非全局 Registry，非 Frozen）；
-- 四级自动化 A1–A4：`init`、atomic candidate ops、`check/status/doctor/reconcile`、`dossier-smoke`；
-- Generated marker 仅更新 Dossier 导航摘要；人工保留研究判断、审核、发布与 Knowledge 授权；
-- 后续版本接口预留：`documents/`→v1.2，`evidence.md`→v1.3，`runs/`→v1.4，`artifacts/`→v1.5/v1.6，`reviews/`→v1.7，Dossier+P9→v1.8，Reviewed records→v2.0，Candidate-only→v2.1；
-- 不得减少既有 Foundation 能力，不得修改 Frozen Schema / Normal Operation / P9 语义，不得安装 MinerU、Lean、求解器全集、向量库。
+- RESEARCH-RECORD 成对 marker Candidate Contract；`evidence.md` 分载 CLM/EVD；授权 `add_claim` / `update_governance` 等 atomic ops；
+- 领域结果类型：`ResearchProjectOperationResult` / `ResearchProjectValidationResult` / `ResearchProjectStatusResult` / `ExternalProcessingAssessment`（不复用 Normal Operation Result）；
+- A1–A4 与 `dossier-smoke`（含 PR append-only guard）；Generated 下一步候选仅确定性规则；
+- 后续版本接口不变；不得减少 Foundation 能力、不得改 Frozen Schema / P9 / Normal Operation，不得安装重型 Sidecar。
 
-真实 Pilot：优先 `07_项目/ASEAN_to_China_Fruit_Network_Optimization/`；材料不足时只允许 disposable fixture 或授权空 scaffold，结论为 `FRAMEWORK PASS / REAL PILOT PENDING`。
+真实 Pilot：材料不足 → `FRAMEWORK PASS / REAL PILOT PENDING`；材料充分且用户授权 → 真实记录 + 无 skip 测试；人工审核前不得 Pilot PASS。
 
 ### v1.2 — Document Intelligence
 
@@ -258,6 +262,7 @@ failure_action: "BLOCK version closure and tagging; keep failing tests; do not i
 | --- | --- | --- |
 | `core` | Foundation 根环境 | 每次修改必跑 |
 | `latex-smoke` | 现有 P9 / XeLaTeX 构建边界 | LaTeX 与发布路径修改必跑 |
+| `dossier-smoke` | Python 3.13 + 根 `requirements.txt` only；`tests/research_project` + disposable acceptance + workflow contract + `check-append-only --all --base-ref <base-sha>`；不安装 XeLaTeX/MinerU/Lean/solver/vector DB；不写 production Source | research_project / 模板 / dossier workflow 修改必跑 |
 | `document-smoke` | Adapter + fixture，不下载完整模型时使用 fake/service mock | 文档模块修改必跑 |
 | `modeling-smoke` | 小型开源求解器与已知答案 fixture | 建模模块修改必跑 |
 | `figure-smoke` | 无头渲染与确定性 fixture | 制图模块修改必跑 |
