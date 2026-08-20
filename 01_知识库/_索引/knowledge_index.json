@@ -1,0 +1,82 @@
+{
+  "index_version": 1,
+  "indexer": {
+    "name": "Knowledge Indexer",
+    "version": "1.0"
+  },
+  "schema": {
+    "object_type": "knowledge",
+    "schema_version": 1,
+    "status": "frozen"
+  },
+  "source_metadata_sha256": "62673af695b573488ec73577d7b2643c3b23a398af67edcaa4f67a41f7cb826d",
+  "summary": {
+    "knowledge_objects": 2,
+    "status_counts": {
+      "draft": 0,
+      "reviewed": 2,
+      "archived": 0
+    },
+    "domain_count": 1,
+    "prerequisite_edges": 1,
+    "related_declared_edges": 0,
+    "related_effective_edges": 0
+  },
+  "knowledge": {
+    "K0001": {
+      "path": "01_知识库/数学变换/勒让德变换.md",
+      "metadata": {
+        "schema_version": 1,
+        "id": "K0001",
+        "type": "knowledge",
+        "title": "勒让德变换",
+        "aliases": [
+          "Legendre transform"
+        ],
+        "status": "reviewed",
+        "created": "2026-08-17",
+        "updated": "2026-08-19",
+        "domain": "凸分析",
+        "prerequisites": [
+          "K0002"
+        ],
+        "related": []
+      },
+      "derived": {
+        "required_by": [],
+        "related_effective": []
+      }
+    },
+    "K0002": {
+      "path": "01_知识库/优化理论/凸函数.md",
+      "metadata": {
+        "schema_version": 1,
+        "id": "K0002",
+        "type": "knowledge",
+        "title": "凸函数",
+        "aliases": [
+          "Convex function"
+        ],
+        "status": "reviewed",
+        "created": "2026-08-19",
+        "updated": "2026-08-19",
+        "domain": "凸分析",
+        "prerequisites": [],
+        "related": []
+      },
+      "derived": {
+        "required_by": [
+          "K0001"
+        ],
+        "related_effective": []
+      }
+    }
+  },
+  "domains": {
+    "凸分析": [
+      "K0001",
+      "K0002"
+    ]
+  },
+  "without_domain": []
+}

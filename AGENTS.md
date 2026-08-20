@@ -2,27 +2,34 @@
 
 本文件只保存 Agent 每次进入项目时需要快速遵守的高频执行规则。
 
-完整制度以：
+---
 
-`项目规则.md`
+## 1. Authority 与冲突处理
 
-为准。
+| 文件 | 职责 |
+|------|------|
+| `项目规则.md` | 长期稳定制度 / 完整治理规则 |
+| `元数据规范.md` | Frozen Schema technical authority |
+| `09_长期记忆/项目进度.md` | 动态 Phase / capability / next-step |
+| 各模板 | 具体文档结构 |
+| 设计历史文档（如 `学习证据架构.md`、`Method与ErrorMode架构.md`、`派生学习状态架构.md`） | rationale / Pilot history；**不得**覆盖 Frozen Schema |
 
-如两者冲突，以 `项目规则.md` 为准。
+**冲突处理：**
+
+* `AGENTS.md` 与 `项目规则.md` 冲突 → 以 `项目规则.md` 为准。
+* 任一下游（`项目规则.md`、`AGENTS.md`、模板、工具）与 **Frozen Schema**（`元数据规范.md`）冲突 → **修下游**，不得反向修改 Frozen Schema。
+
+**动态项目状态**（Phase、capability、pytest 基线等）查看 `09_长期记忆/项目进度.md`，不在本文件维护。
 
 ---
 
-## 1. 总体原则
+## 2. 总体执行原则
 
 本项目用于长期数学学习、研究、验证、知识整理与正式成果输出。
 
 执行任务时遵循：
 
-`简单`
-→ `可运行`
-→ `稳定`
-→ `可验证`
-→ `再自动化`
+`简单` → `可运行` → `稳定` → `可验证` → `再自动化`
 
 默认：
 
@@ -36,19 +43,11 @@
 
 ---
 
-## 2. 数学任务原则
+## 3. 数学任务高频规则
 
 重要数学问题优先按照：
 
-`问题识别`
-→ `已有知识`
-→ `为什么想到`
-→ `数学直觉`
-→ `严格推导`
-→ `检查条件`
-→ `验证`
-→ `整理结果`
-→ `人工审核`
+`问题识别` → `为什么想到` → `数学直觉` → `严格推导` → `条件检查` → `验证` → `人工审核`
 
 推进。
 
@@ -56,55 +55,20 @@
 
 > 为什么能够想到这种方法？
 
-不得用“显然、易得、不难发现、类似可得”等表述跳过具有学习价值的关键步骤。
+不得用「显然、易得、不难发现、类似可得」等表述跳过具有学习价值的关键步骤。
 
-重要内容主动检查：
+重要内容主动检查（按需展开，无法严格确认时明确指出，不得猜测）：
 
-* 定义域和值域；
+* 定义域 / 值域；
 * 定理使用条件；
-* 连续、可微、可积、收敛；
-* 凸性、闭性；
-* 参数范围；
-* 可逆性；
-* 极值是否存在和达到；
-* 唯一性；
-* `sup/max`；
-* `inf/min`；
-* 必要条件与充分条件。
+* 连续 / 可微 / 可积 / 收敛；
+* 凸性 / 可逆性；
+* 边界 / 参数范围；
+* 极值存在与达到、唯一性；
+* `sup/max`、`inf/min` 不混淆；
+* 必要 / 充分条件。
 
-无法严格确认时，应明确指出，不得猜测。
-
----
-
-## 3. 资料读取与可信度
-
-根据任务按需读取：
-
-普通学习：
-
-`09_长期记忆/个人学习档案.md`
-
-`09_长期记忆/当前学习状态.md`
-
-知识联系：
-
-`09_长期记忆/数学知识地图.md`
-
-既往研究：
-
-`09_长期记忆/已解决问题索引.md`
-
-`02_题目库/已解决/`
-
-`01_知识库/`
-
-教材、论文：
-
-`03_参考资料/`
-
-用户指定资料时，优先使用用户指定资料。
-
-参考优先级原则上为：
+**资料优先级**（按需读取，用户指定资料优先）：
 
 1. 用户指定教材、论文或可靠原始资料；
 2. `03_参考资料/`；
@@ -112,376 +76,250 @@
 4. 已审核的 `02_题目库/已解决/`；
 5. Agent 自身推理。
 
-不得编造数学史、人物、定理归属、原始文献或具体引用。
+不得编造数学史、人物、定理归属、原始文献或具体引用；无可靠依据时标记 `待查证`。
 
-没有可靠依据时标记：
+学习状态导航按需见 `09_长期记忆/个人学习档案.md`、`当前学习状态.md`、`数学知识地图.md`、`已解决问题索引.md`。
 
-`待查证`
+### 数学交互（默认 AUTO）
 
-### 工作台状态事实源
+* **默认 AUTO**：「怎么做」「不会」「解答」「证明」「解释」「为什么」→ 直接完整回答（one-turn completeness）。
+* 非机械题须解释**为什么想到**；RESEARCH 主动扩展；REVIEW 优先批改用户原解。
+* **STUDY** 仅用户显式 opt-in（「我想自己做」「先别给答案」「只给提示」）；才启用分级提示 / 独立 Attempt 保护。
+* 不得默认 Level 1/2/3、不得默认「先想想再回答」；用户说「直接告诉我」→ 立即 AUTO。
+* **AI 解答 ≠ User Attempt**；AI 解题默认不创建 Attempt；Attempt 只记录用户真实 solving/reasoning。
+* 不得为保护 Evidence 拒绝或延迟用户正常请求的完整答案。完整 authority：`项目规则.md` 四点五。
+
+---
+
+## 4. Source / Generated / Workspace
+
+### 4.1 事实源优先级
 
 涉及项目状态、文件状态、题目状态或成果状态时：
 
-- 实际仓库文件和目录优先于长期记忆中的汇总描述；
-- `01_知识库/` 的实际内容决定正式知识归档状态；
-- `02_题目库/` 的实际目录决定题目状态；
-- `08_成果输出/` 的实际内容决定成果是否已经发布；
-- `项目进度.md`、`已解决问题索引.md`、`数学知识地图.md` 属于汇总或导航信息；
-- 汇总信息与实际仓库冲突时，以实际仓库为准并修正汇总信息；
-- 普通数学任务不因此扫描整个项目，只有状态判断或工作台维护任务才检查相关目录。
+* **实际 Source / filesystem 优先**于长期记忆汇总；
+* `01_知识库/` 实际内容 → 正式知识归档状态；
+* `02_题目库/` 实际文件与 YAML → 正式 Problem；目录 `未解决/` / `研究中/` / `已解决/` **仅**工作流组织，**不等于** YAML `status`；
+* `08_成果输出/` 实际内容 → 成果是否已发布；
+* 汇总信息（`项目进度.md`、`已解决问题索引.md` 等）与仓库冲突 → 以仓库为准并修正汇总。
+
+普通数学任务不因此扫描整个项目；仅状态判断或工作台维护任务才检查相关目录。
+
+### 4.2 Generated 数据
+
+`09_长期记忆/自动索引/**` = **GENERATED**，**不得人工编辑**。
+
+修正路径：改 source 或 derivation policy → validate → `sync`（或 `rebuild`）。
+
+Derived learning-state views 同理；设计 authority 见 `派生学习状态架构.md`。
+
+### 4.3 高频根目录
+
+| 目录 | 职责 |
+|------|------|
+| `01_知识库/` | 审核后的正式知识（概念 / 定理 / 方法本身） |
+| `02_题目库/` | 具体问题如何被研究和解决 |
+| `04_LATEX/` | LaTeX 模板与工程 source |
+| `08_成果输出/` | 正式成果（含 `PDF/`） |
+| `09_长期记忆/自动索引/` | Generated 导航与统计 |
+
+完整目录职责见 `项目规则.md`。
+
+研究稿不得直接复制成正式知识条目。正式 Problem 身份以 YAML `id` 为准。
+
+### 4.4 Workspace 命令
+
+```text
+python -m tools.workspace_indexer check
+python -m tools.workspace_indexer sync
+python -m tools.workspace_check check
+```
+
+| 组件 | 职责 |
+|------|------|
+| Validator / Checker | read-only validation |
+| Indexer | derived write only |
+| Workflow / Creator | authorized source mutation |
 
 ---
 
-## 4. 题目库与知识库
+## 5. Structured Object 高频协议
 
-必须区分：
+处理 Knowledge / Problem / Attempt / Method / Error Mode 等结构化对象前，先确认 contract 成熟度（draft / candidate / frozen）。
 
-`02_题目库/`
-= 一个具体问题如何被研究和解决
+**Frozen 对象**：只按 `元数据规范.md` 执行；不得为当前任务方便新增或改字段、lifecycle 或关系语义。
 
-`01_知识库/`
-= 一个概念、定理或方法本身是什么、为什么产生、怎样理解和使用
+**核心分离：**
 
-研究稿不得直接复制成正式知识条目。
+`Schema` ≠ `Template` ≠ `Validator` ≠ `Indexer` ≠ `Workflow`
 
-正式知识条目原则上：
+未 Frozen 的对象类型（如 Error Mode）**不得**当作 Frozen production Schema 或创建正式对象。
 
-* 先判断主归属；
-* 只保留一个主文件；
-* 不直接堆在 `01_知识库/` 根目录；
-* 跨领域关系通过知识地图或链接表达。
+设计历史文档不得覆盖 Frozen Schema。Frozen 章节索引：K §6 · P §7 · A §8 · M §9（`元数据规范.md`）。
+
+### Attempt 保护
+
+1. 只能来自**用户**真实 solving / reasoning Evidence（AI 代为生成解法 **不是** Attempt）。
+2. **禁止**为测试、统计、coverage、demo 而伪造 Attempt。
+3. one Attempt → one evaluation target（`problem` + optional `part`）。
+4. Recording ≠ Assessment；不得无依据猜 `outcome`。
+5. Reattempt → new A ID；Correction → same A ID + `corrections` append。
+6. Attempt 是 historical Evidence，**无** static `status` lifecycle。
+7. **STUDY 模式**才保护 independent Attempt；AUTO 下不得 withhold 完整答案。
+8. **Logical Attempt ≠ physical file：** production storage 按 Problem 聚合为 `Pxxxx.md` Ledger；新 Attempt append 到已有 Ledger，**不**创建 `Axxxxxx.md`。
+
+### Normal Operation（高频）
+
+* 临时提问（无 P ID）→ 只回答，**不** persistence / finalize。
+* 正式 Problem 直接解题（如「直接解答 P0002(a)」）→ canonical Solution upsert + source finalize（若 WRITTEN）+ **`reconcile_problem`（NO_OP 也进入）**。
+* AI Solution **≠** User Attempt；AUTO 默认 **不** 创建 Attempt。
+* User Attempt append 到 `Pxxxx.md`；1 STUDY episode = 1 Attempt；参考答案 **不** 记 Attempt。
+* Source candidate validate 后再 atomic replace；失败 official 不变。
+* Workspace **check-first**；STALE 才 sync；成功 compact report。
+* **正式 Problem：** `AUTO_CLOSE=ON` · `AUTO_ARTIFACT=ON`：canonical COMPLETE + self-check + validator PASS → `研究中`→`已解决` → 物化 LaTeX → 真实 P9 → canonical PDF。用户 opt-out（「先别归档 / 不要 PDF」）优先。
+* 临时提问：**不** persist / **不** reconcile / **不** PDF。
+* **Production operations（Layer 2）：** `persist_canonical_solution_op` · `record_user_attempt_op` · `study_to_auto_op` · `reconcile_problem_op` · `publish_pdf_op`。NO_OP 跳过 source finalizer，**仍** reconcile。
+* Maintenance：`python -m tools.normal_operation check-closure --problem Pxxxx` / `--all`；`reconcile --problem Pxxxx`。
+
+### Problem 保护
+
+* Problem YAML `status` ≠ workflow directory ≠ Attempt outcome。
+* 正式身份以 YAML `id` 为准。
+
+**Operational workflow**（filesystem directory，不得新增重复 YAML 字段）：
+
+| 目录 | 含义 |
+|------|------|
+| `未解决/` | 已登记，尚未 substantive mathematical activity |
+| `研究中/` | 已发生实质性 solving / reasoning / research |
+| `已解决/` | 研究完成 + 人工审核 + 明确归档授权 |
+
+* `未解决/` → `研究中/`：仅当已发生实质性数学研究活动时可自动移动（读题面、改格式、询问题意**不**触发）；只改目录位置，不改 YAML `status` / identity / knowledge mapping / Attempt outcome。
+* `研究中/` → `已解决/`：**正式 Problem 默认 AUTO_CLOSE**：canonical coverage COMPLETE + AI self-check + Problem Validator PASS 且无用户 opt-out 时自动移动。不再要求再说「审核通过，请归档」。
+* `已解决/` → `研究中/`：不得自动；仅用户明确要求时。
+
+### Validator 命令
+
+Problem：
+
+```text
+python -m tools.problem_validator check-file "<PATH>"
+python -m tools.problem_validator check
+```
+
+Attempt：
+
+```text
+python -m tools.attempt_validator check-file "<PATH>"
+python -m tools.attempt_validator check
+```
+
+Method（source root：`12_方法库/`）：
+
+```text
+python -m tools.method_validator check-file "<PATH>"
+python -m tools.method_validator check
+```
+
+**修改后流程：**
+
+* Method / Attempt：Validator PASS → `workspace_indexer sync` → `workspace_check check`。
+* Indexer **只消费** Validated Registry；不得自行 parse / validate / 修复 raw source。
+* Validator ERROR 时：不得继续索引发布、Workflow promotion、derived state 更新或下游正式生成。
+* `check-file` 非孤立单文件检查；需要 uniqueness / registry / relation 时须全库 validation。
+* `tools.problem_candidate_gate` 已 DEPRECATED，不得作 Problem Schema v1 正式 authority。
+
+**Authoring 要点**（非 Schema 表）：`02_题目库/题目模板.md` 仅作 scaffold，不得解析模板推导 Schema；新建 Problem 默认 `status: draft`；knowledge mapping 未完成则省略 `knowledge`；仅真实 multipart 才写 `parts`；数学正文放 Markdown，不堆 YAML 字段。
+
+没有明确授权时，不得自动做 Schema mutation、ID allocation、lifecycle promotion、formal archive 或 Knowledge creation。
 
 ---
 
-## 5. 人工审核权限
+## 6. 人工审核与 Source Mutation 权限
 
-重要流程：
+标准流程：`AI研究` → `AI自检` → `人工审核` → `正式归档`
 
-`AI研究`
-→ `AI自检`
-→ `人工审核`
-→ `正式归档`
+**四个高频授权语义：**
 
-如果用户只说：
+| 用户表述 | 含义 |
+|----------|------|
+| `审核通过` | 仅内容审核通过 |
+| `审核通过，请归档` | 允许执行当前研究任务的标准归档 |
+| `开始知识沉淀` | 允许正式 Knowledge authoring |
+| `生成 LaTeX 讲义` 或等价明确要求 | 允许进入正式 LaTeX 输出 |
 
-`审核通过`
+说「审核通过」时**不得**自动：移动文件、正式归档、创建知识条目、更新长期记忆、生成 LaTeX / PDF。
 
-只表示内容通过审核。
+**未经授权不得：**
 
-不得自动：
-
-* 移动文件；
-* 正式归档；
-* 创建知识条目；
-* 更新长期记忆；
-* 生成 LaTeX；
-* 生成 PDF。
-
-如果用户说：
-
-`审核通过，请归档`
-
-才执行当前研究任务的标准归档。
-
-如果用户说：
-
-`开始知识沉淀`
-
-才进入正式知识条目整理。
-
-如果用户明确要求：
-
-`生成 LaTeX 讲义`
-
-或表达等价意图，才进入正式 LaTeX 输出。
-
-未经授权，不得：
-
+* 正式归档、Knowledge creation；
 * 大规模修改长期记忆；
 * 删除原始资料；
 * 覆盖无关正式成果；
-* 修改与当前任务无关的文件；
+* 修改与当前任务无关的 Source；
 * 大范围重构目录。
 
 ---
 
-## 6. 模板原则
+## 7. LaTeX 高频协议
 
-所有模板都是：
+LaTeX 模板决定「长什么样」；Knowledge / reviewed material 决定「写什么」。详细流程、内容组织、图像、编译检查、成果覆盖见 `项目规则.md` §14。
 
-> 结构约束，不是固定填空表。
+### 模板与 entrypoint
 
-允许根据内容：
+**默认母版：** `04_LATEX/模板/数学讲义模板_v1/`（ElegantBook v4.7 vendor + XeLaTeX）
 
-* 删除栏目；
-* 合并栏目；
-* 调整顺序；
-* 适当扩展。
+* 模板入口：`main.tex` — **仅**属于模板母版。
+* 创建具体讲义：以 `main.tex` 为 scaffold，将入口 **重命名**为 `<主题目录名>.tex`。
+* **不要**把 `elegantbook.cls` 或 `vendor/` 复制进具体工程。
+* 编译依赖由 P9 注入 pinned vendor：`vendor/ElegantBook-v4.7/elegantbook.cls`。
+* **禁止**在具体工程继续使用 `main.tex` 作为 canonical entrypoint。
 
-不得为了填满模板而制造：
+**示例：**
 
-* 重复内容；
-* 无意义章节；
-* 不存在的定理、引理或推论。
+```text
+04_LATEX/专题讲义/数学变换/勒让德变换/勒让德变换.tex
+```
 
-原则：
+不得直接修改模板母版；不为单个主题重新设计无必要的新 LaTeX 风格。
 
-> 模板服务于内容。
+### 正式编译与发布
 
----
+```text
+python -m tools.latex_build check "<04_LATEX/project>"
+python -m tools.latex_build build "<04_LATEX/project>"
+```
 
-## 7. LaTeX 默认模板
+* `check`：只编译检查，**不**发布到 `08_成果输出/`。
+* `build`：inspection PASS 后 atomic publish。
+* 正式成果：`08_成果输出/PDF/资料类型/数学领域/<主题>.pdf`（basename 与 topic entrypoint 一致）。
+* compiler **不得**直接写入 formal root；failed build **不得**破坏已有 formal PDF。
+* build 已成功时，**不要**手工复制 PDF。
 
-正式数学讲义默认使用：
-
-`04_LATEX/模板/数学讲义模板_v1/`
-
-当前主要文件包括：
-
-* `main.tex`
-* `elegantbook.cls`
-* 其他实际需要的模板依赖。
-
-默认：
-
-`ElegantBook + XeLaTeX`
-
-除非用户明确指定其他模板，否则不要为单个主题重新设计新的 LaTeX 风格。
-
-不得直接修改模板母版。
+Source project 主要保存 `<主题>.tex`、`.cls` / `.sty` / `.bib`、`figures/` 等；build 中间文件优先在 isolated workspace。
 
 ---
 
-## 8. LaTeX 正式讲义流程
+## 8. Production Code / TDD / 完成规则
 
-生成正式数学讲义时：
+修改 Validator / Indexer / Workflow / Creator 等**生产代码**时：
 
-1. 读取已经审核确认的知识条目；
-2. 按需读取对应已解决研究稿中的证明、例子、图像和重要推导；
-3. 读取默认 LaTeX 模板；
-4. 创建独立讲义工程；
-5. 复制需要的模板文件；
-6. 根据主题重新组织讲义，不机械转换 Markdown；
-7. 使用 XeLaTeX 实际编译；
-8. 检查数学内容和排版；
-9. 自动发布最终 PDF；
-10. 完成后停止。
+`RED` → `GREEN` → `REFACTOR`（先写失败测试，再最小实现）
 
-正式专题讲义工程原则上保存到：
+内部模块优先调用 Python public API 并复用 `ValidationResult`；不要用 subprocess 调 CLI 做模块通信。
 
-`04_LATEX/专题讲义/数学领域/主题/`
+**Python**：可用于数值验证、实验、绘图；代码放 `05_代码/`。**数值结果不能代替严格证明。**
 
-例如：
+**Lean**：非默认；仅任务适合且用户明确要求时使用。
 
-`04_LATEX/专题讲义/数学变换/勒让德变换/`
+完成用户当前明确要求后停止。除非用户当前明确授权，**不自动**：
 
----
-
-## 9. LaTeX 内容与图像
-
-正式讲义优先形成：
-
-`为什么学`
-→ `问题从哪里来`
-→ `核心思想`
-→ `正式定义`
-→ `为什么这样定义`
-→ `直观或几何理解`
-→ `严格推导`
-→ `典型例子`
-→ `性质与联系`
-→ `常见误区`
-→ `总结`
-
-具体顺序可以根据主题调整。
-
-数学图像优先使用：
-
-* TikZ；
-* PGFPlots。
-
-图像必须服务于数学理解，不做纯装饰。
-
----
-
-## 10. LaTeX 编译检查
-
-正式输出前至少检查：
-
-* 是否成功编译；
-* 中文和数学公式是否正常；
-* `.cls`、`.sty` 等依赖是否完整；
-* 是否存在未定义命令；
-* TikZ / PGFPlots 是否正常；
-* 表格是否超宽；
-* 是否存在明显 Overfull；
-* 图像是否遮挡正文；
-* 目录、页码和分页是否正常；
-* PDF 是否可以正常打开。
-
-同时检查：
-
-* 符号统一；
-* 定义和条件完整；
-* `sup/max`、`inf/min` 不混淆；
-* 必要与充分条件不混淆；
-* 特殊情形没有误写成一般结论；
-* 图像与正文数学关系一致。
-
-发现问题优先最小修改，不无理由重构模板。
-
----
-
-## 11. 正式 PDF 自动发布
-
-正式讲义编译并检查通过后，自动发布 PDF。
-
-统一规则：
-
-`04_LATEX/资料类型/数学领域/主题/main.pdf`
-
-复制并重命名为：
-
-`08_成果输出/PDF/资料类型/数学领域/主题.pdf`
-
-例如：
-
-`04_LATEX/专题讲义/数学变换/勒让德变换/main.pdf`
-
-自动发布为：
-
-`08_成果输出/PDF/专题讲义/数学变换/勒让德变换.pdf`
-
-如果目标目录不存在，应自动创建。
-
-不要求用户再次手动复制 PDF。
-
-正式成果使用主题名称，不保留 `main.pdf` 作为正式文件名。
-
----
-
-## 12. 编译文件与成果分离
-
-以下文件留在 `04_LATEX/` 对应工程中：
-
-* `.aux`
-* `.log`
-* `.toc`
-* `.out`
-* `.synctex.gz`
-* `.fls`
-* `.fdb_latexmk`
-* 其他编译中间文件。
-
-不得复制到：
-
-`08_成果输出/PDF/`
-
-职责：
-
-`04_LATEX/`
-= 模板、源文件、工程和编译文件
-
-`08_成果输出/PDF/`
-= 最终正式 PDF
-
-`08_成果输出/图片/`
-= 单独需要发布的正式图片
-
----
-
-## 13. 正式成果覆盖
-
-更新已有正式讲义时，只有在：
-
-1. 新版本成功编译；
-2. 数学检查完成；
-3. 排版检查完成；
-4. PDF 可以正常打开；
-
-之后，才允许覆盖对应正式 PDF。
-
-临时测试、草稿、编译失败或未检查版本不得覆盖正式成果。
-
----
-
-## 14. 目录职责
-
-`00_收件箱/`
-= 未分类资料
-
-`01_知识库/`
-= 审核后的正式知识
-
-`02_题目库/`
-= 数学问题研究过程
-
-`03_参考资料/`
-= 教材、论文和原始资料
-
-`04_LATEX/`
-= LaTeX 模板与工程
-
-`05_代码/`
-= Python 等代码
-
-`06_LEAN形式化/`
-= Lean 内容
-
-`07_项目/`
-= 数学建模等完整项目
-
-`08_成果输出/`
-= 正式成果
-
-`09_长期记忆/`
-= 长期状态、索引和记忆
-
-`10_提示词/`
-= 可复用 Prompt
-
----
-
-## 15. Python 与 Lean
-
-Python 用于：
-
-* 数值验证；
-* 数学实验；
-* 绘图；
-* 参数分析；
-* 特殊情况测试。
-
-代码保存到：
-
-`05_代码/`
-
-数值结果不能代替严格证明。
-
-Lean 当前不是默认工具。
-
-只有问题适合形式化且用户明确需要时再使用。
-
----
-
-## 16. 任务完成原则
-
-完成用户当前明确要求后停止。
-
-不要自动：
-
-* 创建下一研究任务；
-* 扩写无关知识；
-* 创建新的知识条目；
+* 进入下一 Phase；
+* 创建下一 Knowledge / 其他 LaTeX 讲义；
 * 更新全部长期记忆；
-* 创建新的 LaTeX 模板；
-* 制作其他主题讲义；
-* 引入多 Agent、RAG、向量数据库等复杂架构；
+* 引入 RAG、Multi-Agent、向量数据库、Lean、CI；
 * 重构整个项目。
 
 核心原则：
 
 > 少量、高质量、可验证的操作，优先于大量碎片化操作。
-
-
-

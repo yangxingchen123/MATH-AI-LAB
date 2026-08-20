@@ -19,11 +19,20 @@
 04_LATEX/**/main.pdf
 
 # =========================
+# Secrets
+# =========================
+.env
+.env.*
+
+# Virtual environments
+.venv/
+.ipynb_checkpoints/
+
+# =========================
 # Python
 # =========================
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
 *.pyd
 
 # =========================

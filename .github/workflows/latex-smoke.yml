@@ -1,0 +1,48 @@
+# MATH-AI-LAB LaTeX smoke verification.
+# Uses tools.verification latex-smoke (check semantics only).
+# Must not publish formal PDFs or mutate Source / Generated files.
+# Weekly scheduled all-verification: DEFERRED.
+
+name: LaTeX Smoke Verification
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "04_LATEX/**"
+      - "tools/latex_build/**"
+      - "tests/latex_build/**"
+      - "tools/verification/**"
+      - "tests/verification/**"
+      - ".github/workflows/latex-smoke.yml"
+  pull_request:
+    paths:
+      - "04_LATEX/**"
+      - "tools/latex_build/**"
+      - "tests/latex_build/**"
+      - "tools/verification/**"
+      - "tests/verification/**"
+      - ".github/workflows/latex-smoke.yml"
+
+jobs:
+  latex-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up canonical Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Install XeLaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-full fonts-noto-cjk
+
+      - name: Run LaTeX smoke verification
+        run: python -m tools.verification latex-smoke "04_LATEX/专题讲义/数学变换/勒让德变换"

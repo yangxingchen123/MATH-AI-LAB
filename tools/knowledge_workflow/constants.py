@@ -1,0 +1,28 @@
+"""Constants for Knowledge Workflow v1.0."""
+
+from __future__ import annotations
+
+WORKFLOW_VERSION = "1.0"
+
+STAGE_NOT_RUN = "NOT_RUN"
+STAGE_PASS = "PASS"
+STAGE_FAIL = "FAIL"
+STAGE_SKIPPED = "SKIPPED"
+
+RESULT_SUCCESS = "SUCCESS"
+RESULT_FILE_VALIDATION_FAILED = "FILE_VALIDATION_FAILED"
+RESULT_FULL_VALIDATION_FAILED = "FULL_VALIDATION_FAILED"
+RESULT_INDEX_BUILD_FAILED = "INDEX_BUILD_FAILED"
+RESULT_INDEX_STALE = "INDEX_STALE"
+RESULT_HEALTHY = "HEALTHY"
+RESULT_VALIDATION_FAILED = "VALIDATION_FAILED"
+RESULT_INDEX_MISSING = "INDEX_MISSING"
+RESULT_SYSTEM_UNHEALTHY = "SYSTEM_UNHEALTHY"
+
+RULES: dict[str, tuple[str, str]] = {
+    "KW-ROOT-001": ("ERROR", "Invalid project root"),
+    "KW-FILE-001": ("ERROR", "Invalid Knowledge workflow target"),
+    "KW-FILE-002": ("ERROR", "Knowledge file does not exist"),
+    "KW-WORKFLOW-001": ("ERROR", "Workflow orchestration error"),
+    "KW-INTERNAL-001": ("ERROR", "Internal workflow error"),
+}

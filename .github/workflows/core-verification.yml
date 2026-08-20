@@ -1,0 +1,29 @@
+# MATH-AI-LAB Foundation core verification.
+# Local verification contract is the semantic authority.
+# This workflow is a thin read-only remote executor.
+# Weekly scheduled all-verification: DEFERRED.
+
+name: Core Verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up canonical Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run verification core
+        run: python -m tools.verification core

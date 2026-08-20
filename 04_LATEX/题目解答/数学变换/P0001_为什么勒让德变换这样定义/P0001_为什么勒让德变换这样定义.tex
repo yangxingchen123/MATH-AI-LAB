@@ -1,0 +1,491 @@
+% MATH-AI-LAB GENERATED ARTIFACT
+% problem: P0001
+% source_sha256: d6f15029a86b09fd98e4c93f95db1a04f645192cc4c3df68aeb9d173e95d2eee
+% template_sha256: 169ea00ca765092117a8fb77fad40a28f19c83ad661b2537b3091e81ad470591
+% generator_version: problem-artifact-v1.2
+% !TeX program = xelatex
+\documentclass[
+    lang=cn,
+    color=blue,
+    mode=fancy,
+    thmcnt=section,
+    scheme=chinese
+]{elegantbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\title{为什么勒让德变换这样定义}
+\subtitle{P0001}
+\author{}
+\institute{}
+\date{\today}
+\version{1.0}
+
+\begin{document}
+\maketitle
+\mainmatter
+
+\chapter{为什么勒让德变换这样定义}
+
+\section{题目}
+
+\section{解答}
+\subsection{P0001}
+八、详细推导
+
+固定斜率 → $\sup$ 定义 → 经典换变量（一元情形）
+
+\textbf{本文件范围：} A–G（含 $x^2/2$、$e^x$、Fenchel–Young 基本关系）。
+
+\textbf{设定：} 以下 A–D 在 $f : \mathbb{R} \to (-\infty, +\infty]$ 时，共轭 $f^*(p)=\sup_x\{px-f(x)\}$ 均已有定义；C、D 中涉及 $p=f'(x)$ 反解的部分，额外假设 $f \in C^2$、严格凸，且讨论 $p \in f'(\mathrm{dom}\, f)$、$f'$ 在像集 $f'(\mathrm{dom}\, f)$ 上可逆的情形。
+
+\par
+A. 为什么固定斜率 $p$ 后，自然要研究 $px - f(x)$？
+
+直觉
+
+固定斜率 $p$ 后，我们问的不是“曲线在某点多高”，而是：\textbf{斜率为 $p$ 的仿射函数 $y=px-c$ 能抬多高仍不越过曲线？} 注意：$c$ 越大，直线 $y=px-c$ 越低；$c$ 越小，直线越高。对每一个位置 $x$，若要在 $x$ 处不高于曲线，则截距参数 $c$ 至少要满足 $c \ge px - f(x)$。因此 $px - f(x)$ 是在 $x$ 这一点、斜率为 $p$ 时\textbf{最小允许的截距参数}的下界；研究它，就是逐点测量“这条直线被曲线顶住”的程度。
+
+几何
+
+设 $L_c(x) = px - c$ 为斜率 $p$ 的仿射函数（图形为直线）。要求 $L_c(x) \le f(x)$ 对所有 $x$ 成立，即
+
+\[
+c \ge px - f(x) \quad \forall x.
+\]
+
+右端 $px - f(x)$ 随 $x$ 变化；截距参数 $c$ 必须不低于所有 $x$ 处的 $px - f(x)$。于是自然研究函数
+
+\[
+\phi_p(x) := px - f(x),
+\]
+
+它把“斜率已固定、截距待求”的问题化为对 $\phi_p$ 的分析。
+
+严格推导
+
+\textbf{命题 A.} 设 $p \in \mathbb{R}$。仿射函数 $x \mapsto px - c$ 满足 $px - c \le f(x)$ 对所有 $x \in \mathrm{dom}\, f$ 成立，当且仅当
+
+\[
+c \ge \sup_{x \in \mathrm{dom}\, f} \bigl\{ px - f(x) \bigr\}.
+\]
+
+\textbf{证.}  
+$(\Rightarrow)$ 若 $px - c \le f(x)$ 对所有 $x$ 成立，移项得 $c \ge px - f(x)$，对 $x$ 取上确界即得。  
+$(\Leftarrow)$ 若 $c \ge \sup_x\{px - f(x)\}$，则对每个 $x$ 有 $c \ge px - f(x)$，即 $px - c \le f(x)$。 $\square$
+
+因此，$px - f(x)$ 不是随意选取的组合；它是\textbf{截距参数约束}的直接代数形式。（注：$y$ 轴截距为 $-c$，故 $c$ 称为\textbf{截距参数}，不直接等同于 $y$ 轴截距。）
+
+\par
+B. 为什么 $\sup_x\{px - f(x)\}$ 正好编码“斜率为 $p$ 的最佳仿射下界”？
+
+直觉
+
+对固定斜率 $p$，仿射下界写为 $y = px - c$。\textbf{$c$ 越大，直线越低；$c$ 越小，直线越高。} 下界条件 $px - c \le f(x)$ 等价于 $c \ge px - f(x)$，故
+
+\[
+c \ge \sup_x\{px - f(x)\} = f^*(p).
+\]
+
+若 $f^*(p) < +\infty$，为得到斜率为 $p$ 的\textbf{最高}仿射下界，应取\textbf{最小允许的截距参数} $c = f^*(p)$。任何 $c > f^*(p)$ 仍产生合法但更低的仿射下界；任何 $c < f^*(p)$ 会在某处破坏 $px - c \le f(x)$。
+
+于是有限最高仿射下界为
+
+\[
+y = px - f^*(p).
+\]
+
+若 $f^*(p) = +\infty$，则不存在斜率为 $p$ 的有限全局仿射下界。
+
+几何
+
+对每个截距参数 $c$，在 $f^*(p)<+\infty$ 时，直线 $y = px - c$ 在 $c = f^*(p)$ 时达到允许的最高位置（$c$ 再小则不再是下界；$c$ 更大则直线整体更低）。此时对所有 $x$ 有
+
+\[
+px - f^*(p) \le f(x),
+\]
+
+即 $y = px - f^*(p)$ 是斜率为 $p$ 的有限最高仿射下界（亦称最佳仿射下界）。
+
+\textbf{术语：} $y = px - f^*(p)$（仅当 $f^*(p)<+\infty$）优先称为\textbf{最高仿射下界}。仅当存在有限 $x_0$ 使
+
+\[
+f(x_0) = p x_0 - f^*(p)
+\]
+
+（即 $\sup$ 在有限 $x_0$ 达到）时，才称该直线为 $f$ 在 $x_0$ 处的\textbf{支撑直线}——此时几何上“贴住”曲线。
+
+严格推导
+
+\textbf{定义（Legendre–Fenchel 共轭，一元）。} 对 $f : \mathbb{R} \to (-\infty, +\infty]$，
+
+\[
+f^*(p) := \sup_{x \in \mathrm{dom}\, f} \bigl\{ px - f(x) \bigr\}.
+\]
+
+\textbf{命题 B（有限最高仿射下界）。} 固定 $p$。
+
+- 若 $f^*(p) = +\infty$，则不存在有限截距参数 $c$ 使 $x\mapsto px-c$ 成为 $f$ 的全局仿射下界；此时不把 $g_p(x)=px-f^*(p)$ 当作有限仿射函数讨论。
+- 若 $f^*(p) < +\infty$，令 $g_p(x) := px - f^*(p)$。则：
+  1. $g_p$ 是斜率为 $p$ 的有限仿射下界。
+  2. 若 $h(x)=px-c$ 也是斜率为 $p$ 的仿射下界，则 $c \ge f^*(p)$，且 $h(x) \le g_p(x)$ 对所有 $x$ 成立；等号对所有 $x$ 成立当且仅当 $c = f^*(p)$。
+  3. 若 $c > f^*(p)$，则 $h = px - c$ 仍是合法下界，但严格低于 $g_p$（直线更低）。
+
+\textbf{证.} 若 $f^*(p)=+\infty$，则对任意有限 $c$，必有某个 $x$ 使 $px-f(x)>c$，即 $px-c>f(x)$，故无全局仿射下界。若 $f^*(p)<+\infty$，由定义 $f^*(p) \ge px - f(x)$，故 $px - f^*(p) \le f(x)$，(1) 成立。若 $px - c \le f(x)$ 对所有 $x$ 成立，由命题 A 得 $c \ge f^*(p)$，故 $h(x)=px-c \le px-f^*(p)=g_p(x)$。(2)(3) 由截距参数 $c$ 与直线高度的反向关系即得。 $\square$
+
+\textbf{命题 B$'$（支撑直线判据）。} 设 $f^*(p)<+\infty$。则 $\sup$ 在有限 $x_0$ 达到，即 $f^*(p) = p x_0 - f(x_0)$，当且仅当 $y = px - f^*(p)$ 在 $x_0$ 处与 $f$ 相等，此时该最高仿射下界为支撑直线。
+
+\par
+C. 在 $f$ 可微、严格凸的良性情形下，为什么最大化条件给出 $p = f'(x)$？
+
+直觉
+
+$\phi_p(x) = px - f(x)$ 对 $x$ 求导：$\phi_p'(x) = p - f'(x)$。$\phi_p$ 在 $x$ 处增大当且仅当 $p > f'(x)$，减小当且仅当 $p < f'(x)$。
+
+严格凸时，$\phi_p(x)=px-f(x)$ 为严格凹函数，因此极大点若存在则至多一个。当 $p\in f'(\mathrm{dom}\, f)$，存在 $x^*$ 满足 $f'(x^*)=p$；在当前光滑严格凸条件下，该点就是唯一全局最大点——曲线在该点的切线斜率等于 $p$，与“固定斜率 $p$ 的最高仿射下界”在切点相贴。
+
+几何
+
+在严格凸情形，$f$ 的图像向上弯曲。当 $p\in f'(\mathrm{dom}\, f)$ 时，斜率为 $p$ 的最高仿射下界应“贴”在图像的某个点 $x^*$ 上；在该点，局部上曲线与直线同斜率，故 $f'(x^*) = p$。
+
+严格推导
+
+设 $f \in C^2(\mathbb{R})$，$f''(x) > 0$ 对所有 $x$ 成立（严格凸）。固定 $p$，令 $\phi_p(x) = px - f(x)$。
+
+\[
+\phi_p'(x) = p - f'(x), \qquad \phi_p''(x) = -f''(x) < 0.
+\]
+
+故 $\phi_p$ 在 $\mathbb{R}$ 上严格凹，因此极大点若存在则至多一个。若 $p \in f'(\mathrm{dom}\, f)$，存在 $x^* \in \mathrm{dom}\, f$ 使 $f'(x^*) = p$，即 $\phi_p'(x^*) = 0$；由严格凹性，$x^*$ 是 $\phi_p$ 的\textbf{唯一全局最大点}，且
+
+\[
+f^*(p) = \phi_p(x^*) = p x^* - f(x^*).
+\]
+
+\textbf{关于反解的限定：} 上式给出“给定 $p$ 求极大点 $x^*$”的一阶条件。由严格凸性，$f' : \mathbb{R} \to f'(\mathbb{R})$ 严格递增，在像集 $f'(\mathbb{R})$ 上可逆，故对 $p \in f'(\mathbb{R})$ 有 $x^* = (f')^{-1}(p)$。\textbf{不能}默认任意 $p$ 都有唯一原像 $x$；只有 $p$ 落在 $f'(\mathrm{dom}\, f)$ 内时，上述经典换变量才适用（本例 $f=x^2/2$ 中 $f'(\mathbb{R})=\mathbb{R}$，故对所有 $p$ 成立）。
+
+\par
+D. 为什么这意味着可以用斜率 $p$ 重新参数化凸函数信息？
+
+直觉
+
+原先用 \textbf{位置—函数值数据} $(x, f(x))$ 描述凸函数。Legendre 变换将其转为 \textbf{斜率—最佳仿射下界数据} $(p, f^*(p))$：对每个斜率 $p$，记录（有限时）最高仿射下界的截距参数 $f^*(p)$。
+
+\textbf{核心思想：} Legendre 变换把凸函数信息从 $(x,f(x))$ 的“位置—函数值描述”，转换为 $(p,f^*(p))$ 的“斜率—最佳仿射下界数据描述”。一般地
+
+\[
+\operatorname{graph}(f) \neq \operatorname{graph}(f^*).
+\]
+
+几何
+
+$\operatorname{graph}(f)$ 是平面中的点值曲线。$\operatorname{graph}(f^*)$ 是对偶侧曲线，横轴为斜率 $p$、纵轴为共轭值 $f^*(p)$。经典 Legendre 在 $f'$ 于像集上可逆且上确界达到时，建立 $x \leftrightarrow p = f'(x)$，使切点关联最佳仿射下界数据 $(p, f^*(p))$（此时亦为支撑直线）。这编码的是\textbf{最佳仿射下界族}，而非把 $\operatorname{graph}(f)$ 简单“换横轴”重画。
+
+在适当的 proper、lsc、convex 条件下有 $f^{**}=f$，即 $f$ 与 $f^*$ 可携带等价信息；恢复过程不等于 $\operatorname{graph}(f)=\operatorname{graph}(f^*)$。
+
+严格推导
+
+设 $f \in C^2$ 严格凸，$f' : \mathbb{R} \to f'(\mathbb{R})$ 在像集上可逆，记 $x = x(p) := (f')^{-1}(p)$，$p \in f'(\mathbb{R})$。
+
+定义 Legendre 变换（经典）
+
+\[
+f^*(p) := p\, x(p) - f(x(p)), \qquad p \in f'(\mathbb{R}).
+\]
+
+\textbf{命题 D（信息表示的更换）.} 对 $x \in \mathbb{R}$，令 $p = f'(x)$，则
+
+\[
+f(x) = p x - f^*(p).
+\]
+
+因此，切点处的位置—函数值数据 $(x, f(x))$ 与对应斜率—最佳仿射下界数据 $(p, f^*(p))$ 通过 $p = f'(x)$ 一一对应。但一般地
+
+\[
+\operatorname{graph}(f) = \{(x, f(x))\} \neq \{(p, f^*(p)) : p \in f'(\mathbb{R})\} = \operatorname{graph}(f^*).
+\]
+
+\textbf{证.} 令 $p = f'(x)$。由 C 节，$f^*(p) = px - f(x)$，移项即 $f(x) = px - f^*(p)$。两集合分别位于 $(x,y)$ 与 $(p,y')$ 坐标系中，一般不相同。 $\square$
+
+\textbf{要点：} $f^*$ 不是“同一图像换横轴”。它把凸函数从点值描述转为对偶的最佳仿射下界数据；一般 $\operatorname{graph}(f)\neq\operatorname{graph}(f^*)$。
+
+\par
+E. 完整演示：$f(x) = \dfrac{x^2}{2}$
+
+E.1 三种层次总览
+
+| 描述方式 | 参数 | 表达式 | 含义 |
+|----------|------|--------|------|
+| $x$ 描述 | 位置 $x$ | $f(x) = x^2/2$ | 在 $x$ 处的高度 |
+| 切线描述 | 切点 $x_0$，斜率 $p = x_0$ | $y = p x - f^*(p)$ | 过切点、斜率为 $p$ 的切线（此处为支撑直线） |
+| $p$ 描述 | 斜率 $p$ | $f^*(p) = p^2/2$ | 固定斜率 $p$ 时的共轭值 |
+
+\textbf{自共轭特殊现象：} 本例 $f^*(p) = p^2/2$，与 $f$ 具有\textbf{相同的函数形式}。这仅因为 $f(x)=x^2/2$ 的自共轭性，是特殊现象；\textbf{不能}据此认为一般 Legendre 变换都只是把同一条曲线重新参数化。一般地 $\mathrm{graph}(f) \neq \mathrm{graph}(f^*)$。
+
+\par
+E.2 $x$ 描述 → 切线描述
+
+\textbf{直觉：} 抛物线在每个点都有一条切线；切线由“斜率 + 截距”刻画。
+
+\textbf{几何：} $f'(x) = x$，在 $x_0$ 处切线为
+
+\[
+y = f(x_0) + f'(x_0)(x - x_0) = x_0 \cdot x - \Bigl(x_0^2 - \frac{x_0^2}{2}\Bigr) = p x - \frac{p^2}{2}, \quad p := x_0.
+\]
+
+\textbf{严格：} 令 $p = f'(x_0) = x_0$。切线 $y = px - c$ 过 $(x_0, f(x_0))$ 且斜率为 $p$，故
+
+\[
+f(x_0) = p x_0 - c \quad \Rightarrow \quad c = p x_0 - f(x_0) = x_0^2 - \frac{x_0^2}{2} = \frac{x_0^2}{2} = \frac{p^2}{2} = f^*(p).
+\]
+
+切线方程 $y = px - f^*(p) = px - p^2/2$。（此处 $c = f^*(p)$ 为最小允许的截距参数。）
+
+\par
+E.3 切线描述 → $p$ 描述（$\sup$ 与 $f^*(p)$）
+
+\textbf{直觉：} 对所有斜率 $p$，找最高仿射下界 $y = px - f^*(p)$；本例中它恰为切线并在 $x = p$ 处相贴。
+
+\textbf{几何：} $\phi_p(x) = px - x^2/2$ 为开口向下的抛物线，顶点在 $x = p$，最大值为 $p^2/2$。
+
+\textbf{严格：}
+
+\[
+f^*(p) = \sup_{x \in \mathbb{R}} \Bigl\{ px - \frac{x^2}{2} \Bigr\}.
+\]
+
+$\phi_p'(x) = p - x = 0 \Rightarrow x = p$。代入：
+
+\[
+f^*(p) = p \cdot p - \frac{p^2}{2} = \frac{p^2}{2}.
+\]
+
+验证支撑直线条件：$f(p) = p^2/2 = p \cdot p - f^*(p)$，故 $\sup$ 在 $x_0 = p$ 达到，$y = px - f^*(p)$ 为支撑直线。
+
+\par
+E.4 $p$ 描述 → 经典 Legendre 换变量
+
+\textbf{直觉：} $p = f'(x) = x$ 可逆，$x(p) = p$，共轭 $f^*(p) = p \cdot x(p) - f(x(p))$。
+
+\textbf{严格：}
+
+\[
+x(p) = (f')^{-1}(p) = p, \qquad f^*(p) = p \cdot p - \frac{p^2}{2} = \frac{p^2}{2},
+\]
+
+与 $\sup$ 定义一致。
+
+\textbf{小结：} 本例中 $f^*(p)=p^2/2$ 与 $f$ 形式相同，故 $\mathrm{graph}(f)$ 与 $\mathrm{graph}(f^*)$ 在数值上“看起来一样”，但横轴含义不同（$x$ 是位置，$p$ 是斜率）。这不能推广到一般 $f$；一般 Legendre 变换产出的是对偶空间中的不同函数图像。
+
+\par
+E.5 核心思想的三种解释
+
+Legendre 变换把凸函数信息从 $(x,f(x))$ 的“位置—函数值描述”，转换为 $(p,f^{\ast}(p))$ 的“斜率—最佳仿射下界数据描述”。一般 $\operatorname{graph}(f)\neq\operatorname{graph}(f^{\ast})$。
+
+| 层次 | 解释 |
+|------|------|
+| 直觉 | 不再问“在 $x$ 点多高”，而问“斜率为 $p$ 的最佳仿射下界截距参数是多少”。$f^{\ast}$ 记录由最佳仿射下界得到的对偶信息；在适当的 proper、lsc、convex 条件下，这些信息足以通过 $f^{\ast\ast}=f$ 恢复原函数。 |
+| 几何 | $\operatorname{graph}(f)$ 记录点值曲线；$\operatorname{graph}(f^{\ast})$ 记录对偶侧 $(p, f^{\ast}(p))$ 数据。二者一般不是同一张图。 |
+| 严格 | $f^{\ast}(p)=\sup_x\{px-f(x)\}$ 把 $f$ 转为对偶函数；关系 $f(x)=px-f^{\ast}(p)$（$p=f'(x)$ 且达到时）联系两种数据，但不意味着 $\operatorname{graph}(f)=\operatorname{graph}(f^{\ast})$。本例 $f^{\ast}(p)=p^2/2$ 的自共轭性是例外。 |
+
+\par
+F. 核心例子：$f(x) = e^x$
+
+F.0 设定与目标
+
+令 $f(x) = e^x$，$\mathrm{dom}\, f = \mathbb{R}$。定义
+
+\[
+f^*(p) := \sup_{x \in \mathbb{R}} \bigl\{ px - e^x \bigr\}, \qquad \phi_p(x) := px - e^x.
+\]
+
+注意：
+
+\[
+f'(x) = e^x, \qquad f'(\mathbb{R}) = (0, +\infty).
+\]
+
+因此经典写法 $p = f'(x)$ \textbf{只能}覆盖 $p > 0$。本例的目的正是展示：$p = 0$ 与 $p < 0$ 必须用 Legendre–Fenchel 的 $\sup$ 定义处理，并显式区分 $\sup$ 与 $\max$。
+
+\par
+F.1 情形一：$p > 0$（最大值达到）
+
+直觉
+
+$e^x$ 的斜率从 $0^+$ 扫到 $+\infty$。给定 $p > 0$，存在切点 $x^* = \ln p$，使切线斜率恰为 $p$，于是 $\phi_p$ 在该点达到最大值，$f^*(p)$ 有限，且最高仿射下界成为支撑直线。
+
+几何
+
+切线方程为 $y = p x - f^*(p)$。在 $x^* = \ln p$ 处与 $y = e^x$ 相切并接触，故为支撑直线。
+
+严格推导
+
+对所有 $x\in\mathbb{R}$，
+
+\[
+\phi_p''(x) = -e^x < 0,
+\]
+
+因此 $\phi_p$ 在 $\mathbb{R}$ 上严格凹，极大点若存在则至多一个。
+
+又因为 $p>0$ 时存在唯一临界点：
+
+\[
+\phi_p'(x) = p - e^x = 0 \quad\Longleftrightarrow\quad x^* = \ln p,
+\]
+
+所以 $x^*$ 是唯一全局最大点，最大值达到：
+
+\[
+f^*(p) = \phi_p(\ln p) = p \ln p - e^{\ln p} = p \ln p - p.
+\]
+
+验证支撑条件：
+
+\[
+f(\ln p) = e^{\ln p} = p = p \cdot \ln p - (p \ln p - p) = p \cdot \ln p - f^*(p).
+\]
+
+因此 $y = px - f^*(p)$ 是有限最高仿射下界，且为支撑直线。这与经典 Legendre 一致：$p = f'(x^*)$，$x^* = (f')^{-1}(p) = \ln p$。
+
+\par
+F.2 情形二：$p = 0$（$\sup$ 有限但 $\max$ 达不到）
+
+直觉
+
+斜率 $0$ 对应水平线。指数曲线 $y = e^x$ 从上方趋近于 $y = 0$，但永不触及。因此“最高水平下界”是 $y = 0$，截距参数 $f^*(0) = 0$，却没有任何有限点使曲线与该直线相接。
+
+几何
+
+对任意有限 $x$，$e^x > 0$，故水平线 $y = 0$ 严格在曲线下方。把水平线整体抬高（减小截距参数）会立刻在某处穿过曲线。故 $y = 0$ 是斜率为 $0$ 的有限最高仿射下界，但\textbf{不是}支撑直线。
+
+严格推导
+
+\[
+\phi_0(x) = -e^x.
+\]
+
+对一切有限 $x$ 有 $-e^x < 0$。另一方面，
+
+\[
+\lim_{x \to -\infty} (-e^x) = 0.
+\]
+
+故
+
+\[
+f^*(0) = \sup_{x \in \mathbb{R}} (-e^x) = 0,
+\]
+
+但\textbf{不存在} $x_0 \in \mathbb{R}$ 使 $\phi_0(x_0) = 0$。换言之：$\sup$ 有限，$\max$ 不存在（在有限域上达不到）。
+
+因此 $y = 0 \cdot x - f^*(0) = 0$ 是有限最高仿射下界，但因上确界从未在有限 $x$ 达到，它\textbf{不是}支撑直线。
+
+\textbf{与经典写法的对照：} $f'(x) = e^x > 0$ 永不为 $0$，故不存在 $x$ 满足 $p = f'(x) = 0$。若强行套用“$p = f'(x)$ 再代入”，会漏掉 $p = 0$ 这一合法共轭值。
+
+\par
+F.3 情形三：$p < 0$（$f^*(p) = +\infty$）
+
+直觉
+
+斜率为负的直线向左延伸时会向上翘。而 $e^x$ 在 $x \to -\infty$ 时趋于 $0$。负斜率直线最终会从下方“冲破”指数曲线的左端；无论截距参数取多大，都挡不住。因此不存在斜率为负的有限全局仿射下界，$f^*(p) = +\infty$。
+
+几何
+
+固定 $p < 0$ 与任意有限 $c$，考察 $y = px - c$。当 $x \to -\infty$ 时 $px \to +\infty$（负斜率乘以趋于 $-\infty$ 的 $x$），而 $e^x \to 0$，故存在充分负的 $x$ 使 $px - c > e^x$。任何有限截距参数的负斜率直线都不是全局下界。
+
+严格推导
+
+固定 $p < 0$。对任意 $M > 0$，取 $x$ 充分负，使 $px > M$（可行，因 $p < 0$ 且 $x \to -\infty$），同时 $e^x < 1$。则
+
+\[
+\phi_p(x) = px - e^x > M - 1.
+\]
+
+故 $\phi_p$ 无上界：
+
+\[
+f^*(p) = \sup_{x \in \mathbb{R}} \phi_p(x) = +\infty.
+\]
+
+由 B 节有限性逻辑：当 $f^*(p) = +\infty$ 时，\textbf{不存在}斜率为 $p$ 的有限全局仿射下界，故不能把 $g_p(x) = px - f^*(p)$ 当作有限仿射函数讨论。
+
+\textbf{与经典写法的对照：} $p < 0$ 不在 $f'(\mathbb{R}) = (0,+\infty)$ 中，经典反解直接无定义；Legendre–Fenchel 则给出明确结论 $f^*(p) = +\infty$。
+
+\par
+F.4 $\sup$ 与 $\max$ 的对比（本例三种情形）
+
+| $p$ | $f^*(p)$ | 是否达到最大值 | 最高仿射下界 | 是否支撑直线 | 经典 $p=f'(x)$ |
+|-----|----------|----------------|--------------|--------------|----------------|
+| $p > 0$ | $p\ln p - p$ | 是，$x^*=\ln p$ | $y=px-(p\ln p-p)$ 有限 | 是 | 适用 |
+| $p = 0$ | $0$ | 否（仅当 $x\to-\infty$） | $y=0$ 有限 | 否 | 不适用 |
+| $p < 0$ | $+\infty$ | — | 无有限全局仿射下界 | — | 不适用 |
+
+要点：
+
+1. \textbf{$\sup$ 可以有限而 $\max$ 达不到}（$p=0$）：共轭值仍有意义，但最高仿射下界不成为支撑直线。
+2. \textbf{$\sup$ 可以是 $+\infty$}（$p<0$）：表示该斜率方向上不存在有限全局仿射下界。
+3. \textbf{只有 $p>0$ 时} $\sup=\max$，且与经典 $p=f'(x)$ 一致。
+
+\par
+F.5 为什么经典 $p=f'(x)$ 不能覆盖全部 Legendre–Fenchel 情况
+
+1. \textbf{像集限制：} $f'(x)=e^x$ 的像为 $(0,+\infty)$，经典换变量只对 $p\in f'(\mathbb{R})$ 有定义。
+2. \textbf{$p=0$：} 共轭 $f^*(0)=0$ 有限且有几何含义，但不存在临界点 $\phi_0'(x)=0$，必须保留 $\sup$ 定义。
+3. \textbf{$p<0$：} 经典写法无对应 $x$；$\sup$ 定义给出 $f^*(p)=+\infty$，编码“无有限仿射下界”这一信息。
+4. \textbf{结论：} 经典 Legendre 是 $f$ 光滑、严格凸且 $p$ 落在导数映射像集内、上确界达到时的\textbf{特例}；Legendre–Fenchel 的 $\sup$ 定义覆盖未达到与取 $+\infty$ 的情形。
+
+\par
+F.6 小结与最终公式
+
+综合 F.1–F.3：
+
+\[
+f^*(p)=
+\begin{cases}
+p\ln p-p,& p>0,\\
+0,& p=0,\\
++\infty,& p<0.
+\end{cases}
+\]
+
+因此
+
+\[
+\operatorname{dom} f^* = \{ p : f^*(p) < +\infty \} = [0,+\infty).
+\]
+
+- $f(x)=x^2/2$：$f'(\mathbb{R})=\mathbb{R}$，对一切 $p$ 均有 $\max$ 达到，$f^*(p)=p^2/2$ 处处有限——“处处良性”特例。
+- $f(x)=e^x$：仅在 $p>0$ 达到 $\max$；$p=0$ 暴露 $\sup\neq\max$；$p<0$ 暴露 $f^*(p)=+\infty$。本例是理解“为何必须用 $\sup$ 定义”的关键例子。
+
+\par
+G. Fenchel–Young 基本关系（本轮收尾）
+
+由定义 $f^*(p)=\sup_x\{px-f(x)\}$，对任意 $x\in\mathrm{dom}\,f$ 与任意 $p$，有
+
+\[
+px - f(x) \le f^*(p).
+\]
+
+移项即得 \textbf{Fenchel–Young 不等式}：
+
+\[
+px \le f(x) + f^*(p),
+\]
+
+或等价地
+
+\[
+f(x) \ge px - f^*(p).
+\]
+
+\textbf{几何意义：} 当 $f^*(p)<+\infty$ 时，右端 $y=px-f^*(p)$ 是斜率为 $p$ 的有限最高仿射下界；$f(x)\ge px-f^*(p)$ 表示曲线整体位于该仿射下界之上。
+
+\textbf{等号（简要）：} 若存在有限 $x_0$ 使 $f^*(p)=p x_0-f(x_0)$，则在 $x=x_0$ 处等号成立，此时 $y=px-f^*(p)$ 为支撑直线。在光滑情形，这对应于 $p=f'(x_0)$。在适当的 proper、lsc、convex 条件下有 $f^{**}=f$。
+
+\par
+
+
+\end{document}
