@@ -140,10 +140,45 @@ AI 图像不得承担精确坐标、数据值、拓扑或证明关系。二进�
 
 ### v1.1 — Research Project & Dossier
 
-- 交付 Dossier 导航、canonical assumptions/evidence/decisions、负结果和项目级 provenance；
-- 固定“摘要不是事实源”规则；
-- 至少一个真实项目完成创建、更新、审查和无破坏回滚；
-- 未经授权不得创建 Knowledge 或修改 Frozen Schema。
+```yaml
+gate_id: "v1.1/research-project-dossier"
+baseline: "tag v1.0.1-foundation-portability-verified @ 140d01b011ac3b68f3177b9dabcb33b796a6b298; pytest 620 passed; verification core PASS; workspace CURRENT / 0 ERROR / 0 WARNING"
+metric:
+  - "project_scaffold_completeness"
+  - "duplicate_fixture_detection_rate"
+  - "decision_append_only_violation_count"
+  - "unauthorized_knowledge_create_count"
+  - "attempt_pollution_count"
+  - "dossier_generated_boundary_violations"
+  - "governance_external_processing_block_rate"
+threshold:
+  project_scaffold_completeness: "research_dossier.md + assumptions.md + evidence.md + decisions.md + negative_results.md + governance.md + documents/ + runs/ + artifacts/ + reviews/"
+  duplicate_fixture_detection_rate: "100% on fixed duplicate-ref / exact-block / dossier-copy fixtures"
+  decision_append_only_violation_count: 0
+  unauthorized_knowledge_create_count: 0
+  attempt_pollution_count: 0
+  dossier_generated_boundary_violations: 0
+  governance_external_processing_block_rate: "100% when PERSONAL/RESTRICTED lacks authorization"
+fixture:
+  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project disposable fixtures"
+  sha256: "recorded per fixture asset during implementation"
+evidence:
+  - "tools/research_project validator/operations/renderer tests"
+  - ".github/workflows/dossier-smoke.yml"
+  - "optional reviewed ASEAN pilot under 07_项目/"
+failure_action: "BLOCK version closure and tagging; keep failing tests; do not install Sidecar dependencies to force a pass"
+```
+
+交付范围：
+
+- 项目目录控制平面：`research_dossier.md`（导航）、`assumptions.md` / `evidence.md` / `decisions.md` / `negative_results.md` / `governance.md`（事实源）；
+- 项目内局部 ref：`ASM/CLM/EVD/DEC/NEG-####`（非全局 Registry，非 Frozen）；
+- 四级自动化 A1–A4：`init`、atomic candidate ops、`check/status/doctor/reconcile`、`dossier-smoke`；
+- Generated marker 仅更新 Dossier 导航摘要；人工保留研究判断、审核、发布与 Knowledge 授权；
+- 后续版本接口预留：`documents/`→v1.2，`evidence.md`→v1.3，`runs/`→v1.4，`artifacts/`→v1.5/v1.6，`reviews/`→v1.7，Dossier+P9→v1.8，Reviewed records→v2.0，Candidate-only→v2.1；
+- 不得减少既有 Foundation 能力，不得修改 Frozen Schema / Normal Operation / P9 语义，不得安装 MinerU、Lean、求解器全集、向量库。
+
+真实 Pilot：优先 `07_项目/ASEAN_to_China_Fruit_Network_Optimization/`；材料不足时只允许 disposable fixture 或授权空 scaffold，结论为 `FRAMEWORK PASS / REAL PILOT PENDING`。
 
 ### v1.2 — Document Intelligence
 
