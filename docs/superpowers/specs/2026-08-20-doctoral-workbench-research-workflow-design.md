@@ -8,11 +8,7 @@
 
 ## 1. 目标
 
-本规范定义从研究问题到可发布成果的人工可审计工作流，重点解决事实重复、负结果丢失、AI 草稿越权晋升和论文各产物不一致。
-
-它不创建新的 Frozen Research Schema。第一阶段使用项目内 Markdown、manifest 和明确引用；只有真实使用证明稳定后，才另行讨论是否需要新 Schema。
-
-`negative_results.md`、`governance.md` 与本节 **Research Record Grammar** 均为 **v1.1 项目级 Candidate Contract**，不是 Frozen Schema，也不是全局 P/K/A/M Registry。
+本规范定义从研究问题到可发布成果的人工可审计工作流。它不创建 Frozen Research Schema。`negative_results.md`、`governance.md` 与 **Research Record Grammar** 均为 **v1.1 项目级 Candidate Contract**。
 
 ---
 
@@ -32,22 +28,11 @@
 └── reviews/
 ```
 
-项目身份由目录路径 `07_项目/<项目>/` 标识。v1.1 **不**新增全局 Research Project ID，也 **不**创建第二套 Problem / Attempt / Method / Knowledge Registry。
+项目身份 = 目录路径。生产 CLI 写入必须在 `07_项目/` 下；排除把 `_模板` 当作正式项目；拒绝 `..` 逃逸与落入 `01_知识库/` / `11_学习证据/`。测试可用 disposable repo root。
 
-生产 CLI 写入路径必须位于仓库 `07_项目/` 下；不得把 `_模板` 当作正式项目；拒绝 `..` 逃逸；解析后不得落到 `01_知识库/`、`11_学习证据/` 或其他 Source 根。测试允许 disposable repo root。
+### 2.1 Dossier（导航，非事实源）
 
-### 2.1 `research_dossier.md`（导航与摘要，不是事实源）
-
-Dossier 只保留：
-
-- 研究问题与范围摘要（人工 Source；工具不得覆盖）；
-- 当前阶段和阻断项；
-- 最重要的已审核发现导航；
-- canonical 文件链接；
-- documents / runs / artifacts / reviews 导航；
-- Generated 区内由确定性规则派生的导航摘要与“下一步候选”。
-
-Dossier **不是**事实源。不得复制完整 RESEARCH-RECORD。`reconcile` 只能替换：
+人工区：研究问题、范围、人工结论。Generated 区仅：
 
 ```markdown
 <!-- MATH-AI-LAB:RESEARCH-DOSSIER GENERATED BEGIN -->
@@ -55,79 +40,79 @@ Dossier **不是**事实源。不得复制完整 RESEARCH-RECORD。`reconcile` �
 <!-- MATH-AI-LAB:RESEARCH-DOSSIER GENERATED END -->
 ```
 
-marker 缺失、嵌套、顺序错误或损坏时必须拒绝写入。
+`render_generated_dossier` 是只依赖 canonical facts 的纯函数，可写入 canonical input fingerprint。`dossier_is_stale` 比较当前 Generated 与 expected render。**不得**把 “stale / RECONCILE_REQUIRED” 写入 expected Generated（否则 reconcile 后立刻再 stale）。`RECONCILE_REQUIRED` 只由 `status` / `doctor` / 操作结果报告。reconcile 成功后 `dossier_is_stale == false`；连续第二次 reconcile → `NO_OP`；人工区 byte-for-byte 不变。
 
-Generated “下一步候选”**仅**允许由下列确定性规则产生，不得推断研究方向、修改研究范围或生成学术结论：
+Generated “下一步候选”仅允许确定性规则（不得推断研究方向或学术结论）：
 
 1. 无 Evidence 的 Claim；
 2. 未分类 / 缺稳定引用或 hash 的外部 Source；
-3. 未处理的 Governance 外部处理阻断导航；
-4. Active Assumption 缺少影响关系；
-5. Dossier Generated 相对 canonical 为 stale。
+3. Governance 外部处理预检为 BLOCKED 的导航提示；
+4. Active Assumption 缺少影响关系。
 
-### 2.2–2.6 事实源文件
+（stale 提示是 operational status rule，不进入 expected Generated。）
 
-| 文件 | 事实源角色 | 记录类型 |
-| --- | --- | --- |
-| `assumptions.md` | 假设 | `ASSUMPTION` (`ASM-####`) |
-| `evidence.md` | Claim 与 Evidence **同文件分记录** | `CLAIM` (`CLM-####`) 与 `EVIDENCE` (`EVD-####`) |
-| `decisions.md` | append-only 决策 | `DECISION` (`DEC-####`) |
-| `negative_results.md` | 负结果 | `NEGATIVE_RESULT` (`NEG-####`) |
-| `governance.md` | 项目治理 + AI Contribution | `GOVERNANCE`（每项目一条）+ `AI_CONTRIBUTION`（可多条） |
+### 2.2–2.6 事实源
 
-`evidence.md` 内 CLM 与 EVD 仅靠 RESEARCH-RECORD marker 分离。CLM 通过 `evidence_refs` 列出 EVD；EVD 通过 `claim_ref` 指向唯一 CLM，并用 `polarity` / `kind` 分类。创建 Claim 必须走授权操作 `add_claim`，不得要求用户只能手改正式文件。
-
-### 2.7 承载目录
-
-| 目录 | 后续版本 |
+| 文件 | 记录 |
 | --- | --- |
-| `documents/` | v1.2 |
-| `runs/` | v1.4 |
-| `artifacts/` | v1.5 / v1.6 |
-| `reviews/` | v1.7 |
+| `assumptions.md` | `ASSUMPTION` |
+| `evidence.md` | `CLAIM` + `EVIDENCE`（marker 分离） |
+| `decisions.md` | `DECISION`（append-only） |
+| `negative_results.md` | `NEGATIVE_RESULT` |
+| `governance.md` | 单条 `GOVERNANCE`=`GOV-0001` + 多条 `AI_CONTRIBUTION` |
+
+### 2.7 后续目录接口
+
+`documents/`→v1.2 · `runs/`→v1.4 · `artifacts/`→v1.5/v1.6 · `reviews/`→v1.7
 
 ---
 
 ## 3. Research Record Grammar（Candidate Contract）
 
-### 3.1 边界（唯一切分依据）
-
-每条记录必须使用成对 marker，**禁止**仅用 `##` 标题切块。正文内出现任意 Markdown 标题不得截断记录。
+### 3.1 唯一语法
 
 ```text
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=<TYPE> ref=<REF> BEGIN -->
 <metadata lines>
+---
 <body>
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=<TYPE> ref=<REF> END -->
 ```
 
 规则：
 
-- `TYPE` ∈ `ASSUMPTION | CLAIM | EVIDENCE | DECISION | NEGATIVE_RESULT | GOVERNANCE | AI_CONTRIBUTION`；
-- `REF`：ASM/CLM/EVD/DEC/NEG 使用 `PREFIX-####`；`GOVERNANCE` 固定 `GOV-0001`；`AI_CONTRIBUTION` 使用 `AIC-####`；
-- BEGIN 与 END 的 `type`/`ref` 必须完全一致；
-- 同一文件内同类型 ref 唯一；不同类型不得共用同一字符串；
-- metadata：每行 `- key: value`（key 小写蛇形）；未知必填键 → 校验失败；
-- 第一个不以 `- ` 开头且非空的行起为 body（允许 body 内含 `##`）；
-- 省略可选键 = 该键不存在；空字符串 value 非法（应省略或给显式枚举）；
-- Unicode：NFC；fixture 与比较默认 **LF** 字节；append-only 对 Decision 记录做 **byte-for-byte** 比较（不做空白折叠）；
-- 其他比较（duplicate fixture）可在规范化后再比，但规范必须写明所用规范化。
+- `---` **强制**分隔 metadata 与 body（不是 YAML Schema）；
+- body 可含标题、列表、冒号及任意普通 Markdown；body 内 `##` / `- list` **不得**截断记录；
+- 只许用成对 BEGIN/END 切分；orphan、nested、重复 BEGIN、缺 END、BEGIN/END 的 type/ref 不一致 → FAIL；
+- metadata：`- key: value`；key 必须属于该 TYPE 的 required∪optional；未知 key、重复 key、空 value、非法 key 格式、缺必填 → FAIL；
+- TYPE ↔ ref 前缀必须匹配；`GOVERNANCE` **只能** `GOV-0001`（`GOV-0002` 等一律拒绝）；
+- Unicode NFC；fixture **LF**；Decision append-only 为 **byte-for-byte**（不做空白折叠）。
 
-### 3.2 必填 / 可选键与枚举
+### 3.2 键与枚举
 
-| TYPE | 必填键 | 可选键 | 枚举 |
+| TYPE | 必填 | 可选 | 枚举 |
 | --- | --- | --- | --- |
-| ASSUMPTION | `status`, `scope`, `rationale`, `falsifiable_when` | `impacts`, `supersedes`, `superseded_by`, `reviewed` | `status`: `ACTIVE`/`SUPERSEDED`/`RETIRED` |
-| CLAIM | `status` | `evidence_refs`（逗号分隔 EVD） | `status`: `OPEN`/`SUPPORTED`/`CONTESTED`/`WITHDRAWN` |
-| EVIDENCE | `claim_ref`, `polarity`, `kind` | `source_citation`, `source_sha256` | `polarity`: `SUPPORT`/`OPPOSE`/`LIMIT`；`kind`: `QUOTE`/`PARAPHRASE`/`INFERENCE`/`COMPUTATION` |
-| DECISION | `date`, `question`, `options`, `choice`, `basis`, `cost`, `reversible`, `revisit_when` | `opposes`, `evidence_refs`, `supersedes` | `reversible`: `true`/`false`；`date`: `YYYY-MM-DD` |
-| NEGATIVE_RESULT | `status`, `failed_route`, `failure_evidence_refs`, `impact`, `retry_when` | `related_claims`, `related_decisions` | `status`: `OPEN`/`CLOSED` |
-| GOVERNANCE | `project_data_level`, `external_processing_authorized` | `license_status`, `notes` | `project_data_level`: `PUBLIC`/`PERSONAL`/`RESTRICTED`；`external_processing_authorized`: `true`/`false` |
-| AI_CONTRIBUTION | `date`, `role`, `summary`, `human_review` | `tools` | `human_review`: `PENDING`/`ACCEPTED`/`REJECTED` |
+| ASSUMPTION | status, scope, rationale, falsifiable_when | impacts, supersedes, superseded_by, reviewed | status: ACTIVE/SUPERSEDED/RETIRED |
+| CLAIM | status | evidence_refs | status: OPEN/SUPPORTED/CONTESTED/WITHDRAWN |
+| EVIDENCE | claim_ref, polarity, kind | source_citation, source_sha256 | polarity: SUPPORT/OPPOSE/LIMIT；kind: QUOTE/PARAPHRASE/INFERENCE/COMPUTATION |
+| DECISION | date, question, options, choice, basis, cost, reversible, revisit_when | opposes, evidence_refs, supersedes | reversible: true/false；date: YYYY-MM-DD |
+| NEGATIVE_RESULT | status, failed_route, failure_evidence_refs, impact, retry_when | related_claims, related_decisions | status: OPEN/CLOSED |
+| GOVERNANCE | project_data_level, external_processing_authorized, license_status | notes | project_data_level: PUBLIC/PERSONAL/RESTRICTED；external_processing_authorized: true/false；license_status: UNKNOWN/LOCAL_ONLY/VERIFIED_FOR_EXTERNAL_PROCESSING |
+| AI_CONTRIBUTION | date, role, summary, human_review | tools | human_review: PENDING/ACCEPTED/REJECTED |
 
-外部 Source：若 `kind` 为 `QUOTE`/`PARAPHRASE`，必须具备 `source_citation` 或 `source_sha256` 至少一个。
+QUOTE/PARAPHRASE 至少需要 `source_citation` 或 `source_sha256` 之一。
 
-### 3.3 合法 / 非法示例
+模板默认 GOVERNANCE：
+
+```text
+project_data_level: PERSONAL
+external_processing_authorized: false
+license_status: LOCAL_ONLY
+```
+
+理由：新项目在许可与边界确认前最小暴露；该状态合法，不得使 `validate_project` 失败。
+
+### 3.3 示例（均含 `---`）
 
 **合法 ASSUMPTION**
 
@@ -138,180 +123,132 @@ Generated “下一步候选”**仅**允许由下列确定性规则产生，不
 - rationale: 公开统计摘要
 - falsifiable_when: 港口官方数据与假设冲突
 - impacts: CLM-0001
-
+---
 港口日吞吐上界为已知公开值。
+
+## 备注
+- 可含列表与冒号: 如本行
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=ASSUMPTION ref=ASM-0001 END -->
 ```
 
-**非法 ASSUMPTION（缺 `falsifiable_when`）**
+**非法 ASSUMPTION（缺 falsifiable_when）** — 有 BEGIN/END/`---` 但缺必填键 → FAIL。
 
-```markdown
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=ASSUMPTION ref=ASM-0002 BEGIN -->
-- status: ACTIVE
-- scope: x
-- rationale: y
-
-正文
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=ASSUMPTION ref=ASM-0002 END -->
-```
-
-**合法 CLAIM + EVIDENCE（同文件）**
+**合法 CLAIM（新建，无 evidence_refs）**
 
 ```markdown
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=CLAIM ref=CLM-0001 BEGIN -->
 - status: OPEN
-- evidence_refs: EVD-0001
-
+---
 Split-flow 可降低峰值拥堵。
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=CLAIM ref=CLM-0001 END -->
+```
 
+**合法 EVIDENCE**
+
+```markdown
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=EVIDENCE ref=EVD-0001 BEGIN -->
 - claim_ref: CLM-0001
 - polarity: SUPPORT
 - kind: INFERENCE
 - source_citation: project-note:2026-08-20
-
+---
 在既有约束叙述下，分流可降低单港峰值。
 <!-- MATH-AI-LAB:RESEARCH-RECORD type=EVIDENCE ref=EVD-0001 END -->
 ```
 
-**非法 EVIDENCE（缺 polarity）** — BEGIN/END 齐全但 metadata 缺键，Validator FAIL。
-
-**合法 DECISION / NEG / GOVERNANCE / AI_CONTRIBUTION** — 必须含上表必填键；Decision 历史只追加；Governance 模板默认：
-
-```markdown
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=GOVERNANCE ref=GOV-0001 BEGIN -->
-- project_data_level: PERSONAL
-- external_processing_authorized: false
-- license_status: not_applicable_local_only
-- notes: 默认最小化外部处理；升级 PUBLIC/授权前保持本地研究
-
-项目默认按 PERSONAL 处理，未授权外部处理。
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=GOVERNANCE ref=GOV-0001 END -->
-```
-
-默认 `PERSONAL` + `external_processing_authorized: false` 的理由：新项目在许可与数据边界确认前采用最小暴露；该状态 **合法**，不得因此使整个 `validate_project` 失败。
-
-**合法 AI_CONTRIBUTION**
-
-```markdown
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=AI_CONTRIBUTION ref=AIC-0001 BEGIN -->
-- date: 2026-08-20
-- role: drafting-assistant
-- summary: 起草 assumption 候选
-- human_review: PENDING
-- tools: cursor-agent
-
-待人工审核后写入正式结论。
-<!-- MATH-AI-LAB:RESEARCH-RECORD type=AI_CONTRIBUTION ref=AIC-0001 END -->
-```
-
-AI Contribution 在 v1.1 通过 `update_governance` candidate（可含 GOVERNANCE 与/或 AI_CONTRIBUTION 记录集，但 **每个 candidate 文件仍只含一条 record**；多条需多次操作）写入；无独立远程上传。人工审核权限保留在人类。
+**合法 GOVERNANCE / AI_CONTRIBUTION / DECISION / NEG** — 同样强制 `---`；GOVERNANCE ref 必须为 `GOV-0001`。
 
 ---
 
-## 4. 项目内局部引用
+## 4. Claim–Evidence 闭环（唯一方案）
 
-```text
-ASM-0001  CLM-0001  EVD-0001  DEC-0001  NEG-0001  GOV-0001  AIC-0001
-```
-
-只在单项目内唯一；不创建全局 Registry；不改变 P/K/A/M；不与 Attempt ID 混用；非 Frozen。
-
----
-
-## 5. 研究状态（导航，非 Schema）
-
-```text
-FRAMING → EVIDENCE_GATHERING → MODELING_OR_PROVING
-        → VALIDATION → REVIEW → WRITING → RELEASED
-```
+1. `add_claim`：`evidence_refs` 必须省略或为空，不得引用尚不存在的 EVD。
+2. `add_evidence` candidate 仅一条 EVD；`claim_ref` 必须指向已存在 CLM。
+3. 同一次 `evidence.md` 原子替换：追加 EVD，并**确定性**更新该 CLM 的 `evidence_refs`（去重 + 稳定排序，例如按 EVD 编号升序）。
+4. Validator：每个 EVD→存在的 CLM；每个 CLM 列出的 EVD 存在；EVD.`claim_ref` 与 CLM backlink 一致；每个 EVD 出现在其 CLM 的 `evidence_refs`。
+5. `add_evidence` **不得**自动把 Claim `status` 改为 `SUPPORTED`/`CONTESTED`。
+6. 任一步失败 → 整个 `evidence.md` byte-for-byte 不变。
 
 ---
 
-## 6. 四级自动化与授权写入
+## 5. 操作分类
 
-```text
-A1 init
-A2 atomic candidate ops
-A3 check / status / doctor / reconcile / assess_external_processing
-A4 dossier-smoke CI（含 append-only PR guard）
+### 5.1 Add-only
+
+`add_assumption` · `add_claim` · `add_evidence` · `append_decision` · `record_negative_result` · `update_governance` 的 **AI_CONTRIBUTION** 分支
+
+对目标 record：同 ref 且规范化内容相同 → `NO_OP`；同 ref 内容不同 → `REJECTED`；新 ref → 验证后 `WRITTEN`。
+
+### 5.2 Controlled-transition
+
+`supersede_assumption` · `update_governance` 的 **GOVERNANCE** 分支 · `reconcile_project`（仅 Generated 区）
+
+### 5.3 `update_governance`
+
+- candidate **每次恰好一条** Record（禁止“可同时含 GOVERNANCE 与 AIC”）；
+- GOVERNANCE candidate 必须 `GOV-0001`：相同 → `NO_OP`；不同但合法 → **只替换** GOV-0001，**保留**全部 AIC → `WRITTEN`；
+- AI_CONTRIBUTION candidate → 仅追加，遵守 add-only；
+- 失败 → `governance.md` byte-for-byte 不变。
+
+### 5.4 Atomic 写入（现有接口）
+
+```python
+tools.source_io.atomic.atomic_replace_text(official_path: Path, candidate_text: str)
 ```
 
-### 6.1 init
+流程：parse 单 record candidate → 内存构造完整 prospective 文件 → disposable validation tree → `validate_project` → `atomic_replace_text`。最终替换前不得修改 official。
 
-| 目标状态 | 结果 |
+`init_project`：sibling staging 目录 → 完整 scaffold 校验 → destination 仍不存在二次检查 → 非覆盖 rename/publish → race/conflict → `REJECTED` + staging cleanup；不完整/冲突 destination → 零变化。不存在 → `WRITTEN`；完整合法 → `NO_OP`。
+
+领域结果类型（禁止复用 Normal Operation）：`ResearchProjectOperationResult` · `ResearchProjectValidationResult` · `ResearchProjectStatusResult` · `ExternalProcessingAssessment`。
+
+---
+
+## 6. ExternalProcessingAssessment = PROJECT_POLICY_PREFLIGHT
+
+v1.1 **不是** asset/provider/upload 授权完成证明。即使 `ALLOWED`，仍只表示项目级预检；后续 Sidecar 必须再做 asset/provider/purpose/retention 检查。v1.1 **无**远程上传代码。
+
+| 条件 | 结果 |
 | --- | --- |
-| 不存在 | 完整 scaffold 一次性落地 → `WRITTEN` |
-| 已是完整合法 scaffold | 不覆盖 → `NO_OP` |
-| 存在但不完整或冲突 | `REJECTED`，**零文件变化**（不得静默半补齐） |
+| Governance 缺失/非法 | BLOCKED |
+| `external_processing_authorized: false` | BLOCKED |
+| `RESTRICTED` | BLOCKED（v1.1） |
+| `PERSONAL` | BLOCKED（v1.1，尚无 provider/purpose/retention contract） |
+| `PUBLIC` + authorized true + `VERIFIED_FOR_EXTERNAL_PROCESSING` | project-level ALLOWED |
+| `PUBLIC` + authorized true + `UNKNOWN`/`LOCAL_ONLY` | BLOCKED |
 
-### 6.2 candidate 操作（每次恰好一条 record）
-
-`add_assumption` · `supersede_assumption` · `add_claim` · `add_evidence` · `append_decision` · `record_negative_result` · `update_governance`
-
-规则：ref 已存在且规范化后内容相同 → `NO_OP`；ref 已存在且内容不同 → `REJECTED`；不自动分配 ref；candidate 不得是正在替换的 official 路径；parse/post-validate 失败 → official **byte-for-byte** 不变。
-
-CLI 对应：`add-assumption`、`supersede-assumption`、`add-claim`、`add-evidence`、`append-decision`、`record-negative-result`、`update-governance`、`reconcile`、`init`；只读：`check`、`status`、`doctor`、`check-append-only`。
-
-### 6.3 Governance 与外部处理
-
-- `validate_project`：结构、语法、关系、Generated 边界；**不**因 `RESTRICTED`/`PERSONAL` + 未授权而整体 FAIL。
-- `assess_external_processing`：返回 `ALLOWED` 或 `BLOCKED`；未授权时阻断外部处理能力；本地只读与允许的本地研究仍可进行。
-- 缺 `project_data_level` → `validate_project` FAIL。
-- 外部 asset 缺许可状态 → 该 asset 不得进入正式外部处理。
-- v1.1 **无**真实远程上传代码。
-
-人工保留权：问题与范围、证据真实性、结论、审查处置、正式发布、Knowledge 晋升、远程处理授权。
+`validate_project` **不**因 PERSONAL/RESTRICTED+未授权而 FAIL。缺 `project_data_level` / 非法枚举 → validate FAIL。
 
 ---
 
-## 7. 研究循环与负结果
+## 7. Decision append-only（含 `--all`）
 
-（同前：界定问题 → 假设 → 证据 → 推理/建模 → 验证 → 记录失败与决策 → 审稿 → 写作 → 授权发布。）
+`check_append_only_all(repo_root, base_ref)`：
 
-负结果写入 `negative_results.md`，不得只存在于聊天或 Generated。
+- 解析 `base_ref` 为 commit；无效/未 fetch → FAIL（不得静默跳过）；
+- 发现 base 与 current 的 `07_项目/<project>/decisions.md`（**排除** `_模板`）；
+- 检查路径并集；
+- base 无、current 新增 → empty base，允许只追加；
+- base 有、current 删除文件或整项目 → FAIL；
+- 重命名致旧路径消失 → FAIL（不得当新项目）；
+- 历史 record 的改/删/重排/前插/记录内空白变化 → FAIL；仅尾部追加合法；
+- Git path = repo-relative POSIX；subprocess 用参数列表，禁止拼 shell。
 
 ---
 
-## 8–12. 审稿、缺陷、写作、知识晋升、权限
+## 8. 四级自动化与 Gate evaluator
 
-v1.7 六类 reviewer 与严重度门禁保持不变；v1.1 只预留 `reviews/`。
+A1 init · A2 atomic ops · A3 check/status/doctor/reconcile/assess_external_processing/gate · A4 dossier-smoke。
 
-知识晋升仍需用户明确说「开始知识沉淀」。Source mutation：
+只读 Gate：
 
 ```text
-candidate → parse → validate_project → temporary write → validate_project → atomic replace
+python -m tools.research_project gate --format json
 ```
 
-领域结果类型（不得复用 Normal Operation 对象）：
+对九项 metric 输出 numerator/denominator/value/threshold/PASS|FAIL/evidence；任一不达标非零退出；确定性 JSON；不写 production Source。`dossier-smoke` 必须执行并保存 artifact。
 
-- `ResearchProjectOperationResult`
-- `ResearchProjectValidationResult`
-- `ResearchProjectStatusResult`
-- `ExternalProcessingAssessment`
-
----
-
-## 13. 后续版本接口
-
-| 版本 | v1.1 承载位置 |
-| --- | --- |
-| v1.2 MinerU | `documents/` |
-| v1.3 Literature Evidence | `evidence.md` |
-| v1.4 Modeling | `runs/` |
-| v1.5 Figure | `artifacts/` |
-| v1.6 Lean | `artifacts/` |
-| v1.7 Review | `reviews/` |
-| v1.8 Writing/P9 | Dossier + P9 |
-| v2.0 RAG | Reviewed canonical records |
-| v2.1 Multi-Agent | Candidate-only 输出 |
-
----
-
-## 14. v1.1 / v1.7 / v1.8 Gate
-
-### v1.1（与 capability roadmap 指标名完全一致）
+### v1.1 Gate（与 roadmap 同名）
 
 ```yaml
 gate_id: "v1.1/research-project-dossier"
@@ -337,22 +274,28 @@ threshold:
   dossier_generated_boundary_violation_count: 0
   unauthorized_external_processing_block_rate: "100%"
 fixture:
-  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project/fixtures + tests/research_project/fixtures/SHA256SUMS"
-  sha256: "each fixture file hash listed in SHA256SUMS; integrity test enforces exact match"
+  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project/fixtures/** (excl. SHA256SUMS self) + SHA256SUMS manifest"
+  sha256: "SHA256SUMS lists every fixture regular file except itself; integrity test enforces set equality + binary hashes; text fixtures LF-only"
 evidence:
   - "pytest tests/research_project"
-  - ".github/workflows/dossier-smoke.yml including check-append-only --all"
-  - "optional reviewed ASEAN pilot under 07_项目/ after human authorization"
-failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weaken thresholds; do not install Sidecar deps to force a pass"
+  - "python -m tools.research_project gate --format json"
+  - ".github/workflows/dossier-smoke.yml Gate JSON artifact"
+  - "optional reviewed ASEAN pilot after human authorization"
+failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weaken thresholds"
 ```
 
-指标释义：
+`unauthorized_external_processing_block_rate` fixtures 必须与 §6 真值表一一对应。
 
-- `append_only_fixture_detection_rate=100%`：修改/删除/重排/插入/空白变化等固定违规 fixture 全部被发现；
-- `decision_history_overwrite_count=0`：真实候选版本未覆写历史 Decision；
-- `unauthorized_external_processing_block_rate=100%`：未授权外部处理请求全部 BLOCKED（**不是**项目 validate 失败率）；
-- `duplicate_fixture_detection_rate` 仅覆盖固定 fixture（重复 ref、完全重复 block、Dossier 完整复制），不声称覆盖一切自然语言改写。
+---
 
-### v1.7 / v1.8
+## 9. Fixture SHA256SUMS
 
-保持原强制 Gate（六类 reviewer；P9 唯一 PDF；Knowledge 需「开始知识沉淀」）。
+- 覆盖 `tests/research_project/fixtures/**` 下除 `SHA256SUMS` **自身外**的全部 regular files；
+- 无重复路径、无绝对路径、无 `..`；listed set ≡ 实际 file set；
+- binary SHA-256；text fixture 另检无 CRLF；增删改 fixture 必须同步更新 manifest。
+
+---
+
+## 10. 审稿 / 写作 / 知识晋升 / 版本接口
+
+v1.7 六类 reviewer 与 v1.8 P9/Knowledge 规则不变。后续版本接口表不变。Knowledge 仍需「开始知识沉淀」。

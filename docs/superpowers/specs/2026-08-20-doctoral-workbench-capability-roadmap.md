@@ -164,25 +164,21 @@ threshold:
   dossier_generated_boundary_violation_count: 0
   unauthorized_external_processing_block_rate: "100%"
 fixture:
-  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project/fixtures + tests/research_project/fixtures/SHA256SUMS"
-  sha256: "each fixture file hash listed in SHA256SUMS; integrity test enforces exact match"
+  ref: "07_项目/_模板/研究项目_v1.1 + tests/research_project/fixtures/** excluding SHA256SUMS self + SHA256SUMS manifest"
+  sha256: "SHA256SUMS lists every fixture regular file except itself; integrity tests enforce set equality and binary hashes; text fixtures LF-only"
 evidence:
-  - "tools/research_project validator/operations/renderer tests"
-  - ".github/workflows/dossier-smoke.yml including check-append-only --all"
-  - "optional reviewed ASEAN pilot under 07_项目/ after human authorization"
+  - "pytest tests/research_project"
+  - "python -m tools.research_project gate --format json"
+  - ".github/workflows/dossier-smoke.yml Gate JSON artifact"
+  - "optional reviewed ASEAN pilot after human authorization"
 failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weaken thresholds; do not install Sidecar deps to force a pass"
 ```
 
-指标释义与 workflow spec §14 完全一致：`append_only_fixture_detection_rate` 覆盖修改/删除/重排/插入/空白变化 fixture；`decision_history_overwrite_count` 统计真实候选覆写；`unauthorized_external_processing_block_rate` 是外部处理阻断率，不是项目 validate 失败率。
+指标释义与 workflow spec 完全一致。`unauthorized_external_processing_block_rate` fixtures 必须映射 PROJECT_POLICY_PREFLIGHT 真值表（PERSONAL/RESTRICTED/unauthorized/license 不全 → BLOCKED；仅 PUBLIC+authorized+VERIFIED_FOR_EXTERNAL_PROCESSING → project-level ALLOWED）。
 
-交付范围：
+交付范围：强制 `---` Record Grammar；add-only / controlled-transition；Claim–Evidence 原子 backlink；stale 非振荡 reconcile；`check_append_only_all`；Gate evaluator；`dossier-smoke`；领域 Result 类型。不得减少 Foundation 能力，不得改 Frozen Schema / P9 / Normal Operation。
 
-- RESEARCH-RECORD 成对 marker Candidate Contract；`evidence.md` 分载 CLM/EVD；授权 `add_claim` / `update_governance` 等 atomic ops；
-- 领域结果类型：`ResearchProjectOperationResult` / `ResearchProjectValidationResult` / `ResearchProjectStatusResult` / `ExternalProcessingAssessment`（不复用 Normal Operation Result）；
-- A1–A4 与 `dossier-smoke`（含 PR append-only guard）；Generated 下一步候选仅确定性规则；
-- 后续版本接口不变；不得减少 Foundation 能力、不得改 Frozen Schema / P9 / Normal Operation，不得安装重型 Sidecar。
-
-真实 Pilot：材料不足 → `FRAMEWORK PASS / REAL PILOT PENDING`；材料充分且用户授权 → 真实记录 + 无 skip 测试；人工审核前不得 Pilot PASS。
+真实 Pilot：材料不足 → `FRAMEWORK PASS / REAL PILOT PENDING`；充分且授权 → 真实记录 + 无 skip 测试。
 
 ### v1.2 — Document Intelligence
 
@@ -262,7 +258,7 @@ failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weak
 | --- | --- | --- |
 | `core` | Foundation 根环境 | 每次修改必跑 |
 | `latex-smoke` | 现有 P9 / XeLaTeX 构建边界 | LaTeX 与发布路径修改必跑 |
-| `dossier-smoke` | Python 3.13 + 根 `requirements.txt` only；`tests/research_project` + disposable acceptance + workflow contract + `check-append-only --all --base-ref <base-sha>`；不安装 XeLaTeX/MinerU/Lean/solver/vector DB；不写 production Source | research_project / 模板 / dossier workflow 修改必跑 |
+| `dossier-smoke` | Python 3.13 + 根 `requirements.txt` only；运行 `tests/research_project`、disposable acceptance、workflow contract、`python -m tools.research_project gate --format json`（上传 Gate JSON artifact）、PR/push 的 `check-append-only --all --base-ref <sha>`；path filters 至少覆盖 `tools/research_project/**`、`tools/source_io/**`、`tests/research_project/**`、`tests/verification/**`、`07_项目/**`、`docs/superpowers/specs/**`、`docs/superpowers/plans/**v1.1-research-project*`、`.github/workflows/dossier-smoke.yml`、`requirements.txt`；`fetch-depth: 0`；不安装 XeLaTeX/MinerU/Lean/solver/vector DB；不写 production Source | research_project / 模板 / dossier workflow / Gate / append-only 相关修改必跑 |
 | `document-smoke` | Adapter + fixture，不下载完整模型时使用 fake/service mock | 文档模块修改必跑 |
 | `modeling-smoke` | 小型开源求解器与已知答案 fixture | 建模模块修改必跑 |
 | `figure-smoke` | 无头渲染与确定性 fixture | 制图模块修改必跑 |
