@@ -3,7 +3,7 @@
 **设计日期：** 2026-08-20
 **文档状态：** Candidate，等待仓库级人工审核
 **设计类型：** Umbrella Architecture / Stable Contract
-**实施状态：** 未开始
+**实施状态：** 总体升级未开始；v1.0.1 前置 Gate 已关闭
 **替代文档：** 本版替代同路径的单体设计初稿；能力范围不缩减
 
 ---
@@ -30,15 +30,21 @@
 
 ---
 
-## 2. 当前基线与第一阻塞
+## 2. 设计基线与已关闭的前置 Gate
 
 MATH-AI-LAB 已有 Foundation 能力包括：Problem 中心化、Attempt 与 AI Solution 分离、Canonical Solution、Knowledge / Problem / Attempt / Method 对象、学习与 Error Evidence 边界、Validator、Indexer、Workspace、Atomic Mutation、Normal Operation、LaTeX 原子发布和 Verification Contract。未 Frozen 的 Error Mode 等对象仍保持 Candidate/Pilot 边界，不因升级设计被伪装为正式 Schema。
 
-设计评审时的可复现实测基线为 `615 passed, 3 failed`。三个失败均与测试中硬编码 `C:\MATH-AI-LAB` 有关。因此：
+设计评审时的可复现实测基线为 `615 passed, 3 failed`。三个失败均与测试中硬编码 `C:\MATH-AI-LAB` 有关，因此第一个实施版本固定为 **v1.0.1 Foundation Portability Closure**。
 
-- 第一个实施版本固定为 **v1.0.1 Foundation Portability Closure**；
-- 远程 Core、完整测试及新增跨平台回归未变绿前，不得宣称跨平台关闭；
-- 此基线属于设计时快照，实施后的最新事实只写入 `09_长期记忆/项目进度.md`。
+该前置 Gate 已于 2026-08-20 关闭，历史 Evidence 为：
+
+- PR #1 通过 merge commit `762525303a4a76cf0343106c3fb490c556e9ad94` 进入 `main`；
+- 三个经验证的修复 commit 均为 `origin/main` 的祖先；
+- 合并后完整测试 `620 passed`，`verification core PASS`；
+- Workspace Indexer `CURRENT`，Workspace Check `0 ERROR / 0 WARNING`；
+- 远程 Core 与 LaTeX Smoke 均成功。
+
+上述内容是 Gate 关闭快照，不取代 `09_长期记忆/项目进度.md` 的动态状态 authority。下一实施 Gate 从 **v1.1 Research Project & Dossier** 开始。
 
 ---
 
@@ -354,8 +360,8 @@ v2.2 只有在以下事实均有 Evidence 时才允许关闭：
 
 本优化版已经把“永久能力”和“阶段实现”分开，并将单体文档拆为可独立评审的专项规范。它仍只是一组 Candidate 设计，不是实施完成声明。
 
-人工审核通过后，下一份工程文档只允许是：
+九份 Candidate 规格完成仓库级人工审核并进入 `main` 后，下一份工程文档只允许是：
 
-> `v1.0.1 Foundation Portability Closure` 的详细 TDD 实施计划。
+> `v1.1 Research Project & Dossier` 的详细 TDD 实施计划。
 
-该计划获得批准前，不实施 MinerU、建模、制图、Lean、RAG 或多 Agent 生产模块。
+该计划获得批准前，不实施 v1.1 生产代码，也不提前实施 MinerU、建模、制图、Lean、RAG 或多 Agent 生产模块。

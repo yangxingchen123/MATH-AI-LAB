@@ -130,6 +130,7 @@ AI 图像不得承担精确坐标、数据值、拓扑或证明关系。二进�
 
 ### v1.0.1 — Foundation Portability Closure
 
+- **关闭状态：** `VERIFIED`（2026-08-20）；Evidence 为 PR #1 merge commit `762525303a4a76cf0343106c3fb490c556e9ad94`、合并后 `620 passed`、Core `PASS`、Workspace `CURRENT` 且 `0 ERROR / 0 WARNING`、远程 Core 与 LaTeX Smoke 成功。
 - **Baseline：** 设计时 `615 passed, 3 failed`，失败与硬编码 Windows 路径有关。
 - **Metric：** Core、完整 pytest、新增 Windows/POSIX 路径回归、LaTeX smoke。
 - **Threshold：** 所有强制测试 `0 failed`；`verification core PASS`；`latex-smoke PASS`；`workspace CURRENT`；远程 Core 绿色；无仓库根绝对路径假设。
