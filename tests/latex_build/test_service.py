@@ -5,10 +5,21 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
+import pytest
+
 from tools.latex_build.models import PublishStatus
 from tools.latex_build.service import build_latex_project, check_latex_project
 
 from .conftest import write_latex_project
+
+
+@pytest.fixture(autouse=True)
+def _stub_xelatex_lookup(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Fake runners do not need a real toolchain; avoid PATH-dependent TOOLCHAIN_MISSING."""
+    monkeypatch.setattr(
+        "tools.latex_build.builder.shutil.which",
+        lambda name, path=None: "xelatex" if name == "xelatex" else None,
+    )
 
 
 def _runner_factory(outdir_holder: dict):
