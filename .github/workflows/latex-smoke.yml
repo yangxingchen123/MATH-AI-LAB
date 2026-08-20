@@ -14,6 +14,7 @@ on:
       - "tests/latex_build/**"
       - "tools/verification/**"
       - "tests/verification/**"
+      - "tests/normal_operation/test_real_latex.py"
       - ".github/workflows/latex-smoke.yml"
   pull_request:
     paths:
@@ -22,6 +23,7 @@ on:
       - "tests/latex_build/**"
       - "tools/verification/**"
       - "tests/verification/**"
+      - "tests/normal_operation/test_real_latex.py"
       - ".github/workflows/latex-smoke.yml"
 
 jobs:
@@ -43,6 +45,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-full fonts-noto-cjk
+
+      - name: Run disposable real XeLaTeX acceptance
+        run: python -m pytest -q tests/normal_operation/test_real_latex.py
 
       - name: Run LaTeX smoke verification
         run: python -m tools.verification latex-smoke "04_LATEX/专题讲义/数学变换/勒让德变换"

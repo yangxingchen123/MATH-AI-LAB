@@ -5,13 +5,19 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
-from tests.normal_operation.test_closure import _multipart_body, _write_p0002
-from tools.normal_operation.naming import artifact_stem
+import pytest
+
 from tools.normal_operation.reconcile import reconcile_problem
 from tools.problem_solution.slots import wrap_slot_content
 from tests.problem_validator.conftest import problem_md
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
+
+@pytest.mark.skipif(
+    shutil.which("xelatex") is None,
+    reason="xelatex not installed; real compilation is covered by the LaTeX smoke workflow",
+)
 def test_disposable_real_xelatex_pdf(tmp_path: Path) -> None:
     # Whole-problem (no parts) to keep generated TeX small.
     from tests.normal_operation.test_closure import _kb
@@ -30,7 +36,7 @@ def test_disposable_real_xelatex_pdf(tmp_path: Path) -> None:
         encoding="utf-8",
     )
 
-    real_tpl = Path(r"C:\MATH-AI-LAB\04_LATEX\模板\数学讲义模板_v1")
+    real_tpl = REPO_ROOT / "04_LATEX" / "模板" / "数学讲义模板_v1"
     real_cls = real_tpl / "vendor" / "ElegantBook-v4.7" / "elegantbook.cls"
     tpl = tmp_path / "04_LATEX" / "模板" / "数学讲义模板_v1"
     vendor = tpl / "vendor" / "ElegantBook-v4.7"
