@@ -5,6 +5,8 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
+import pytest
+
 from tools.normal_operation.reconcile import reconcile_problem
 from tools.problem_solution.slots import wrap_slot_content
 from tests.problem_validator.conftest import problem_md
@@ -12,6 +14,10 @@ from tests.problem_validator.conftest import problem_md
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
+@pytest.mark.skipif(
+    shutil.which("xelatex") is None,
+    reason="xelatex not installed; real compilation is covered by the LaTeX smoke workflow",
+)
 def test_disposable_real_xelatex_pdf(tmp_path: Path) -> None:
     # Whole-problem (no parts) to keep generated TeX small.
     from tests.normal_operation.test_closure import _kb

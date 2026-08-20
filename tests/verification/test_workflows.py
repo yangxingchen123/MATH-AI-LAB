@@ -33,6 +33,7 @@ def test_latex_workflow_path_filters_and_smoke_command() -> None:
     text = (WORKFLOWS / "latex-smoke.yml").read_text(encoding="utf-8")
     assert "python -m tools.verification latex-smoke" in text
     assert "04_LATEX/专题讲义/数学变换/勒让德变换" in text
+    assert "python -m pytest -q tests/normal_operation/test_real_latex.py" in text
     assert "latex_build build" not in text
     assert "workspace_indexer sync" not in text
     assert "lualatex" not in text.lower()
@@ -41,16 +42,19 @@ def test_latex_workflow_path_filters_and_smoke_command() -> None:
     if on is True or on is None:
         on = data[True]
     assert "workflow_dispatch" in on
-    paths = on["push"]["paths"]
+    push_paths = on["push"]["paths"]
+    pr_paths = on["pull_request"]["paths"]
     for required in (
         "04_LATEX/**",
         "tools/latex_build/**",
         "tests/latex_build/**",
         "tools/verification/**",
         "tests/verification/**",
+        "tests/normal_operation/test_real_latex.py",
         ".github/workflows/latex-smoke.yml",
     ):
-        assert required in paths
+        assert required in push_paths
+        assert required in pr_paths
     assert "cron" not in str(data)
 
 
