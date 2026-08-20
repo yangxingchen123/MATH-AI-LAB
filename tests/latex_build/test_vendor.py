@@ -22,7 +22,8 @@ from tools.latex_build.vendor import (
     xelatex_env_with_vendor,
 )
 
-PRODUCTION_ROOT = Path(r"C:\MATH-AI-LAB")
+# Checkout-relative root (same convention as other real-project tests).
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_vendor_discovery(repo_root: Path) -> None:
@@ -97,8 +98,8 @@ def test_default_runner_injects_texinputs(repo_root: Path, monkeypatch: pytest.M
 
 
 def test_production_vendor_class_file() -> None:
-    assert pinned_vendor_cls_exists(PRODUCTION_ROOT)
-    cls = pinned_vendor_cls(PRODUCTION_ROOT)
+    assert pinned_vendor_cls_exists(REPO_ROOT)
+    cls = pinned_vendor_cls(REPO_ROOT)
     text = cls.read_text(encoding="utf-8")
     provides = parse_provides_class(text)
     assert provides == PINNED_ELEGANTBOOK_PROVIDES_CLASS
@@ -110,7 +111,7 @@ def test_kpsewhich_resolves_pinned_vendor_when_available() -> None:
     kpse = shutil.which("kpsewhich")
     if kpse is None:
         pytest.skip("kpsewhich not installed")
-    env = xelatex_env_with_vendor(pinned_vendor_dir(PRODUCTION_ROOT))
+    env = xelatex_env_with_vendor(pinned_vendor_dir(REPO_ROOT))
     proc = subprocess.run(
         [kpse, "elegantbook.cls"],
         env=env,
@@ -120,5 +121,43 @@ def test_kpsewhich_resolves_pinned_vendor_when_available() -> None:
     )
     resolved = Path(proc.stdout.strip())
     assert resolved.is_file()
-    assert resolved.resolve() == pinned_vendor_cls(PRODUCTION_ROOT).resolve()
+    assert resolved.resolve() == pinned_vendor_cls(REPO_ROOT).resolve()
+
+
+def test_repo_root_is_checkout_relative_not_fixed_drive() -> None:
+    """Vendor must resolve from this checkout, not a fixed Windows path."""
+    assert (REPO_ROOT / "元数据规范.md").is_file()
+    expected = (
+        REPO_ROOT
+        / "04_LATEX"
+        / "模板"
+        / "数学讲义模板_v1"
+        / "vendor"
+        / "ElegantBook-v4.7"
+        / "elegantbook.cls"
+    )
+    assert expected.is_file()
+    assert pinned_vendor_cls(REPO_ROOT).resolve() == expected.resolve()
+    # Fixed Windows path must not be treated as the production root identity.
+    fixed = Path(r"C:\MATH-AI-LAB")
+    if REPO_ROOT.resolve() != fixed.resolve():
+        assert pinned_vendor_cls(REPO_ROOT).resolve() != (
+            fixed
+            / "04_LATEX"
+            / "模板"
+            / "数学讲义模板_v1"
+            / "vendor"
+            / "ElegantBook-v4.7"
+            / "elegantbook.cls"
+        ).resolve()
+
+
+def test_texinputs_survives_vendor_path_with_spaces(tmp_path: Path) -> None:
+    spaced_root = tmp_path / "repo with spaces"
+    vendor = install_pinned_vendor(spaced_root, cls_text="CLS-SPACED")
+    value = texinputs_with_vendor(vendor, "")
+    assert str(vendor.resolve()) in value
+    assert "repo with spaces" in value.replace("\\", "/")
+    env = xelatex_env_with_vendor(vendor, base_env={"PATH": "/bin"})
+    assert str(vendor.resolve()) in env["TEXINPUTS"]
 
