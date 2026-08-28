@@ -1,0 +1,22 @@
+formal_ref: DISC-001
+natural_language_ref: statements/DISC-001.md
+source_files:
+- ref: MathAILab/Research/RevNil.lean
+  sha256: 75cec33ca2fd74bd659b23d4598a7fdd060c19ba9ac58b9d8bc4fa433c9d9c34
+- ref: statements/DISC-001.md
+  sha256: 67ab7511ba41332f0012a6ef2d1b039ea83fddab94fbda4878f5fc1f9ccb601f
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#DISC-001
+assumptions:
+  explicit:
+  - rev is the recursive reverse defined in this module
+  imported_axioms: []

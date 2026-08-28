@@ -45,17 +45,47 @@
 
 ## 3. 数学任务高频规则
 
-重要数学问题优先按照：
+重要数学问题**先做种类分流**（conversation routing，**不是** Frozen `problem_type`，禁止写入 Problem YAML）。完整 authority：`项目规则.md` 第四节 §0 与第九节 §9.2。
 
-`问题识别` → `为什么想到` → `数学直觉` → `严格推导` → `条件检查` → `验证` → `人工审核`
+| 种类 | 主产出 | 落点 |
+|------|--------|------|
+| 课后习题 / 定理证明 | 人可读解答 | 临时对话；正式 `02_题目库/` |
+| 开放数学研究 | 引理链 + 未决 | `02_题目库/` 或 `07_项目/` research |
+| 竞赛 / 应用建模 | 可检验模型与证据链 | `07_项目/` + `05_代码/` + `04_LATEX/数学建模/` |
+| 计算实验 | 可复现 run | `05_代码/` |
+| 文献精读 | 问题/方法/结论 + 引用分层 | `03_参考资料/论文/` + `07_项目/` literature |
+| 批改原解 | REVIEW | 真实作答才 Attempt |
 
-推进。
+禁止：用证明链写美赛；用 Dossier 存课后标准解答；把竞赛整卷登记成一道 Problem；把数值 run 写成「已证明现实」。无法判定时先按临时提问作答，不创建错误 Source。
+
+**习题 / 定理 / 开放研究** 再按：
+
+`问题重构` → `受控检索` → `方法押注` → `数学直觉` → `严格推导（本题）` → `条件检查` → `证伪/边界` → `验证（标明证据层）` → `自检与未决` → `分流落盘` → `人工审核`
+
+**建模**按：重构问号 → 检索 → **选模押注**（可识别 / 可证伪 / 否决）→ 已知答案实验 → Dossier 分流。建模押注对象是模型家族，不是证明程序。
+
+本流程是执行契约，**不是**「已达博士级」的能力认证。
+
+通过标准：判断对、分层对、错能自检、不知道时停。
 
 重点解释：
 
-> 为什么能够想到这种方法？
+> 为什么能够想到这种方法？若不走这条路，卡在哪一个障碍上？
 
-不得用「显然、易得、不难发现、类似可得」等表述跳过具有学习价值的关键步骤。
+不得用「显然、易得、不难发现、类似可得」等表述跳过具有学习价值的关键步骤。禁止把「这是常见技巧」当作唯一动机。
+
+高频硬门槛（详略随难度缩放；机械计算可压缩）：
+
+* **重构**：未知量 / 空间 / 结构 / 良定性；去掉哪条条件命题立刻假。未写出工作命题前，禁止用题面原文检索已解决库 / K / M。
+* **检索**：查询 = 工作命题（结构 + 障碍）；命中是候选不是答案。检索失败合法。
+* **押注**：至多 1–2 个主程序；写前提与 kill criteria；落选一行否决，禁止开方法课。
+* **证伪**：反例、尖锐性、必要性；陈述可能为假时优先给反例，不得装懂续写。
+* **分层**：启发式 ≠ 数值/图像 ≠ 人可读证明 ≠ Lean 核验 ≠ 文献标题。
+* **分流（习题/定理）**：本题解答 → P；可复用程序 → Method 候选；定义/定理 → Knowledge 候选；改了任务 → 新 P 或未证。K/M 不自动创建。禁止把 Problem 写成小教材，禁止以本题附录作为可复用终点。
+* **分流（建模）**：问号回答 → Dossier；选模 → `model_selection.md` / `decisions.md`；假设 → `assumptions.md`；实验 → `05_代码/` run。竞赛整卷不进 `02_题目库/`。
+* **卡住**：输出障碍类型 + 最小加强条件或下一步引理；禁止只换话术重写。
+* **停止**：标明证完了什么、未证什么；不知道就停。检出错误优于假装正确。
+* **中途中断**：正式题 / 研究项目把重构、障碍、证据层、分流结论、未决写入 Problem 或 Dossier；不依赖对话续上。临时提问不 persistence。动态状态见 `09_长期记忆/项目进度.md` 的 Solving Protocol 条。
 
 重要内容主动检查（按需展开，无法严格确认时明确指出，不得猜测）：
 
@@ -68,13 +98,14 @@
 * `sup/max`、`inf/min` 不混淆；
 * 必要 / 充分条件。
 
-**资料优先级**（按需读取，用户指定资料优先）：
+**资料优先级**（按需读取，用户指定资料优先；检索须在重构之后，查询用工作命题）：
 
 1. 用户指定教材、论文或可靠原始资料；
 2. `03_参考资料/`；
 3. 已审核的 `01_知识库/`；
-4. 已审核的 `02_题目库/已解决/`；
-5. Agent 自身推理。
+4. 已审核的 `12_方法库/`；
+5. 已审核的 `02_题目库/已解决/`（按同类障碍，不按题面像不像）；
+6. Agent 自身推理。
 
 不得编造数学史、人物、定理归属、原始文献或具体引用；无可靠依据时标记 `待查证`。
 
@@ -83,7 +114,8 @@
 ### 数学交互（默认 AUTO）
 
 * **默认 AUTO**：「怎么做」「不会」「解答」「证明」「解释」「为什么」→ 直接完整回答（one-turn completeness）。
-* 非机械题须解释**为什么想到**；RESEARCH 主动扩展；REVIEW 优先批改用户原解。
+* **题库 md：** 用户打开或交付 `02_题目库/` 的 Problem 文件、或按 `题目模板.md` 填写且 `## 题目` 已有实质内容 → 默认就是「把里面所有小问做完」。有 `parts` 则每个 part 都要答；共享题设先统一重构再逐问证明。不要先做对象分类课（模板 / 赛题 / 建模）。空模板（题目栏仍为占位）除外。同一文件中不共享题设的独立题：对话里全做，落盘时一题一 P。
+* 先按种类分流（习题/定理 vs 建模 vs 文献 vs 计算实验 vs 批改）。非机械**证明题**须解释**为什么想到**（含障碍与 kill criteria）；重构后再检索；证完后分流。建模走选模押注与 Dossier，不走「证明本题」。RESEARCH 主动扩展并写明未决，拓展不得混进本题解答。REVIEW 优先批改用户原解，并检查证伪与条件错用。
 * **STUDY** 仅用户显式 opt-in（「我想自己做」「先别给答案」「只给提示」）；才启用分级提示 / 独立 Attempt 保护。
 * 不得默认 Level 1/2/3、不得默认「先想想再回答」；用户说「直接告诉我」→ 立即 AUTO。
 * **AI 解答 ≠ User Attempt**；AI 解题默认不创建 Attempt；Attempt 只记录用户真实 solving/reasoning。
@@ -118,10 +150,14 @@ Derived learning-state views 同理；设计 authority 见 `派生学习状态�
 | 目录 | 职责 |
 |------|------|
 | `01_知识库/` | 审核后的正式知识（概念 / 定理 / 方法本身） |
-| `02_题目库/` | 具体问题如何被研究和解决 |
-| `04_LATEX/` | LaTeX 模板与工程 source |
-| `08_成果输出/` | 正式成果（含 `PDF/`） |
+| `02_题目库/` | 习题 / 定理题如何被研究和解决（不是竞赛整篇论文） |
+| `03_参考资料/` | 原文：`教材/` `论文/` `竞赛/` `讲义/`；`derived/` 是 GENERATED |
+| `04_LATEX/` | 讲义 / 题目解答 / 数学建模论文工程 |
+| `05_代码/` | 数值验证与隔离建模实验（Python / MATLAB） |
+| `07_项目/` | 研究、文献精读、竞赛建模 Dossier（`--kind`） |
+| `08_成果输出/` | 正式成果（含 `PDF/数学建模/`） |
 | `09_长期记忆/自动索引/` | Generated 导航与统计 |
+| `12_方法库/` | 审核后的 Method |
 
 完整目录职责见 `项目规则.md`。
 
@@ -220,6 +256,68 @@ Method（source root：`12_方法库/`）：
 python -m tools.method_validator check-file "<PATH>"
 python -m tools.method_validator check
 ```
+
+Research Project（v1.1 Candidate Contract + v1.3 literature/review extension，**不是** Frozen Schema；source root：`07_项目/`，排除 `_模板/`）：
+
+```text
+python -m tools.research_project doctor
+python -m tools.research_project check --project "07_项目/<name>"
+python -m tools.research_project gate --format json
+python -m tools.research_project literature-gate --format json
+python -m tools.reference_library doctor
+python -m tools.reference_library ingest-paper --slug "<slug>" --title "<title>" --domain "<domain>"
+```
+
+Modeling（v1.4 框架，stdlib Pilot；求解器不得进入根 `requirements.txt`）：
+
+```text
+python -m tools.modeling doctor
+python -m tools.modeling select --path "<candidates.yaml>"
+python -m tools.workbench bootstrap --kind contest_modeling --name "<name>" --title "<title>"
+python -m tools.workbench attach-md --contest "<赛事>" --slug "<题号>" --md "<path.md>"
+python -m tools.workbench run-experiment --name "<name>" --engine soc --run-id "<id>"
+python -m tools.workbench run-experiment --name "<name>" --engine soc_sensitivity --run-id "<id>"
+python -m tools.workbench run-experiment --name "<name>" --engine soc_piecewise --run-id "<id>"
+python -m tools.workbench find-data --name "<name>"
+python -m tools.workbench contest-pipeline --name "<name>"
+python -m tools.workbench coverage --name "<name>"
+python -m tools.open_data search --project "07_项目/<name>"
+python -m tools.workbench status
+python -m tools.reference_library ingest-contest --contest "<赛事>" --slug "<题号>" --title "<标题>"
+```
+
+Figure（v1.5 框架，stdlib SVG/Mermaid；Matplotlib/Plotly/Manim 不得进入根 `requirements.txt`）：
+
+```text
+python -m tools.figure doctor
+python -m tools.figure gate
+```
+
+Lean（v1.6 框架；lake 缺失时 `doctor` 为 DEGRADED，不得让 Core 失败）：
+
+```text
+python -m tools.lean_formalization doctor
+python -m tools.lean_formalization gate
+python -m tools.lean_formalization build
+python -m tools.lean_formalization verify
+python -m tools.lean_formalization scan --root "06_LEAN形式化"
+```
+
+Retrieval / Cited RAG（v2.0；Metadata → FTS → BM25 → Hybrid RRF；向量库未安装）：
+
+```text
+python -m tools.retrieval gate
+```
+
+Controlled Multi-Agent（v2.1；Candidate only；不得写正式 Source）：
+
+```text
+python -m tools.collaboration gate
+```
+
+不得把 Dossier Generated 区当作假设 / Claim / Decision 的事实源；不得为研究项目伪造 Attempt 或自动创建 Knowledge。
+
+**两类建模：** 计算实验 → `05_代码/` + v1.4；美赛/国赛整篇论文 → `07_项目`（`--kind contest_modeling`）+ `05_代码` + `04_LATEX/数学建模/`。文献原文 → `03_参考资料/论文/`；读懂（问题/方法/结论）→ `--kind literature`。PDF→MD 是 Sidecar，缺引擎时 DEGRADED。用法：`10_提示词/Modeling_and_Literature_Usage_Guide.md`。
 
 **修改后流程：**
 

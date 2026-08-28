@@ -1,0 +1,10 @@
+theorems:
+  - id: WEAK-001
+    natural_language: "for all natural numbers n, n + 1 is strictly greater than n"
+    lean_decl: weaker
+    lean_file: weaker.lean
+    family: algebra
+    quantifiers: forall n
+    objects: Nat
+    assumptions: []
+    conclusion: strict-inequality

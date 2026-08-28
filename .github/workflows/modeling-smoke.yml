@@ -1,0 +1,33 @@
+# MATH-AI-LAB modeling smoke. Stdlib engines only; no solver Sidecar.
+
+name: Modeling Smoke
+
+on:
+  push:
+    paths:
+      - "tools/modeling/**"
+      - "tools/workbench/**"
+      - "tests/modeling/**"
+      - "tests/workbench/**"
+      - ".github/workflows/modeling-smoke.yml"
+      - "requirements.txt"
+  pull_request:
+    paths:
+      - "tools/modeling/**"
+      - "tools/workbench/**"
+      - "tests/modeling/**"
+      - "tests/workbench/**"
+      - ".github/workflows/modeling-smoke.yml"
+      - "requirements.txt"
+
+jobs:
+  modeling-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/modeling tests/workbench
+      - run: python -m tools.modeling doctor

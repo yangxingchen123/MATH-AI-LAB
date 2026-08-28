@@ -1,0 +1,21 @@
+formal_ref: ALG-001
+natural_language_ref: statements/ALG-001.md
+source_files:
+- ref: MathAILab/Research/TwoAddTwo.lean
+  sha256: ec7b62d3902cfc4ad7945c8c08abc21551063fd4727ab613bd11cc57b812918e
+- ref: statements/ALG-001.md
+  sha256: 217ef0800bef252965b294f62ca8b2e2fced93d6468380e2b6248aba6264c471
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#ALG-001
+assumptions:
+  explicit: []
+  imported_axioms: []

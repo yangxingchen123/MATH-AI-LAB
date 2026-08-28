@@ -1,0 +1,21 @@
+candidates:
+  - name: energy_balance_soc
+    target_question: Q1-Q3 continuous-time SOC and time-to-empty
+    why: SOC is remaining energy over effective capacity; the ODE is the definition in continuous time
+    data_requirement: nominal energy, component powers, optional temperature/age scales
+    identifiable_when: power and effective energy are separately known or bounded
+    falsifiable_when: constant-power SOC is not approximately linear, or TTE is not inverse to power
+  - name: thevenin_circuit
+    target_question: Q1 voltage-aware SOC
+    why: could capture IR drop if open I-V traces exist
+    data_requirement: current-voltage time series under open license
+    identifiable_when: at least two distinct load currents with voltage
+    falsifiable_when: predicted voltage RMSE exceeds a stated bound
+    rejected: true
+  - name: blackbox_regression
+    target_question: Q2 curve fit only
+    why: would interpolate SOC samples without a continuous-time law
+    data_requirement: SOC time series
+    identifiable_when: enough discrete samples
+    falsifiable_when: never as a physical model
+    rejected: true

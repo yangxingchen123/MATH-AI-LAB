@@ -46,3 +46,23 @@ Thumbs.db
 # =========================
 *.tmp
 *.bak
+
+# =========================
+# Lean Lake cache (Sidecar)
+# =========================
+**/.lake/
+
+# =========================
+# Optional Sidecar caches (never Core)
+# =========================
+.mineru/
+**/chroma/
+**/*.faiss
+vector-index/
+
+# Generated document parses (not original source)
+03_参考资料/**/derived/
+
+# Modeling run artifacts (keep directory placeholders)
+05_代码/**/outputs/*
+!05_代码/**/outputs/.gitkeep

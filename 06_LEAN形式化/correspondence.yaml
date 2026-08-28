@@ -1,0 +1,63 @@
+theorems:
+  - id: ALG-001
+    natural_language: "2 + 2 = 4"
+    natural_language_ref: statements/ALG-001.md
+    lean_decl: MathAILab.Research.two_add_two
+    lean_file: MathAILab/Research/TwoAddTwo.lean
+    family: algebra
+    quantifiers: none
+    objects: Nat
+    assumptions: []
+    conclusion: equality
+  - id: ALG-002
+    natural_language: "for all natural numbers n, n + 0 = n"
+    natural_language_ref: statements/ALG-002.md
+    lean_decl: MathAILab.Research.nat_add_zero
+    lean_file: MathAILab/Research/TwoAddTwo.lean
+    family: algebra
+    quantifiers: forall n
+    objects: Nat
+    assumptions: []
+    conclusion: equality
+  - id: DISC-001
+    natural_language: "the reverse of the empty list is empty"
+    natural_language_ref: statements/DISC-001.md
+    lean_decl: MathAILab.Research.rev_nil
+    lean_file: MathAILab/Research/RevNil.lean
+    family: discrete
+    quantifiers: none
+    objects: List
+    assumptions:
+      - "rev is the recursive reverse defined in this module"
+    conclusion: equality
+  - id: ALG-003
+    natural_language: "for all natural numbers n, 0 + n = n"
+    natural_language_ref: statements/ALG-003.md
+    lean_decl: MathAILab.Research.zero_add
+    lean_file: MathAILab/Research/TwoAddTwo.lean
+    family: algebra
+    quantifiers: forall n
+    objects: Nat
+    assumptions: []
+    conclusion: equality
+  - id: DISC-002
+    natural_language: "for all lists xs of natural numbers, length (rev xs) = length xs"
+    natural_language_ref: statements/DISC-002.md
+    lean_decl: MathAILab.Research.length_rev
+    lean_file: MathAILab/Research/RevNil.lean
+    family: discrete
+    quantifiers: forall xs
+    objects: List
+    assumptions:
+      - "rev is the recursive reverse defined in this module"
+    conclusion: equality
+  - id: ALG-004
+    natural_language: "for all natural numbers m and n, m + n = n + m"
+    natural_language_ref: statements/ALG-004.md
+    lean_decl: MathAILab.Research.add_comm
+    lean_file: MathAILab/Research/TwoAddTwo.lean
+    family: algebra
+    quantifiers: forall m n
+    objects: Nat
+    assumptions: []
+    conclusion: equality

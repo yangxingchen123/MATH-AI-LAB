@@ -1,0 +1,6 @@
+name = "MathAILab"
+version = "0.1.0"
+defaultTargets = ["MathAILab"]
+
+[[lean_lib]]
+name = "MathAILab"

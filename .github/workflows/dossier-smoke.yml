@@ -1,0 +1,66 @@
+# MATH-AI-LAB research project dossier smoke.
+# Python 3.13 + root requirements.txt only.
+# Must not install heavy optional toolchains or write production Source.
+
+name: Dossier Smoke Verification
+
+on:
+  push:
+    paths:
+      - "tools/research_project/**"
+      - "tools/source_io/**"
+      - "tests/research_project/**"
+      - "tests/verification/**"
+      - "07_项目/**"
+      - "docs/superpowers/specs/**"
+      - "docs/superpowers/plans/**v1.1-research-project*"
+      - ".github/workflows/dossier-smoke.yml"
+      - "requirements.txt"
+  pull_request:
+    paths:
+      - "tools/research_project/**"
+      - "tools/source_io/**"
+      - "tests/research_project/**"
+      - "tests/verification/**"
+      - "07_项目/**"
+      - "docs/superpowers/specs/**"
+      - "docs/superpowers/plans/**v1.1-research-project*"
+      - ".github/workflows/dossier-smoke.yml"
+      - "requirements.txt"
+
+jobs:
+  dossier-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up canonical Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run research project tests
+        run: python -m pytest -q tests/research_project
+
+      - name: Evaluate v1.1 gate
+        run: python -m tools.research_project gate --format json > gate.json
+
+      - name: Upload Gate JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-project-gate-json
+          path: gate.json
+
+      - name: Append-only guard on pull request
+        if: github.event_name == 'pull_request'
+        run: python -m tools.research_project check-append-only --all --base-ref ${{ github.event.pull_request.base.sha }}
+
+      - name: Append-only guard on push
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        run: python -m tools.research_project check-append-only --all --base-ref ${{ github.event.before }}

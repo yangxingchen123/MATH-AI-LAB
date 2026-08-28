@@ -1,0 +1,127 @@
+% Working draft for 2026 MCM Problem A. Not a formal publish.
+% Do not copy official COMAP control sheets.
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\title{Modeling Smartphone Battery Drain\\[0.4em]
+\large 2026 MCM Problem A (working draft)}
+\author{Team (MATH-AI-LAB dossier)}
+\date{22 August 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We model state of charge by energy conservation,
+\(E_{\mathrm{eff}}\dot{\mathrm{SOC}}=-P(t)\).
+Under constant load the time-to-empty is \(t_{\mathrm{empty}}=E_{\mathrm{eff}}\mathrm{SOC}_0/P\).
+A known-answer instance (\(15\,\mathrm{Wh}\), \(3\,\mathrm{W}\), full charge) gives \(5\,\mathrm{h}\),
+and Euler integration matches the linear solution.
+Relative elasticities of \(t_{\mathrm{empty}}\) with respect to additive power components equal
+minus their power shares, so the largest load---here the assumed screen term---dominates.
+The same two loads in opposite order change time-to-empty from \(31\,\mathrm{h}\) to \(3.45\,\mathrm{h}\).
+All numerical powers are order-of-magnitude assumptions, not an open dataset.
+This draft does not claim a finished contest paper.
+\end{abstract}
+
+\section{Introduction}
+The official task is to build a continuous-time lithium-ion model that returns \(\mathrm{SOC}(t)\)
+and predicts time-to-empty under realistic use.
+Data may support parameter estimation but cannot replace an explicit continuous-time law.
+The PDF text layer is empty (glyphs are drawn as paths); we work from a PDFTomd transcript
+and leave one OCR-garbled clause in Requirement~1 unmarked.
+
+\section{Assumptions and Justifications}
+\begin{enumerate}
+\item Lumped SOC only (ASM-0001). A Doyle--Fuller--Newman model is not identifiable here.
+\item Energy balance \(E_{\mathrm{eff}}\dot{\mathrm{SOC}}=-P\) (ASM-0002). This is the definition of SOC in continuous time.
+\item Additive power: idle, screen, CPU, network, GPS, background (ASM-0003).
+\item Temperature and aging enter only as \(E_{\mathrm{eff}}=E_{\mathrm{nom}}\eta(T)\alpha\) (ASM-0004).
+\item No charging on a time-to-empty interval (ASM-0005).
+\item Current numbers are assumed magnitudes, not licensed measurements (ASM-0006).
+\end{enumerate}
+
+\section{The Model}
+Why this model: SOC is remaining energy over effective capacity.
+Differentiating the definition yields
+\begin{equation}
+E_{\mathrm{eff}}\frac{\mathrm{d}}{\mathrm{d}t}\mathrm{SOC}(t)=-P(t),\qquad
+P(t)=\sum_{i}P_i(t).
+\end{equation}
+If \(P\) is constant and positive,
+\begin{equation}
+\mathrm{SOC}(t)=\mathrm{SOC}_0-\frac{P}{E_{\mathrm{eff}}}t,\qquad
+t_{\mathrm{empty}}=\frac{E_{\mathrm{eff}}\mathrm{SOC}_0}{P}.
+\end{equation}
+Black-box regression is excluded by the problem statement.
+An equivalent-circuit model is deferred until open \(I\)--\(V\) traces exist (DEC-0001).
+
+\section{Solution and Results}
+Known-answer check: \(E_{\mathrm{eff}}=15\,\mathrm{Wh}\), \(P=3\,\mathrm{W}\), \(\mathrm{SOC}_0=1\)
+gives \(t_{\mathrm{empty}}=5\,\mathrm{h}\) and \(\mathrm{SOC}(2.5\,\mathrm{h})=0.5\).
+Euler with 200 steps reproduces the second value.
+Idle power \(0.3\,\mathrm{W}\) alone gives \(50\,\mathrm{h}\).
+These identities are internal to the ODE (CLM-0001 / EVD-0001).
+
+\section{Sensitivity and Error Analysis}
+For \(t_{\mathrm{empty}}\propto 1/P\) and \(P=\sum P_i\),
+\begin{equation}
+\frac{P_i}{t_{\mathrm{empty}}}\frac{\partial t_{\mathrm{empty}}}{\partial P_i}=-\frac{P_i}{P}.
+\end{equation}
+The ranking of drivers is therefore the ranking of power shares and does not depend on
+\(E_{\mathrm{eff}}\) or \(\mathrm{SOC}_0\) (DEC-0002).
+On the assumed baseline \((0.3,1.5,0.8,0.2,0.1,0.1)\,\mathrm{W}\),
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+component & share & elasticity \\
+\midrule
+screen & $0.50$ & $-0.50$ \\
+CPU & $0.267$ & $-0.267$ \\
+idle & $0.10$ & $-0.10$ \\
+network & $0.067$ & $-0.067$ \\
+GPS & $0.033$ & $-0.033$ \\
+background & $0.033$ & $-0.033$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+A \(20\%\) increase in screen power moves TTE from \(5\,\mathrm{h}\) to \(15/3.3\approx 4.55\,\mathrm{h}\).
+Capacity derating \(\eta=0.75\) or \(\alpha=0.85\) scales every TTE by the same factor
+(\(3.75\,\mathrm{h}\) and \(4.25\,\mathrm{h}\)) and does not reorder the power shares.
+If each \(P_i\) independently has a \(20\%\) relative error (assumed, not measured),
+\(\sigma_P/P\approx 0.12\); with a further \(10\%\) error on \(E_{\mathrm{eff}}\),
+a first-order RSS bound is \(\sigma_t/t\approx 0.15\).
+
+The same ODE with piecewise-constant \(P(t)\) answers usage-order questions (DEC-0003).
+For \(E_{\mathrm{eff}}=15\,\mathrm{Wh}\), a heavy block of \(6\,\mathrm{W}\) for one hour
+followed by \(0.3\,\mathrm{W}\) idle empties at \(31\,\mathrm{h}\);
+the swapped order empties at \(3.45\,\mathrm{h}\).
+Order is not a second-order correction: it changes time-to-empty by about nine times
+because the heavy block either spends leftover energy slowly or finishes the pack quickly.
+A constant \(3\,\mathrm{W}\) day (\(5\,\mathrm{h}\)) cannot see this effect.
+
+The model is weak wherever voltage efficiency, Peukert rate-capacity, or thermal coupling
+makes \(P\) non-additive or \(E_{\mathrm{eff}}\) load-dependent.
+
+\section{Strengths and Weaknesses}
+Strengths: explicit continuous-time law; analytical TTE; falsifiable linear-SOC prediction;
+component ranking that answers the problem's ``which activities'' question.
+Weaknesses: no open licensed drain dataset; parameters are assumed; no voltage dynamics;
+Requirement~1 still contains an unread OCR gap.
+
+\section{Conclusion}
+Under the energy-balance model, cut the largest power share first---on our assumed baseline,
+that is screen brightness---and do not expect tiny background tasks to move TTE much.
+An operating system can implement the same ranking: estimate component powers, form shares,
+and throttle the largest share first; derate \(E_{\mathrm{eff}}\) when cold or aged.
+Schedule high-draw work when a charger will be available soon: under energy conservation,
+doing the heavy block last can empty the pack during that block.
+The same ODE applies to any portable pack if loads can be treated as additive.
+These recommendations inherit ASM-0006: they are mechanism translations, not field trials.
+
+\begin{thebibliography}{9}
+\bibitem{comap}
+COMAP.
+\newblock 2026 MCM Problem A: Modeling Smartphone Battery Drain.
+\newblock Official PDF, local copy \texttt{03\_参考资料/竞赛/美赛/2026-A/source.pdf}.
+\end{thebibliography}
+\end{document}

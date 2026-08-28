@@ -1,0 +1,7 @@
+{
+  "lean4.alwaysAskBeforeInstallingLeanVersions": false,
+  "lean4.automaticallyBuildDependencies": false,
+  "lean4.envPathExtensions": [
+    "${userHome}/.elan/bin"
+  ]
+}

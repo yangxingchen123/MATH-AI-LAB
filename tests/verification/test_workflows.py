@@ -61,3 +61,43 @@ def test_latex_workflow_path_filters_and_smoke_command() -> None:
 def test_no_weekly_schedule_workflow() -> None:
     names = {p.name for p in WORKFLOWS.glob("*.yml")}
     assert "weekly.yml" not in names
+
+
+def test_dossier_smoke_workflow_contract():
+    text = Path(".github/workflows/dossier-smoke.yml").read_text(encoding="utf-8")
+    data = yaml.safe_load(text)
+    on = data.get("on")
+    if on is None and True in data:
+        on = data[True]
+    assert isinstance(on, dict)
+    assert "pull_request" in on and "push" in on
+    paths = set()
+    for event in ("pull_request", "push"):
+        cfg = on[event]
+        if isinstance(cfg, dict):
+            paths.update(cfg.get("paths", []))
+    required = {
+        "tools/research_project/**",
+        "tools/source_io/**",
+        "tests/research_project/**",
+        "tests/verification/**",
+        "07_项目/**",
+        "docs/superpowers/specs/**",
+        "docs/superpowers/plans/**v1.1-research-project*",
+        ".github/workflows/dossier-smoke.yml",
+        "requirements.txt",
+    }
+    assert required <= paths
+    assert "fetch-depth: 0" in text or "fetch-depth:0" in text.replace(" ", "")
+    assert "python-version: \"3.13\"" in text or "python-version: '3.13'" in text
+    assert "requirements.txt" in text
+    assert "tests/research_project" in text
+    assert "tools.research_project gate" in text or "research_project gate" in text
+    assert "check-append-only" in text and "--all" in text
+    assert "pull_request.base.sha" in text
+    assert "github.event.before" in text
+    assert "0000000000000000000000000000000000000000" in text
+    assert "texlive" not in text.lower()
+    assert "mineru" not in text.lower()
+    assert "leanprover" not in text.lower()
+    assert "upload-artifact" in text.lower() or "actions/upload-artifact" in text
