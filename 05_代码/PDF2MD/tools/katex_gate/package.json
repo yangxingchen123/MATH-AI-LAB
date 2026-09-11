@@ -1,0 +1,9 @@
+{
+  "name": "pdf2md-katex-gate",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Optional KaTeX parse gate for Typora-publishable math",
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
+}
