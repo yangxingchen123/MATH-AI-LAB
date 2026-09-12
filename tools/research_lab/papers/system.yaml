@@ -1,0 +1,10 @@
+kind: system
+title: ""
+claims_四大: false
+filled: false
+sections:
+  - evaluator
+  - cost
+  - lean
+  - failures
+note: empty draft checklist; not a submission

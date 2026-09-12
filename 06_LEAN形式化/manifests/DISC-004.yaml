@@ -1,0 +1,22 @@
+formal_ref: DISC-004
+natural_language_ref: statements/DISC-004.md
+source_files:
+- ref: MathAILab/Research/SumFree.lean
+  sha256: e059ff02237bdc47f2e2a13b0fb13d8297dfa2a237c3bbf4920d1e66271a9576
+- ref: statements/DISC-004.md
+  sha256: 9833c6d52f300e7ca47aa559613bdc4bd2aab26fa0326991c7d6bd5a8eecd28f
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#DISC-004
+assumptions:
+  explicit:
+  - length (n+1)/2 is the classical attained size ceil(n/2)
+  imported_axioms: []

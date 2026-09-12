@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MATH-AI-LAB</title>
+    <link rel="stylesheet" href="/vendor/katex.min.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="top-row">
+        <div class="brand">MATH-AI-LAB</div>
+        <input id="search" type="search" placeholder="搜索对象…" autocomplete="off" />
+        <div class="modes" id="modes">
+          <button type="button" data-mode="AUTO">AUTO</button>
+          <button type="button" data-mode="STUDY">STUDY</button>
+          <button type="button" data-mode="REVIEW">REVIEW</button>
+          <button type="button" data-mode="RESEARCH">RESEARCH</button>
+        </div>
+      </div>
+      <nav class="tabs" id="tabs">
+        <button type="button" data-nav="today">今日</button>
+        <button type="button" data-nav="problems">题目</button>
+        <button type="button" data-nav="knowledge">知识</button>
+        <button type="button" data-nav="methods">方法</button>
+        <button type="button" data-nav="project">项目</button>
+        <button type="button" data-nav="lab">实验室</button>
+      </nav>
+    </header>
+    <div class="shell">
+      <aside class="tree" id="tree"></aside>
+      <main class="article" id="article"></main>
+      <aside class="toc" id="toc"></aside>
+    </div>
+    <script src="/vendor/katex.min.js"></script>
+    <script src="/vendor/auto-render.min.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

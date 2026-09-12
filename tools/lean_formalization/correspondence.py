@@ -42,6 +42,15 @@ def validate_table(entries: list[dict], project_root: Path) -> CorrespondenceRes
             errors.append(f"missing natural_language_ref: {nl_ref}")
         if item.get("family"):
             families.add(str(item["family"]))
+    known_ids = {str(item.get("id")) for item in entries if item.get("id")}
+    for item in entries:
+        deps = item.get("depends_on") or []
+        if deps and not isinstance(deps, list):
+            errors.append(f"depends_on must be a list in {item.get('id')}")
+            continue
+        for dep in deps:
+            if str(dep) not in known_ids:
+                errors.append(f"{item.get('id')} depends_on unknown id {dep}")
     if len(families) < 2:
         errors.append("need at least two distinct proposition families")
     return CorrespondenceResult(ok=not errors, errors=errors, families=sorted(families))

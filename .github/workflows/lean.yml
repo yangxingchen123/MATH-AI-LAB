@@ -50,3 +50,6 @@ jobs:
 
       - name: Correspondence check
         run: python -m tools.lean_formalization check-correspondence
+
+      - name: Research-lab verify
+        run: python -m tools.research_lab verify

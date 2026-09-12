@@ -1,0 +1,21 @@
+id: PROB-SF-001
+title: Maximum size of a sum-free subset of {1,...,n}
+track: C
+stage: FALSIFICATION
+evaluator: sum_free
+success_level: S1
+novelty_claim: known
+prior_art:
+  - relation: same
+    note: classical ceil(n/2) bound; odds and upper-half constructions; not a novelty claim
+notes: >
+  Classical bound ceil(n/2), attained by the odd numbers and by the upper half.
+  This Pilot reproduces the bound with a blind greedy search, an exhaustive
+  check for small n, and Lean theorems odds_sum_free / odds_length /
+  one_two_three_not_sum_free / sum_free_length_le (DISC-003–006).
+  It is not a new theorem.
+lean_decls:
+  - MathAILab.Research.odds_sum_free
+  - MathAILab.Research.odds_length
+  - MathAILab.Research.one_two_three_not_sum_free
+  - MathAILab.Research.sum_free_length_le

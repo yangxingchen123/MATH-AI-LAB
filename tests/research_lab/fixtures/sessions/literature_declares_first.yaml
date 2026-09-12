@@ -1,0 +1,5 @@
+task_kind: literature
+mode: AUTO
+role: literature
+actions:
+  - declare_first_from_abstract

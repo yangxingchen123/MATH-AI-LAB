@@ -1,0 +1,23 @@
+{
+  "name": "math-ai-lab",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @math-ai-lab/web",
+    "build": "npm run build -w @math-ai-lab/web",
+    "start": "npm run start -w @math-ai-lab/web",
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "e2e": "playwright test e2e/core.spec.ts",
+    "e2e:visual": "playwright test e2e/visual.spec.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

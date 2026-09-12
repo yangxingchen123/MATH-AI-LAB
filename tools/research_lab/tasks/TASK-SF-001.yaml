@@ -1,0 +1,25 @@
+task_id: TASK-SF-001
+problem_id: PROB-SF-001
+stage: FALSIFICATION
+input_hash: "sha256:prob-sf-001-c0-n5"
+model:
+  provider: none
+  model: none
+  version_or_snapshot: none
+parameters:
+  temperature: 0
+  seed: 0
+budget:
+  hard_limit_usd: 1
+  hard_limit_seconds: 1800
+artifacts: []
+result:
+  status: evaluated
+  verifier: sum_free
+  verifier_version: local
+cost:
+  input_tokens: 0
+  output_tokens: 0
+  gpu_seconds: 0
+  cpu_seconds: 0
+  usd: 0

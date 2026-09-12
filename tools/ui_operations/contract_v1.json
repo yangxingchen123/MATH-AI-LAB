@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "operations": [
+    "RecordAttempt",
+    "MoveProblemWorkflow",
+    "CreateProblem",
+    "CreateKnowledge",
+    "CreateMethod",
+    "PromoteInboxItem"
+  ]
+}

@@ -1,0 +1,22 @@
+formal_ref: DISC-003
+natural_language_ref: statements/DISC-003.md
+source_files:
+- ref: MathAILab/Research/SumFree.lean
+  sha256: e059ff02237bdc47f2e2a13b0fb13d8297dfa2a237c3bbf4920d1e66271a9576
+- ref: statements/DISC-003.md
+  sha256: 7f062f7568461102875097420acf653ad75e3ac0532f43a6c4d877be5e996230
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#DISC-003
+assumptions:
+  explicit:
+  - recursive odds list; known construction, not a new theorem
+  imported_axioms: []

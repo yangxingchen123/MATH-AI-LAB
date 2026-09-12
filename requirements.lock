@@ -1,0 +1,4 @@
+# v2.2-lab Pilot lockfile (P0). Direct dependencies only.
+# Install: python -m pip install -r requirements.lock
+PyYAML==6.0.3
+pytest==9.1.1

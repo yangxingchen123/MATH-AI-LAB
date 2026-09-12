@@ -1,0 +1,4 @@
+task_kind: modeling
+mode: AUTO
+pipeline: proof
+working_proposition: "prove the contest problem"

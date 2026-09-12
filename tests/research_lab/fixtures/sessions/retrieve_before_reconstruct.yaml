@@ -1,0 +1,6 @@
+task_kind: research
+mode: RESEARCH
+retrieved: true
+retrieval_query: "sum-free subset maximum size"
+claimed_proved: true
+evidence_layer: heuristic

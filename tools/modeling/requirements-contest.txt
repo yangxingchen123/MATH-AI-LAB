@@ -1,0 +1,5 @@
+# Contest modeling sidecar. Do NOT merge into the repository root requirements.txt.
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+pandas>=2.0

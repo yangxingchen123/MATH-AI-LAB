@@ -1,0 +1,9 @@
+id: CONJ-SF-001
+problem_id: PROB-SF-001
+statement: "The odd numbers in {1,...,n} form a sum-free set of size (n+1)/2."
+status: CANDIDATE_SURVIVED
+novelty_claim: known
+evaluator: sum_free
+prior_art:
+  - relation: same
+    note: classical odds construction; not a novelty claim

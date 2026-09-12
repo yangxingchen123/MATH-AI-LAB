@@ -1,0 +1,7 @@
+task_kind: research
+mode: RESEARCH
+working_proposition: "a nodup sum-free subset of {1..n} has size at most ceil(n/2)"
+bets:
+  - program: pairing
+    kill_criteria: "a and n+1-a both remain after removing n+1"
+stuck: true

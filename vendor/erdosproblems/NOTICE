@@ -1,0 +1,13 @@
+teorth/erdosproblems
+https://github.com/teorth/erdosproblems
+commit 5308c57c700559416b9f205df274b136784203e7
+Apache License 2.0
+
+This warehouse redistributes a full-tree pin of the upstream
+repository (every tracked file at the commit above).
+Runtime uses only local files under vendor/erdosproblems/.
+It does not call a GitHub API, and it does not copy problem
+statements from https://www.erdosproblems.com.
+
+Human index: Thomas Bloom, https://www.erdosproblems.com
+Formal Lean statements, if any, remain upstream and are not imported.

@@ -12,6 +12,7 @@
 python -m tools.modeling doctor
 python -m tools.modeling run --engine ols --output-root "<dir>" --run-id "<id>"
 python -m tools.modeling select --path "<candidates.yaml>"
+python -m tools.modeling contest-doctor
 ```
 
 `select` 要求每个候选写清：针对的问号、为什么想到、数据、可识别条件、可证伪条件。缺一项则不可用。
@@ -36,6 +37,8 @@ python -m tools.open_data search --query "smartphone power dataset" --project "0
 一次创建 `07_项目/` Dossier、`05_代码/` 实验工程和 `04_LATEX/数学建模/` 论文骨架。`contest-pipeline` 串联选模、开放数据检索、stdlib 实验、问号覆盖审计，并在 `documents/candidates/` 写出 Evidence **候选**（不改正式 `evidence.md`）。`coverage` 可单独复跑审计。二者**不会**宣称论文完成，不会发布 PDF，不会写入 Knowledge。`find-data` 只写开放数据候选，不估参。
 
 然后：题面 → 假设 → `model_selection.md` → `05_代码/<同名>/` 实验 → `04_LATEX/数学建模/` 排版。未授权不发布 PDF，不写入 Knowledge。
+
+对话里做整卷竞赛时，默认走竞赛建模 Agent Skill：`.cursor/skills/math-modeling-lab`（钉住的 solver/paper 在 `vendor/math-modeling-skills/`）。操作说明：`10_提示词/Math_Modeling_Agent_Usage_Guide.md`。
 
 ## 论文收录与精读
 

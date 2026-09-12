@@ -1,0 +1,6 @@
+# Optional contest ML extras. Do NOT merge into the repository root requirements.txt.
+scikit-learn>=1.4
+statsmodels>=0.14
+seaborn>=0.13
+# xgboost is optional and may lack a wheel on some Windows setups.
+# xgboost>=2.0

@@ -46,8 +46,24 @@ def test_correspondence_covers_two_families():
     table = load_table(LEAN_ROOT / "correspondence.yaml")
     result = validate_table(table, LEAN_ROOT)
     assert result.ok is True
-    assert set(result.families) >= {"algebra", "discrete"}
+    assert set(result.families) >= {"algebra", "discrete", "analysis"}
     assert undeclared_theorems(LEAN_ROOT, table) == []
+    assert any(item.get("id") == "ANL-001" for item in table)
+    assert any(item.get("id") == "DISC-004" for item in table)
+    assert any(item.get("id") == "DISC-006" for item in table)
+    alg004 = next(item for item in table if item.get("id") == "ALG-004")
+    assert set(alg004.get("depends_on") or []) == {"ALG-002", "ALG-003"}
+    anl004 = next(item for item in table if item.get("id") == "ANL-004")
+    assert anl004.get("depends_on") == ["ANL-001"]
+
+
+def test_unknown_depends_on_is_rejected():
+    table = [dict(item) for item in load_table(LEAN_ROOT / "correspondence.yaml")]
+    table[0] = dict(table[0])
+    table[0]["depends_on"] = ["NO-SUCH-ID"]
+    result = validate_table(table, LEAN_ROOT)
+    assert result.ok is False
+    assert any("depends_on unknown id" in item for item in result.errors)
 
 
 def test_weakening_fixture_is_detected():
@@ -93,6 +109,17 @@ def test_elan_bin_is_home_elan():
     from tools.lean_formalization.build import elan_bin
 
     assert elan_bin() == Path.home() / ".elan" / "bin"
+
+
+def test_lake_manifest_stays_lf_after_build():
+    from tools.lean_formalization.build import lake_available, run_lake_build
+    from tools.lean_formalization.constants import LEAN_ROOT
+
+    manifest = LEAN_ROOT / "lake-manifest.json"
+    if lake_available():
+        run_lake_build(LEAN_ROOT)
+    data = manifest.read_bytes()
+    assert b"\r\n" not in data
 
 
 def test_build_missing_lake_is_degraded():

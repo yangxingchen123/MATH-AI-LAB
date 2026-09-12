@@ -1,0 +1,44 @@
+gold: |
+  For f(x)=x^2/2 the conjugate equals p^2/2 and is attained at x=p for every real p,
+  including p=0 and p<0. For e^x the conjugate is finite only for p>0; at p≤0 the
+  supremum is +∞.
+equivalents:
+  - "The quadratic f(x)=x^2/2 is self-conjugate: f^*(p)=p^2/2 with maximizer x=p for all real p."
+  - "Unlike x^2/2, the Fenchel conjugate of e^x is p log p - p only on p>0."
+  - "When p≤0, px - e^x is unbounded above, so the conjugate is +∞."
+  - "Equality in x^2/2 + p^2/2 ≥ p x holds if and only if x=p."
+  - "For every pair of integers x and p, xp + px is at most x^2 + p^2."
+  - "The quadratic dual is attained at x=p even when p is negative."
+  - "The conjugate of e^x is infinite whenever p≤0."
+  - "Self-duality of x^2/2 means the primal and dual agree, with contact at x=p."
+  - "Fenchel-Young for the scaled square is equality precisely on x=p."
+  - "On p>0 the exponential conjugate is p log p - p."
+  - "Quadratic conjugation stays finite at the origin p=0."
+  - "Replacing the quadratic by an exponential changes the effective domain of the dual."
+  - "The supporting slope of e^x cannot be non-positive; the dual needs p>0."
+  - "Attainment for x^2/2 holds for every real p, while e^x needs p>0."
+  - "The map p to p^2/2 is both the primal and the dual of the same quadratic."
+  - "Integer Fenchel-Young for x^2 does not need p>0."
+  - "A negative p still yields a finite quadratic conjugate."
+  - "The domain of the exponential dual is the positive reals p>0."
+  - "Equality case x=p is the unique contact point of the quadratic pair."
+  - "The scaled square remains a proper convex dual at every real slope, including p=0."
+mutants:
+  - id: M1
+    defect: max_for_sup_exp
+    statement: "The maximum of p x - e^x is always attained."
+  - id: M2
+    defect: omit_exp_domain
+    statement: "The conjugate of e^x is p log p - p for every real p."
+  - id: M3
+    defect: quadratic_missed_at_zero
+    statement: "For f(x)=x^2/2 the conjugate at p=0 is not attained and becomes infinite."
+  - id: M4
+    defect: inf_min_swap
+    statement: "Write inf as min without comment when the bound is not attained."
+  - id: M5
+    defect: exp_sup_max_collapse
+    statement: "For e^x, sup and max coincide at every real p."
+  - id: M6
+    defect: legendre_always_reparam
+    statement: "Every Legendre transform is only a reparameterization of the same graph."

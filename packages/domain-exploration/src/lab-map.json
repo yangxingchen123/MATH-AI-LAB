@@ -1,0 +1,42 @@
+{
+  "version": "1",
+  "never_maps_to_promotion": true,
+  "lifecycle": {
+    "INBOX": "idea",
+    "TRIAGED": "idea",
+    "PRIOR_ART_CHECKED": "exploring",
+    "STATEMENT_REVIEWED": "exploring",
+    "FALSIFICATION": "challenged",
+    "CANDIDATE_SURVIVED": "tested",
+    "PROOF_PLANNED": "exploring",
+    "PROVED_INFORMAL": "supported",
+    "PROVED_FORMAL": "supported",
+    "EXTERNAL_REVIEWED": "supported",
+    "PAPER_READY": "supported",
+    "REJECTED_FALSE": "rejected",
+    "REJECTED_KNOWN": "rejected",
+    "REJECTED_TRIVIAL": "rejected",
+    "REJECTED_LOW_VALUE": "rejected",
+    "BLOCKED_MISSING_THEORY": "rejected",
+    "PAUSED_COST": "rejected"
+  },
+  "pipeline": {
+    "INBOX": "observation",
+    "TRIAGED": "observation",
+    "PRIOR_ART_CHECKED": "exploration",
+    "STATEMENT_REVIEWED": "exploration",
+    "FALSIFICATION": "experiment",
+    "CANDIDATE_SURVIVED": "critique",
+    "PROOF_PLANNED": "proof_attempt",
+    "PROVED_INFORMAL": "proof_attempt",
+    "PROVED_FORMAL": "proof_attempt",
+    "EXTERNAL_REVIEWED": "verification",
+    "PAPER_READY": "verification",
+    "REJECTED_FALSE": "exploration",
+    "REJECTED_KNOWN": "exploration",
+    "REJECTED_TRIVIAL": "exploration",
+    "REJECTED_LOW_VALUE": "exploration",
+    "BLOCKED_MISSING_THEORY": "exploration",
+    "PAUSED_COST": "exploration"
+  }
+}

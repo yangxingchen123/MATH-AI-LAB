@@ -243,6 +243,17 @@ failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weak
 - 固定评测任务上，质量指标至少一项显著优于单角色基线，且严重错误率不升高；
 - 超时、取消和单角色 fallback 可用。
 
+### v2.2-lab — Research Lab Pilot（不是 v2.2 关闭）
+
+- 不新建平行根目录；三轨映射到 `07_项目/`、`06_LEAN形式化/`、`tools.research_lab`；
+- `operate` 验收运行条件；`protocol` 机检种类分流与重构先于检索；infra 禁止新 P00xx；
+- 证据链密封 run 可 `reproduce`；`known`/`first` 必须带 prior_art；卡住必须写障碍类型；
+- 原始 90 天 40 项由 `backlog` 机检关闭（done / sidecar / unplugged / policy）；不接入外部模型或 Mathlib；
+- 离散 evaluator / P001-L0 只作实例校准；`verify` 可选；禁止宣传新颖性；
+- 不得宣称数学四大准备度或 v2.2 VERIFIED。
+
+规范：`docs/superpowers/specs/2026-08-28-research-lab-maturity-design.md`。
+
 ### v2.2 — Doctoral Research Workbench Closure
 
 - 总架构 18 项能力均达到 §4 最低状态；
@@ -262,7 +273,8 @@ failure_action: "BLOCK v1.1 closure and tagging; keep failing tests; do not weak
 | `document-smoke` | Adapter + fixture，不下载完整模型时使用 fake/service mock | 文档模块修改必跑 |
 | `modeling-smoke` | 小型开源求解器与已知答案 fixture | 建模模块修改必跑 |
 | `figure-smoke` | 无头渲染与确定性 fixture | 制图模块修改必跑 |
-| `lean` | 锁定 Lean/Mathlib 工具链 | Lean 路径修改必跑 |
+| `lean` | 锁定 Lean 工具链（Mathlib 仍为 none） | Lean 路径修改必跑 |
+| `research-lab-smoke` | Python 3.13 + 根 `requirements.txt`；`tests/research_lab` + `tests/lean_formalization` + `tools.research_lab operate/doctor/gate/verify`；不安装 LLM/solver/Mathlib；lake 缺失时 operate/verify 为 DEGRADED | research_lab / 协议 / 运行条件相关修改必跑 |
 | `retrieval-eval` | 固定 corpus 与 query set | 检索/RAG 修改必跑 |
 | `full-integration` | 所有获批 Sidecar | 发布候选与定期验证 |
 | `research-acceptance` | 两个真实项目的端到端复用 | v2.2 关闭必跑 |

@@ -1,0 +1,24 @@
+{
+  "name": "@math-ai-lab/math-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@math-ai-lab/domain": "0.1.0",
+    "katex": "^0.16.22",
+    "marked": "^16.2.1"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.7",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

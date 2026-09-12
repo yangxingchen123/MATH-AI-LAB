@@ -331,7 +331,8 @@ def _relation_titles(snapshot: WorkspaceSnapshot) -> dict[str, str]:
 def _label(object_id: str, titles: dict[str, str]) -> str:
     title = titles.get(object_id, "")
     if title:
-        return f"{object_id} — {title.replace('|', '\\|')}"
+        safe_title = title.replace("|", "\\|")
+        return f"{object_id} — {safe_title}"
     return object_id
 
 

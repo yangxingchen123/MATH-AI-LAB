@@ -61,3 +61,95 @@ theorems:
     objects: Nat
     assumptions: []
     conclusion: equality
+    depends_on:
+      - ALG-002
+      - ALG-003
+  - id: ANL-001
+    natural_language: "for all integers x and p, x p + p x ≤ x^2 + p^2"
+    natural_language_ref: statements/ANL-001.md
+    lean_decl: MathAILab.Research.fenchel_young_quadratic
+    lean_file: MathAILab/Research/QuadraticConjugate.lean
+    family: analysis
+    quantifiers: forall x p
+    objects: Int
+    assumptions: []
+    conclusion: inequality
+  - id: ANL-002
+    natural_language: "for all integers p, the scaled quadratic dual attains p^2 at x = p"
+    natural_language_ref: statements/ANL-002.md
+    lean_decl: MathAILab.Research.quadratic_conjugate_attained
+    lean_file: MathAILab/Research/QuadraticConjugate.lean
+    family: analysis
+    quantifiers: forall p
+    objects: Int
+    assumptions: []
+    conclusion: equality
+  - id: ANL-003
+    natural_language: "for all integers x and p, x p + p x = x^2 + p^2 iff x = p"
+    natural_language_ref: statements/ANL-003.md
+    lean_decl: MathAILab.Research.quadratic_eq_iff
+    lean_file: MathAILab/Research/QuadraticConjugate.lean
+    family: analysis
+    quantifiers: forall x p
+    objects: Int
+    assumptions: []
+    conclusion: iff
+  - id: ANL-004
+    natural_language: "for all integers x, the scaled Fenchel-Young identity holds at p = -1"
+    natural_language_ref: statements/ANL-004.md
+    lean_decl: MathAILab.Research.quadratic_at_neg
+    lean_file: MathAILab/Research/QuadraticConjugate.lean
+    family: analysis
+    quantifiers: forall x
+    objects: Int
+    assumptions:
+      - "p is the negative unit; the identity does not require p > 0"
+    conclusion: inequality
+    depends_on:
+      - ANL-001
+  - id: DISC-003
+    natural_language: "for all n, the odd numbers in {1,...,n} form a sum-free list"
+    natural_language_ref: statements/DISC-003.md
+    lean_decl: MathAILab.Research.odds_sum_free
+    lean_file: MathAILab/Research/SumFree.lean
+    family: discrete
+    quantifiers: forall n
+    objects: List Nat
+    assumptions:
+      - "odds is the recursive odd-number list in this module"
+    conclusion: sum-free
+  - id: DISC-004
+    natural_language: "for all n, the odd numbers in {1,...,n} have length (n+1)/2"
+    natural_language_ref: statements/DISC-004.md
+    lean_decl: MathAILab.Research.odds_length
+    lean_file: MathAILab/Research/SumFree.lean
+    family: discrete
+    quantifiers: forall n
+    objects: List Nat
+    assumptions:
+      - "odds is the recursive odd-number list in this module"
+    conclusion: equality
+  - id: DISC-005
+    natural_language: "the list [1, 2, 3] is not sum-free"
+    natural_language_ref: statements/DISC-005.md
+    lean_decl: MathAILab.Research.one_two_three_not_sum_free
+    lean_file: MathAILab/Research/SumFree.lean
+    family: discrete
+    quantifiers: none
+    objects: List Nat
+    assumptions:
+      - "isSumFree forbids a+b in the list"
+    conclusion: negation
+  - id: DISC-006
+    natural_language: "a nodup sum-free list in {1,...,n} has length at most (n+1)/2"
+    natural_language_ref: statements/DISC-006.md
+    lean_decl: MathAILab.Research.sum_free_length_le
+    lean_file: MathAILab/Research/SumFree.lean
+    family: discrete
+    quantifiers: forall xs n
+    objects: List Nat
+    assumptions:
+      - "members of xs lie in {1,...,n}"
+      - "xs is nodup"
+      - "xs is sum-free"
+    conclusion: inequality

@@ -1,0 +1,10 @@
+task_kind: research
+mode: RESEARCH
+role: prover
+actions:
+  - mutate_statement
+working_proposition: "weaken the bound until it compiles"
+bets:
+  - program: change-the-theorem
+    kill_criteria: "statement identity changes"
+evidence_layer: human_proof

@@ -1,0 +1,138 @@
+.math-display {
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 0.25rem 0;
+}
+
+.math-inline {
+  max-width: 100%;
+}
+
+.math-error {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.2rem 0.4rem;
+  border: 1px dashed var(--color-danger, #a33);
+  border-radius: 4px;
+  font-size: 0.85em;
+  vertical-align: middle;
+}
+
+.math-error-display {
+  display: block;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.math-error-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.math-error-toggle {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.math-error-src {
+  margin: 0.4rem 0 0;
+  overflow-x: auto;
+}
+
+.math-error-msg {
+  display: none;
+}
+
+.markdown-body {
+  max-width: 78ch;
+  overflow-x: hidden;
+}
+
+.markdown-body .math-display,
+.markdown-body table,
+.markdown-body pre {
+  max-width: 100%;
+}
+
+.markdown-body .table-wrap,
+.markdown-body table {
+  display: block;
+  overflow-x: auto;
+}
+
+.markdown-body pre {
+  overflow-x: auto;
+}
+
+.heading-anchor {
+  margin-right: 0.4rem;
+  text-decoration: none;
+  opacity: 0.45;
+}
+
+.heading-anchor:hover,
+.heading-anchor:focus-visible {
+  opacity: 1;
+}
+
+.math-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.25rem;
+}
+
+.math-copy,
+.code-copy {
+  font: inherit;
+  font-size: 0.75rem;
+  background: none;
+  border: 1px solid var(--border, #d5d0c4);
+  color: inherit;
+  padding: 0.1rem 0.4rem;
+  cursor: pointer;
+}
+
+.math-display-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.broken-ref {
+  color: var(--danger, #8a2b2b);
+  text-decoration: wavy underline;
+}
+
+.math-block {
+  margin: 1rem 0;
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--border, #d5d0c4);
+}
+
+.math-block-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted, #5c5a54);
+}
+
+.math-theorem,
+.math-lemma,
+.math-proposition,
+.math-corollary {
+  border-left-color: var(--accent, #2f4a6e);
+}
+
+.math-warning {
+  border-left-color: var(--danger, #8a2b2b);
+}
+
+.math-proof > summary {
+  cursor: pointer;
+  font-weight: 600;
+}

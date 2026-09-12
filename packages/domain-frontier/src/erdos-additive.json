@@ -1,0 +1,1778 @@
+{
+  "version": "1",
+  "upstream": "https://github.com/teorth/erdosproblems",
+  "pin": "5308c57c700559416b9f205df274b136784203e7",
+  "source": "vendor/erdosproblems/data/problems.yaml",
+  "scope_tag": "additive combinatorics",
+  "not_a_theorem": true,
+  "writes_canonical": false,
+  "network": false,
+  "region": {
+    "id": "region:additive-combinatorics",
+    "title": "Additive combinatorics (external open index)",
+    "description": "Unknown-region pointers from teorth/erdosproblems. Not Universe entities, not theorems."
+  },
+  "direction": {
+    "id": "dir:erdos-additive",
+    "title": "Scan open Erdős problems in additive combinatorics",
+    "motivation": "Lab domain is additive combinatorics. External open status is not a local proof."
+  },
+  "counts": {
+    "vendor_records": 1217,
+    "additive_records": 103,
+    "open_questions": 49,
+    "audit_records": 54
+  },
+  "additive_status_counts": {
+    "disproved (Lean)": 10,
+    "open": 48,
+    "solved (Lean)": 3,
+    "proved (Lean)": 17,
+    "proved": 13,
+    "solved": 5,
+    "decidable": 1,
+    "disproved": 5,
+    "open (Lean)": 1
+  },
+  "questions": [
+    {
+      "id": "erdos:3",
+      "number": "3",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A003002",
+        "A003003",
+        "A003004",
+        "A003005"
+      ],
+      "url": "https://www.erdosproblems.com/3",
+      "not_a_theorem": true,
+      "prize": "$5000"
+    },
+    {
+      "id": "erdos:14",
+      "number": "14",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A143824",
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/14",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:30",
+      "number": "30",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A143824",
+        "A227590",
+        "A003022"
+      ],
+      "url": "https://www.erdosproblems.com/30",
+      "not_a_theorem": true,
+      "prize": "$1000"
+    },
+    {
+      "id": "erdos:36",
+      "number": "36",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A393584",
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/36",
+      "not_a_theorem": true,
+      "nickname": "minimum overlap problem",
+      "prize": "no"
+    },
+    {
+      "id": "erdos:39",
+      "number": "39",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/39",
+      "not_a_theorem": true,
+      "prize": "$500"
+    },
+    {
+      "id": "erdos:41",
+      "number": "41",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/41",
+      "not_a_theorem": true,
+      "prize": "$500"
+    },
+    {
+      "id": "erdos:44",
+      "number": "44",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/44",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:52",
+      "number": "52",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A263996"
+      ],
+      "url": "https://www.erdosproblems.com/52",
+      "not_a_theorem": true,
+      "nickname": "sum-product problem",
+      "prize": "$250"
+    },
+    {
+      "id": "erdos:138",
+      "number": "138",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A005346"
+      ],
+      "url": "https://www.erdosproblems.com/138",
+      "not_a_theorem": true,
+      "prize": "$500"
+    },
+    {
+      "id": "erdos:141",
+      "number": "141",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "primes",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A006560"
+      ],
+      "url": "https://www.erdosproblems.com/141",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:142",
+      "number": "142",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A003002",
+        "A003003",
+        "A003004",
+        "A003005"
+      ],
+      "url": "https://www.erdosproblems.com/142",
+      "not_a_theorem": true,
+      "prize": "$10000"
+    },
+    {
+      "id": "erdos:155",
+      "number": "155",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A143824",
+        "A227590",
+        "A003022"
+      ],
+      "url": "https://www.erdosproblems.com/155",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:160",
+      "number": "160",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/160",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:168",
+      "number": "168",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A004059",
+        "A057561",
+        "A094708",
+        "A386439"
+      ],
+      "url": "https://www.erdosproblems.com/168",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:169",
+      "number": "169",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A005346"
+      ],
+      "url": "https://www.erdosproblems.com/169",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:170",
+      "number": "170",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A046693"
+      ],
+      "url": "https://www.erdosproblems.com/170",
+      "not_a_theorem": true,
+      "nickname": "sparse ruler problem",
+      "prize": "no"
+    },
+    {
+      "id": "erdos:172",
+      "number": "172",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/172",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:176",
+      "number": "176",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions",
+        "discrepancy"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/176",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:187",
+      "number": "187",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "ramsey theory",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/187",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:201",
+      "number": "201",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A003002",
+        "A003003",
+        "A003004",
+        "A003005",
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/201",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:241",
+      "number": "241",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A387704"
+      ],
+      "url": "https://www.erdosproblems.com/241",
+      "not_a_theorem": true,
+      "prize": "$100"
+    },
+    {
+      "id": "erdos:271",
+      "number": "271",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A005487"
+      ],
+      "url": "https://www.erdosproblems.com/271",
+      "not_a_theorem": true,
+      "nickname": "Stanley sequences",
+      "prize": "no"
+    },
+    {
+      "id": "erdos:272",
+      "number": "272",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/272",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:335",
+      "number": "335",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/335",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:340",
+      "number": "340",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A080200",
+        "A005282"
+      ],
+      "url": "https://www.erdosproblems.com/340",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:483",
+      "number": "483",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A030126"
+      ],
+      "url": "https://www.erdosproblems.com/483",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:539",
+      "number": "539",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/539",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:749",
+      "number": "749",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/749",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:787",
+      "number": "787",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/787",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:788",
+      "number": "788",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/788",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:789",
+      "number": "789",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/789",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:790",
+      "number": "790",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/790",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:791",
+      "number": "791",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A066063"
+      ],
+      "url": "https://www.erdosproblems.com/791",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:792",
+      "number": "792",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/792",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:817",
+      "number": "817",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/817",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:819",
+      "number": "819",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/819",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:840",
+      "number": "840",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/840",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:864",
+      "number": "864",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A389182"
+      ],
+      "url": "https://www.erdosproblems.com/864",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:866",
+      "number": "866",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/866",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:875",
+      "number": "875",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/875",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:876",
+      "number": "876",
+      "status": "open",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/876",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1097",
+      "number": "1097",
+      "status": "open",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1097",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1112",
+      "number": "1112",
+      "status": "open (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1112",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1145",
+      "number": "1145",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "additive basis"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1145",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1186",
+      "number": "1186",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1186",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1191",
+      "number": "1191",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1191",
+      "not_a_theorem": true,
+      "prize": "$1000"
+    },
+    {
+      "id": "erdos:1192",
+      "number": "1192",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "additive basis"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1192",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1194",
+      "number": "1194",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "additive basis",
+        "sidon sets"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1194",
+      "not_a_theorem": true,
+      "prize": "no"
+    },
+    {
+      "id": "erdos:1199",
+      "number": "1199",
+      "status": "open",
+      "tags": [
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1199",
+      "not_a_theorem": true,
+      "prize": "no"
+    }
+  ],
+  "audit": [
+    {
+      "id": "erdos:1",
+      "number": "1",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A276661"
+      ],
+      "url": "https://www.erdosproblems.com/1",
+      "not_a_theorem": true,
+      "prize": "$500",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:37",
+      "number": "37",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/37",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:42",
+      "number": "42",
+      "status": "solved (Lean)",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/42",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:43",
+      "number": "43",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A143824",
+        "A227590",
+        "A003022",
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/43",
+      "not_a_theorem": true,
+      "prize": "$100",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:53",
+      "number": "53",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/53",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:109",
+      "number": "109",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/109",
+      "not_a_theorem": true,
+      "nickname": "Erdős sumset conjecture",
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:139",
+      "number": "139",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A003002",
+        "A003003",
+        "A003004",
+        "A003005"
+      ],
+      "url": "https://www.erdosproblems.com/139",
+      "not_a_theorem": true,
+      "nickname": "Szemerédi's theorem",
+      "prize": "$1000",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:140",
+      "number": "140",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A003002"
+      ],
+      "url": "https://www.erdosproblems.com/140",
+      "not_a_theorem": true,
+      "prize": "$500",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:171",
+      "number": "171",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics",
+        "combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A156989"
+      ],
+      "url": "https://www.erdosproblems.com/171",
+      "not_a_theorem": true,
+      "nickname": "density Hales-Jewett",
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:179",
+      "number": "179",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/179",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:185",
+      "number": "185",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A003142"
+      ],
+      "url": "https://www.erdosproblems.com/185",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:186",
+      "number": "186",
+      "status": "solved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A389784"
+      ],
+      "url": "https://www.erdosproblems.com/186",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:190",
+      "number": "190",
+      "status": "solved",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/190",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:198",
+      "number": "198",
+      "status": "disproved (Lean)",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/198",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:219",
+      "number": "219",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "primes",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "A005115",
+        "A113827",
+        "A123556"
+      ],
+      "url": "https://www.erdosproblems.com/219",
+      "not_a_theorem": true,
+      "nickname": "Green-Tao theorem",
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:245",
+      "number": "245",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/245",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:328",
+      "number": "328",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/328",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:331",
+      "number": "331",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/331",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:337",
+      "number": "337",
+      "status": "disproved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "additive basis"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/337",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:350",
+      "number": "350",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/350",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:475",
+      "number": "475",
+      "status": "decidable",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/475",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:476",
+      "number": "476",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/476",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:484",
+      "number": "484",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/484",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:494",
+      "number": "494",
+      "status": "proved",
+      "tags": [
+        "analysis",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/494",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:645",
+      "number": "645",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "ramsey theory",
+        "arithmetic progressions"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/645",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:656",
+      "number": "656",
+      "status": "proved",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/656",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:658",
+      "number": "658",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/658",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:707",
+      "number": "707",
+      "status": "disproved (Lean)",
+      "tags": [
+        "additive combinatorics",
+        "sidon sets"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/707",
+      "not_a_theorem": true,
+      "prize": "$1000",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:721",
+      "number": "721",
+      "status": "solved",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A171081"
+      ],
+      "url": "https://www.erdosproblems.com/721",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:741",
+      "number": "741",
+      "status": "solved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/741",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:763",
+      "number": "763",
+      "status": "disproved",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/763",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:764",
+      "number": "764",
+      "status": "disproved",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/764",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:772",
+      "number": "772",
+      "status": "proved",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/772",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:781",
+      "number": "781",
+      "status": "disproved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/781",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:785",
+      "number": "785",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/785",
+      "not_a_theorem": true,
+      "nickname": "exact additive complements",
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:806",
+      "number": "806",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/806",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:808",
+      "number": "808",
+      "status": "disproved",
+      "tags": [
+        "additive combinatorics",
+        "graph theory"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/808",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:818",
+      "number": "818",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/818",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:847",
+      "number": "847",
+      "status": "disproved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/847",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:863",
+      "number": "863",
+      "status": "proved",
+      "tags": [
+        "number theory",
+        "sidon sets",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/863",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:865",
+      "number": "865",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/865",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:867",
+      "number": "867",
+      "status": "disproved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/867",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:874",
+      "number": "874",
+      "status": "proved",
+      "tags": [
+        "number theory",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/874",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:877",
+      "number": "877",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "A121269",
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/877",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:895",
+      "number": "895",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics",
+        "graph theory"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/895",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:899",
+      "number": "899",
+      "status": "proved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/899",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:966",
+      "number": "966",
+      "status": "proved (Lean)",
+      "tags": [
+        "number theory",
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/966",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:984",
+      "number": "984",
+      "status": "proved",
+      "tags": [
+        "arithmetic progressions",
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/984",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1179",
+      "number": "1179",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics",
+        "probability"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1179",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1185",
+      "number": "1185",
+      "status": "solved",
+      "tags": [
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1185",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1187",
+      "number": "1187",
+      "status": "solved",
+      "tags": [
+        "number theory",
+        "primes",
+        "additive combinatorics",
+        "arithmetic progressions"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1187",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1193",
+      "number": "1193",
+      "status": "solved (Lean)",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "yes",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1193",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1198",
+      "number": "1198",
+      "status": "disproved",
+      "tags": [
+        "additive combinatorics",
+        "ramsey theory"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "N/A"
+      ],
+      "url": "https://www.erdosproblems.com/1198",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    },
+    {
+      "id": "erdos:1213",
+      "number": "1213",
+      "status": "proved",
+      "tags": [
+        "additive combinatorics"
+      ],
+      "formalized": "no",
+      "oeis": [
+        "possible"
+      ],
+      "url": "https://www.erdosproblems.com/1213",
+      "not_a_theorem": true,
+      "prize": "no",
+      "not_an_open_question": true
+    }
+  ]
+}

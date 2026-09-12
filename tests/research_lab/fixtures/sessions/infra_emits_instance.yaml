@@ -1,0 +1,4 @@
+task_kind: infra
+mode: AUTO
+new_problem: true
+new_lean_theorem: true

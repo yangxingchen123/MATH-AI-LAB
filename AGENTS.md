@@ -41,6 +41,8 @@
 * 当前任务完成后停止；
 * 不自行扩展下一任务。
 
+**系统 / 运行条件任务：** 用户说「优化系统」「运行条件」「优化思路」「继续实验室」且**没有**给出新题面 / 新定理时，种类是 **infra**。先 `python -m tools.research_lab operate`，再改协议 / Gate / CI / 用法。**禁止**把这类任务交付成又一道 P00xx、又一条 Lean 定理、或再跑一遍 P001 / sum-free 演示。实例校准走 `verify`，不是默认交付。思路契约：`tools/research_lab/protocol.yaml`（authority 仍是 `项目规则.md` 第四节，不是 Frozen Schema）。
+
 ---
 
 ## 3. 数学任务高频规则
@@ -55,6 +57,7 @@
 | 计算实验 | 可复现 run | `05_代码/` |
 | 文献精读 | 问题/方法/结论 + 引用分层 | `03_参考资料/论文/` + `07_项目/` literature |
 | 批改原解 | REVIEW | 真实作答才 Attempt |
+| 系统 / 运行条件 | 协议、Gate、CI、用法 | `tools/` + docs；**不是**新 P |
 
 禁止：用证明链写美赛；用 Dossier 存课后标准解答；把竞赛整卷登记成一道 Problem；把数值 run 写成「已证明现实」。无法判定时先按临时提问作答，不创建错误 Source。
 
@@ -62,7 +65,7 @@
 
 `问题重构` → `受控检索` → `方法押注` → `数学直觉` → `严格推导（本题）` → `条件检查` → `证伪/边界` → `验证（标明证据层）` → `自检与未决` → `分流落盘` → `人工审核`
 
-**建模**按：重构问号 → 检索 → **选模押注**（可识别 / 可证伪 / 否决）→ 已知答案实验 → Dossier 分流。建模押注对象是模型家族，不是证明程序。
+**建模**按：重构问号 → 检索 → **选模押注**（可识别 / 可证伪 / 否决）→ 已知答案实验 → Dossier 分流。建模押注对象是模型家族，不是证明程序。竞赛 / 美赛 / 国赛整卷默认加载 `.cursor/skills/math-modeling-lab`（vendored solver/paper：`vendor/math-modeling-skills/`），用法见 `10_提示词/Math_Modeling_Agent_Usage_Guide.md`。不得把竞赛建成 `Pxxxx`。
 
 本流程是执行契约，**不是**「已达博士级」的能力认证。
 
@@ -272,6 +275,8 @@ Modeling（v1.4 框架，stdlib Pilot；求解器不得进入根 `requirements.t
 
 ```text
 python -m tools.modeling doctor
+python -m tools.modeling contest-doctor
+python -m tools.modeling contest-smoke
 python -m tools.modeling select --path "<candidates.yaml>"
 python -m tools.workbench bootstrap --kind contest_modeling --name "<name>" --title "<title>"
 python -m tools.workbench attach-md --contest "<赛事>" --slug "<题号>" --md "<path.md>"
@@ -286,6 +291,8 @@ python -m tools.workbench status
 python -m tools.reference_library ingest-contest --contest "<赛事>" --slug "<题号>" --title "<标题>"
 ```
 
+竞赛整卷默认加载 `.cursor/skills/math-modeling-lab`（工作副本：`.cursor/skills/math-modeling-solver` / `math-modeling-paper`；pin：`vendor/math-modeling-skills/`，MIT，只读）。用法：`10_提示词/Math_Modeling_Agent_Usage_Guide.md`。不得把竞赛建成 `Pxxxx`，不得把 matplotlib 写入根 `requirements.txt`。竞赛数值模板 sidecar：`python -m pip install -r tools/modeling/requirements-contest.txt`（或双击 `安装数模竞赛环境.bat`）。缺失时 `contest-doctor` 为 DEGRADED，不阻断 Core。
+
 Figure（v1.5 框架，stdlib SVG/Mermaid；Matplotlib/Plotly/Manim 不得进入根 `requirements.txt`）：
 
 ```text
@@ -293,7 +300,11 @@ python -m tools.figure doctor
 python -m tools.figure gate
 ```
 
-Lean（v1.6 框架；lake 缺失时 `doctor` 为 DEGRADED，不得让 Core 失败）：
+Lean（v1.6 框架 + v2.2-lab P001-L0；lake 缺失时 `doctor` 为 DEGRADED，不得让 Core 失败）：
+
+* 普通学习问答：Lean 可选。
+* 可形式化的发表关键引理 / 有限证书 / 代数恒等式 / 高风险边界：默认走 `06_LEAN形式化/`，正式目标零 `sorry`。
+* 深层分析证明：先人类证明；P001 Lean 是训练项目，不是新定理。
 
 ```text
 python -m tools.lean_formalization doctor
@@ -302,6 +313,59 @@ python -m tools.lean_formalization build
 python -m tools.lean_formalization verify
 python -m tools.lean_formalization scan --root "06_LEAN形式化"
 ```
+
+Research Lab（v2.2-lab Pilot；stdlib；不写正式 Source；不宣称四大 / v2.2 VERIFIED）。Frontier 读 `vendor/erdosproblems/` 全体文件 pin（本地 YAML，无 API）：
+
+```text
+python -m tools.research_lab operate
+python -m tools.research_lab explore
+python -m tools.research_lab explore --format markdown
+python -m tools.research_lab explore --id reasoning --format markdown
+python -m tools.research_lab explore --id frontier --format markdown
+python -m tools.research_lab explore --list --format markdown
+python -m tools.research_lab search-failure --query "not_sum_free"
+python -m tools.research_lab search-explore --query "induction"
+python -m tools.research_lab protocol
+python -m tools.research_lab route --kind infra
+python -m tools.research_lab cycle --n 10
+python -m tools.research_lab funnel --n 5 --limit 8
+python -m tools.research_lab reproduce --file <chain.jsonl>
+python -m tools.research_lab journal
+python -m tools.research_lab prior-art-matrix
+python -m tools.research_lab backlog
+python -m tools.research_lab lemma-graph
+python -m tools.research_lab risks
+python -m tools.research_lab pipeline --n 5
+python -m tools.research_lab list-problems
+python -m tools.research_lab list-conjectures
+python -m tools.research_lab doctor
+python -m tools.research_lab gate
+python -m tools.research_lab inventory
+python -m tools.research_lab evaluate-sum-free --n 10 --set 6,7,8,9,10
+python -m tools.research_lab search-sum-free --n 10
+python -m tools.research_lab check-problem
+python -m tools.research_lab verify
+```
+
+Studio UI（只读 Notebook；stdlib HTTP；**不**写正式 Source；与 `tools.workbench` 竞赛编排分开）：
+
+```text
+python -m tools.studio serve
+python -m tools.studio launch
+python -m tools.studio catalog
+```
+
+正式桌面工作台（Qt 窗口；进程内读仓库；**不**绑定 localhost）：
+
+```text
+python -m tools.qt_workbench doctor
+python -m tools.qt_workbench launch
+python -m pip install -r tools/qt_workbench/requirements.txt
+```
+
+双击 `打开工作台.bat` 打开 Qt 窗口。PySide6 是 sidecar，不得写入根 `requirements.txt`。网页界面可选：`打开网页工作台.bat`（http://127.0.0.1:3000/）。旧入口：`打开旧版工作台.bat` → `python -m tools.studio launch`（http://127.0.0.1:8765/）。`apps/web` 与 `tools.studio` 保留，不是 Qt 的事实源。写入仍只经 `python -m tools.ui_operations`。
+
+网页 Human Interface（可选）：`apps/web` + `packages/domain` + `packages/content` + `packages/math-renderer`。**不是**新 Schema；与 Python Validator 冲突时改 TS。页面不得直接读/写 canonical 文件。写入只经 `POST /api/operations` → `python -m tools.ui_operations`。阶段记录：`docs/ui/interactive-workbench-v2.md`、`docs/ui/desktop-qt.md`。
 
 Retrieval / Cited RAG（v2.0；Metadata → FTS → BM25 → Hybrid RRF；向量库未安装）：
 
@@ -317,7 +381,7 @@ python -m tools.collaboration gate
 
 不得把 Dossier Generated 区当作假设 / Claim / Decision 的事实源；不得为研究项目伪造 Attempt 或自动创建 Knowledge。
 
-**两类建模：** 计算实验 → `05_代码/` + v1.4；美赛/国赛整篇论文 → `07_项目`（`--kind contest_modeling`）+ `05_代码` + `04_LATEX/数学建模/`。文献原文 → `03_参考资料/论文/`；读懂（问题/方法/结论）→ `--kind literature`。PDF→MD 是 Sidecar，缺引擎时 DEGRADED。用法：`10_提示词/Modeling_and_Literature_Usage_Guide.md`。
+**两类建模：** 计算实验 → `05_代码/` + v1.4；美赛/国赛整篇论文 → `07_项目`（`--kind contest_modeling`）+ `05_代码` + `04_LATEX/数学建模/`，对话默认加载 `.cursor/skills/math-modeling-lab`。文献原文 → `03_参考资料/论文/`；读懂（问题/方法/结论）→ `--kind literature`。PDF→MD 是 Sidecar，缺引擎时 DEGRADED。用法：`10_提示词/Modeling_and_Literature_Usage_Guide.md` · `10_提示词/Math_Modeling_Agent_Usage_Guide.md`。
 
 **修改后流程：**
 
@@ -408,7 +472,7 @@ Source project 主要保存 `<主题>.tex`、`.cls` / `.sty` / `.bib`、`figures
 
 **Python**：可用于数值验证、实验、绘图；代码放 `05_代码/`。**数值结果不能代替严格证明。**
 
-**Lean**：非默认；仅任务适合且用户明确要求时使用。
+**Lean**：双层政策。学习问答可选；发表关键证书 / 代数恒等式 / 高风险边界默认形式化。P001-L0 是训练项目。lake 失败不阻断 Core。
 
 完成用户当前明确要求后停止。除非用户当前明确授权，**不自动**：
 

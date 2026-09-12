@@ -1,0 +1,166 @@
+authority: 项目规则.md 第四节
+not_frozen_schema: true
+contract: conversation-policy
+domain: additive_combinatorics
+forbid_unscoped_mathematics: true
+kinds:
+  exercise:
+    pipeline: proof
+    drop: dialogue or 02_题目库
+    forbid_instance_work: false
+  research:
+    pipeline: proof
+    drop: 02_题目库 or 07_项目
+    forbid_instance_work: false
+  modeling:
+    pipeline: model_select
+    drop: 07_项目 + 05_代码 + 04_LATEX/数学建模
+    forbid_instance_work: false
+  experiment:
+    pipeline: v1.4
+    drop: 05_代码
+    forbid_instance_work: false
+  literature:
+    pipeline: read
+    drop: 03_参考资料/论文 + 07_项目 literature
+    forbid_instance_work: false
+  review:
+    pipeline: review
+    drop: Attempt only if user solution
+    forbid_instance_work: false
+  infra:
+    pipeline: operating
+    drop: tools/ docs/ CI
+    forbid_instance_work: true
+proof_steps:
+  - id: route
+  - id: reconstruct
+    before: retrieve
+    required:
+      - working_proposition
+  - id: retrieve
+    query: working_proposition
+  - id: bet
+    max: 2
+    required:
+      - kill_criteria
+  - id: intuition
+  - id: derive
+  - id: conditions
+  - id: falsify
+  - id: evidence
+  - id: self_check
+  - id: split
+  - id: human_review
+modes:
+  - AUTO
+  - RESEARCH
+  - REVIEW
+  - STUDY
+forbidden_mixes:
+  - modeling_as_proof_problem
+  - exercise_as_dossier
+  - contest_volume_as_single_problem
+  - numeric_run_as_reality_proof
+  - infra_as_new_P00xx
+roles:
+  problem_curator:
+    must_not:
+      - declare_importance
+  literature:
+    must_not:
+      - declare_first_from_abstract
+  conjecturer:
+    must_not:
+      - skip_falsify
+      - declare_importance
+  falsifier:
+    must_not:
+      - hide_failure
+  formalizer:
+    must_not:
+      - final_semantic_review
+      - mutate_statement
+  prover:
+    must_not:
+      - mutate_statement
+  referee:
+    must_not:
+      - write_proof_body
+  cost_controller:
+    must_not:
+      - declare_math_value
+  human_pi:
+    must_not:
+      - outsource_final_judgment
+  strategy:
+    must_not:
+      - treat_fluency_as_correctness
+evidence_layers:
+  - heuristic
+  - numeric
+  - plot
+  - literature_title
+  - human_proof
+  - lean
+stop_when:
+  - unknown
+  - blocked_missing_theory
+  - budget_exceeded
+  - illegal_role_action
+  - infra_instance_work
+require_obstacle_when_stuck: true
+tool_first:
+  - evaluator
+  - lean_simp
+  - lean_ring
+forbid_expensive_model_when_tool_succeeds: true
+unrepairable_reasons:
+  - out_of_universe
+forbid_retry_unrepairable: true
+layers:
+  - canonical
+  - universe
+  - frontier
+  - exploration
+forbid_layer_merge: true
+discovery_pipeline:
+  - observation
+  - exploration
+  - candidate
+  - experiment
+  - critique
+  - proof_attempt
+  - verification
+  - promotion
+promotion:
+  automatic: false
+  require_human_review: true
+  require_evidence_evaluation: true
+  exploration_cannot_write_canonical: true
+  formal_verification: optional
+  pending_blocks_promotion: true
+failure_memory:
+  reusable: true
+  lookup: lexical
+  embeddings: false
+exploration:
+  reasoning_proves_theorem: false
+  pattern_is_not_theorem: true
+  notebook_is_canonical: false
+  strategy_is_proof: false
+  evolution_proves_theorem: false
+  catalog_search: lexical
+  embeddings: false
+frontier:
+  catalog: erdosproblems
+  scope: additive_combinatorics
+  vendor: vendor/erdosproblems
+  pin: 5308c57c700559416b9f205df274b136784203e7
+  source: vendor/erdosproblems/data/problems.yaml
+  full_tree: true
+  writes_canonical: false
+  not_a_theorem: true
+  embeddings: false
+  network: false
+

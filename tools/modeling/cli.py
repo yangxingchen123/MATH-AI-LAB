@@ -7,6 +7,8 @@ import json
 import sys
 from pathlib import Path
 
+from .contest_sidecar import doctor_text as contest_doctor_text
+from .contest_sidecar import smoke_text as contest_smoke_text
 from .doctor import doctor_text
 from .manifest import validate_manifest_file
 from .runner import (
@@ -29,6 +31,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m tools.modeling")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor")
+    sub.add_parser("contest-doctor")
+    sub.add_parser("contest-smoke")
     validate = sub.add_parser("validate-manifest")
     validate.add_argument("--path", required=True)
     run = sub.add_parser("run")
@@ -72,6 +76,14 @@ def run(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.command == "doctor":
         text, code = doctor_text()
+        sys.stdout.write(text)
+        return code
+    if args.command == "contest-doctor":
+        text, code = contest_doctor_text()
+        sys.stdout.write(text)
+        return code
+    if args.command == "contest-smoke":
+        text, code = contest_smoke_text()
         sys.stdout.write(text)
         return code
     if args.command == "validate-manifest":

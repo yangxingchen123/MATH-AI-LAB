@@ -121,6 +121,7 @@ def run_lake_build(
             returncode=None,
         )
     log = (completed.stdout or "") + (completed.stderr or "")
+    _normalize_lake_manifest_lf(root)
     if completed.returncode == 0:
         status = "SUCCEEDED"
     elif _is_toolchain_unavailable(log):
@@ -134,3 +135,15 @@ def run_lake_build(
         core_impact=False,
         returncode=completed.returncode,
     )
+
+
+def _normalize_lake_manifest_lf(project_root: Path) -> None:
+    """Keep lake-manifest.json LF so Windows lake rewrites do not stale sha256 pins."""
+    path = Path(project_root) / "lake-manifest.json"
+    if not path.is_file():
+        return
+    data = path.read_bytes()
+    if b"\r\n" not in data:
+        return
+    path.write_bytes(data.replace(b"\r\n", b"\n"))
+

@@ -1,0 +1,5 @@
+public_max_n: 12
+holdout_n:
+  - 18
+  - 21
+note: hidden known bound ceil(n/2); not used in exhaustive n≤12 gate

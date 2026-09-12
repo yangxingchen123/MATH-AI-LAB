@@ -19,8 +19,22 @@
 04_LATEX/**/main.pdf
 
 # =========================
+# Node (apps/web + packages; isolated from Python Core)
+# =========================
+node_modules/
+.next/
+dist/
+coverage/
+*.tsbuildinfo
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# =========================
 # Secrets
 # =========================
+.mathailab/
 .env
 .env.*
 
@@ -66,3 +80,6 @@ vector-index/
 # Modeling run artifacts (keep directory placeholders)
 05_代码/**/outputs/*
 !05_代码/**/outputs/.gitkeep
+
+# Research Lab generated sidecars (failure journal / local ledgers)
+tools/research_lab/sidecars/*.jsonl

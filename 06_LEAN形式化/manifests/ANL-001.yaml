@@ -1,0 +1,22 @@
+formal_ref: ANL-001
+natural_language_ref: statements/ANL-001.md
+source_files:
+- ref: MathAILab/Research/QuadraticConjugate.lean
+  sha256: 71424db899d966a793b29eb94c81de9e516edd5fa8209296eb6c2fdb82e3e41a
+- ref: statements/ANL-001.md
+  sha256: 6ee3b7043d623f1eb11301715f6d71c4fbb30803f8258ecdec5e0b38ffb3e779
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#ANL-001
+assumptions:
+  explicit:
+  - integer algebraic skeleton of P0001 f(x)=x^2/2; not Real Legendre-Fenchel
+  imported_axioms: []

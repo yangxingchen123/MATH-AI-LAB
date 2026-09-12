@@ -1,0 +1,22 @@
+formal_ref: ANL-002
+natural_language_ref: statements/ANL-002.md
+source_files:
+- ref: MathAILab/Research/QuadraticConjugate.lean
+  sha256: 71424db899d966a793b29eb94c81de9e516edd5fa8209296eb6c2fdb82e3e41a
+- ref: statements/ANL-002.md
+  sha256: 0b241db891c8aa3f32bfd90b054dc7285014a62baf38c4f3af66084c0f15b869
+toolchain:
+  lean: leanprover/lean4:v4.15.0
+  mathlib_commit: none
+  lake_manifest_sha256: 4bc718ef2a96d02e4d7b01e5be81f6f047c1bacde25236fb7259cb3db8a5ed53
+build:
+  command:
+  - lake
+  - build
+  status: SUCCEEDED
+  log_ref: none
+semantic_review_ref: correspondence.yaml#ANL-002
+assumptions:
+  explicit:
+  - attainment identity for the scaled quadratic dual at x=p
+  imported_axioms: []

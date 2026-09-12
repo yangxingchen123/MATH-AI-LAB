@@ -1,0 +1,10 @@
+task_kind: research
+mode: RESEARCH
+role: human_pi
+actions:
+  - outsource_final_judgment
+working_proposition: "majority vote of models decides importance"
+bets:
+  - program: vote
+    kill_criteria: "no human reads the proof"
+evidence_layer: heuristic

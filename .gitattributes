@@ -1,0 +1,12 @@
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Keep Lean artifact hashes stable on Windows checkouts.
+*.lean text eol=lf
+06_LEAN形式化/**/*.md text eol=lf
+06_LEAN形式化/**/*.yaml text eol=lf
+06_LEAN形式化/lake-manifest.json text eol=lf
+
+# Research Project contract tests hash bytes; LF is required.
+tests/research_project/** text eol=lf
+07_项目/_模板/** text eol=lf

@@ -1,0 +1,11 @@
+id: LIT-SF-001
+title: Classical sum-free subset bound ceil(n/2)
+problem_id: PROB-SF-001
+doi: null
+arxiv: null
+version: textbook-classical
+locator: odds construction and upper-half construction of {1..n}
+retrieved: "2026-08-28"
+query: "maximum size sum-free subset of {1,...,n}"
+coverage_gaps:
+  - "no DOI; classical fact used as known baseline, not a novelty claim"

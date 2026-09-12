@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from tools.figure.doctor import doctor as figure_doctor
 from tools.lean_formalization.doctor import doctor as lean_doctor
+from tools.modeling.contest_sidecar import doctor as contest_sidecar_doctor
 from tools.modeling.doctor import doctor_text as modeling_doctor
 from tools.open_data.catalogs import SEED_HITS
 from tools.reference_library.ingest import doctor as reference_doctor
@@ -16,11 +17,17 @@ def capability_status() -> dict:
     figure = figure_doctor()
     lean = lean_doctor()
     reference = reference_doctor()
+    contest = contest_sidecar_doctor()
     capabilities = [
         {
             "name": "modeling",
             "status": "PASS" if modeling_code == 0 else "FAIL",
             "detail": "stdlib known-answer pilots",
+        },
+        {
+            "name": "contest_modeling_agent",
+            "status": contest.get("status", "FAIL"),
+            "detail": "vendor skills + numpy sidecar",
         },
         {
             "name": "figure",
@@ -60,6 +67,11 @@ def capability_status() -> dict:
         gaps.append("Lean Sidecar is not PASS; lake/toolchain may be missing or build failed.")
     if reference.get("status") != "PASS":
         gaps.append("03_参考资料 taxonomy is incomplete.")
+    if contest.get("status") != "PASS":
+        gaps.append(
+            "Contest modeling numpy sidecar is not PASS. "
+            "Install tools/modeling/requirements-contest.txt; do not merge it into root requirements.txt."
+        )
     gaps.append("PDF→MD (MinerU) is a Sidecar and is not installed.")
     gaps.append("Vector retrieval and solver Sidecars are not installed.")
     gaps.append("Open-data search writes candidates only; it does not estimate parameters or ingest literature.")
